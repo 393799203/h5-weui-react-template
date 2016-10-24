@@ -10,7 +10,7 @@
     	"svg": "node scripts/task svg",
     	"clean": "node scripts/task clean"
 	},
-  "devDependencies": {
+    "devDependencies": {
 		"fs-extra":"0.30.0",
 		"babel-preset-stage-0": "^6.0.0",
 		"jsx-control-statements":"3.1.2"

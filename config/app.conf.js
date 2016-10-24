@@ -1,6 +1,6 @@
 var path = require('path');
 var appConf = {
-	"port": 8000,
-	"serverName":"127.0.0.1"
+	"port": 8888,
+	"serverName":"h5.finance.meili-inc.com"
 }
 module.exports = appConf;

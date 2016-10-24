@@ -8,7 +8,7 @@ module.exports = {
 	cache: true,
 	entry: {
 		app: ['./src/app.jsx'],
-		vendor:['react','react-dom','whatwg-fetch','es6-promise']
+		vendor:['react','react-dom','whatwg-fetch','es6-promise','rc-queue-anim']
 	},
 	output: {
 		path: path.resolve(__dirname, '../dist/static'),
@@ -17,10 +17,10 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
-		root: [path.resolve(__dirname, '../modules'), path.resolve(__dirname, '../src'), path.resolve(__dirname, '../src/style')],
+		root: [path.resolve(__dirname, '../modules'), path.resolve(__dirname, '../src')],
 		alias: {
 			'src': path.resolve(__dirname, '../src'),
-			'react-avatar-editor':"@mogu/react-avatar-editor"
+			'static': path.resolve(__dirname, '../static')
 		}
 	},
 	resolveLoader: {
@@ -60,7 +60,7 @@ module.exports = {
 		}]
 	},
 	sassLoader:{
-		includePaths: [path.resolve(__dirname, "../modules"),path.resolve(__dirname, '../src')]
+		includePaths: [path.resolve(__dirname, "../static"),path.resolve(__dirname, '../src')]
 	},
 	eslint: {
 		formatter: require('eslint-friendly-formatter')

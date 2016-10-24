@@ -5,8 +5,10 @@
 	"author": "qingmeng <qingmeng@mogujie.com>",
 	"preferGlobal": true,
 	"scripts": {
-		"start": "teni server",
-		"build": "teni task clean && teni build && teni task"
+		"start": "node scripts/server.js",
+    	"build": "node scripts/task.js clean && node scripts/build.js && node scripts/task.js",
+    	"svg": "node scripts/task svg",
+    	"clean": "node scripts/task clean"
 	},
   "devDependencies": {
 		"fs-extra":"0.30.0",

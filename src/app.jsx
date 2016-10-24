@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import Router from 'components/router';
+import { hashHistory, Router, IndexRoute, IndexRedirect, Redirect, Route, Link } from 'react-router'
 import FastClick from 'fastclick'
 
 //*************补丁**************
@@ -14,7 +14,7 @@ FastClick.attach(document.body)
 
 //*************样式加载**************
 import 'normalize.css';//样式引入
-import 'app.scss';//样式引入
+import 'style/app.scss';//样式引入
 
 //*************页面引入**************
 

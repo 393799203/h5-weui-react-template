@@ -36,6 +36,9 @@ config.plugins = (config.plugins || []).concat([
 	}),
 	//代码压缩平时可以不用
 	new webpack.optimize.UglifyJsPlugin({
+		exclude: [
+			 /node_modules\//
+		],
 		compress: {
 			warnings: false
 		}
@@ -43,7 +46,7 @@ config.plugins = (config.plugins || []).concat([
 	new ExtractTextPlugin('[name].[contenthash].css'),
 	new HtmlWebpackPlugin({
 		filename: '../index.html',
-		template: 'src/index.html'
+		template: 'index.html'
 	})
 ])
 

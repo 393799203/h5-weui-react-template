@@ -1,7 +1,11 @@
 var path = require('path');
+var appConf = require('./app.conf');
+var proxyPaths = [
+	
+];
 var serverConf = {
-	contentBase: path.resolve(__dirname, '../src'),
-	progress:false,
+	contentBase: path.resolve(__dirname, '..'),
+	//progress:true,
 	devtool: 'eval-source-map',
 	hot: true,
 	inline: true,
@@ -10,14 +14,11 @@ var serverConf = {
 		colors: true
 	}
 }
-var proxyPaths = [
-	'message'
-];
 proxyPaths.forEach(function(v){
-	serverConf.proxy['/'+v+"*"] ={
-		target: 'http://dev.www.mogujie.org',
+	serverConf.proxy['/'+v+'*'] = {
+		target: appConf.proxy,
 		changeOrigin: true
 	}
-})
+});
 module.exports = serverConf;
 

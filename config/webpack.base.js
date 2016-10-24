@@ -1,4 +1,3 @@
-
 var path = require('path')
 var TransferWebpackPlugin = require('transfer-webpack-plugin');
 var webpack = require('webpack')
@@ -8,7 +7,7 @@ module.exports = {
 	cache: true,
 	entry: {
 		app: ['./src/app.jsx'],
-		vendor:['react','react-dom','whatwg-fetch','es6-promise','rc-queue-anim']
+		vendor:['react','react-dom','react-router','flux','whatwg-fetch','es6-promise','rc-queue-anim']
 	},
 	output: {
 		path: path.resolve(__dirname, '../dist/static'),
@@ -17,10 +16,11 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
-		root: [path.resolve(__dirname, '../modules'), path.resolve(__dirname, '../src')],
+		root: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../static')],
 		alias: {
 			'src': path.resolve(__dirname, '../src'),
-			'static': path.resolve(__dirname, '../static')
+			'static': path.resolve(__dirname, '../static'),
+			'react-avatar-editor':"@mogu/react-avatar-editor"
 		}
 	},
 	resolveLoader: {
@@ -34,7 +34,7 @@ module.exports = {
 		}),
 		new TransferWebpackPlugin([{
 			from: 'static'
-		}], path.resolve(__dirname, "../src"))
+		}], path.resolve(__dirname, "../"))
 	],
 	module: {
 		loaders: [,
@@ -60,11 +60,10 @@ module.exports = {
 		}]
 	},
 	sassLoader:{
-		includePaths: [path.resolve(__dirname, "../static"),path.resolve(__dirname, '../src')]
+		includePaths: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../static')]
 	},
 	eslint: {
 		formatter: require('eslint-friendly-formatter')
 	}
 }
-
 

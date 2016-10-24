@@ -1,0 +1,27 @@
+*{
+  box-sizing: border-box;
+}
+body{
+	color:$color;
+	min-height:100%;
+	/**min-width:$page-min-width;*/
+	font-size:$text-normal;
+	line-height:1.2;
+  font-family: PingHei;
+}
+p{
+    margin:0;
+}
+ul{
+    margin:0;
+    padding:0;
+    list-style-type:none;
+}
+h3,h4,dl,dd{
+    padding:0;
+    margin:0;
+}
+a{
+	cursor:pointer;
+    text-decoration:none;
+}

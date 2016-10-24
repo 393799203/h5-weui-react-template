@@ -1,0 +1,27 @@
+{
+	"name": "h5-finance-frontend",
+	"version": "0.0.1",
+	"description": "",
+	"author": "qingmeng <qingmeng@mogujie.com>",
+	"preferGlobal": true,
+	"scripts": {
+		"start": "teni server",
+		"build": "teni task clean && teni build && teni task"
+	},
+  "devDependencies": {
+		"fs-extra":"0.30.0",
+		"babel-preset-stage-0": "^6.0.0",
+		"jsx-control-statements":"3.1.2"
+	},
+	"dependencies": {
+		"react": "15.1.0",
+		"react-dom": "15.1.0",
+		"normalize.css":"4.1.1",
+		"flux"				:"2.1.1",
+		"whatwg-fetch":"1.0.0",
+		"es6-promise"	:"3.2.1",
+		"fastclick"	:"1.0.6"
+	}
+}
+
+

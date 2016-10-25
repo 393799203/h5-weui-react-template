@@ -1,3 +1,10 @@
+@import "~tui/lib/style/theme";	//主题变量
+@import "~tui/lib/style/index";	//主题
+#appWrapper{
+	height:100%;
+}
+
+
 @import "./theme";	//主题变量
 @import "./reset";	//重置
 @import "./mixin";	//方法
@@ -8,7 +15,5 @@
 @import "./font";	//字体
 @import "./util";	//工具类
 
-#appWrapper{
-	height:100%;
-}
+
 

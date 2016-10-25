@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Nav from './navBar'
 
 export default class Layout extends Component {
 	render() {

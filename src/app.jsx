@@ -17,7 +17,9 @@ import 'normalize.css';//样式引入
 import 'style/app.scss';//样式引入
 
 //*************页面引入**************
+import Layout from 'views/layout';
 
+import Home from 'views/pages/test';
 
 
 //app 根组件
@@ -34,7 +36,9 @@ class App extends Component {
 render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
-			
+			<Route component={Layout}>
+				<IndexRoute component={Home} title="首页"/>
+			</Route>
 		</Route>
 	</Router>
 ), document.getElementById('appWrapper'));

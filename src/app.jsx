@@ -6,6 +6,7 @@ import FastClick from 'fastclick'
 //*************补丁**************
 import 'whatwg-fetch';
 import Es6Promise from 'es6-promise';
+import Es6ObjectAssign from 'es6-object-assign';
 import 'core/polyfill';
 
 Es6Promise.polyfill();
@@ -19,7 +20,9 @@ import 'style/app.scss';//样式引入
 //*************页面引入**************
 import Layout from 'views/layout';
 
-import Home from 'views/pages/expense';
+import Home from 'views/pages/home';
+import ExpenseList from 'views/pages/expense/list';
+import ExpenseDetail from 'views/pages/expense/detail';
 
 
 //app 根组件
@@ -37,7 +40,12 @@ render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
 			<Route component={Layout}>
-				<IndexRoute component={List}/>
+				<IndexRoute component={Home}/>
+				<Route path="auditList" >
+					<IndexRedirect to="expense" />
+					<Route path=":auditType" component={ ExpenseList }/>
+				</Route>
+				<Redirect from="*" to="/auditList" />
 			</Route>
 		</Route>
 	</Router>

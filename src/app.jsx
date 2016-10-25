@@ -23,6 +23,7 @@ import Layout from 'views/layout';
 import Home from 'views/pages/home';
 import ExpenseList from 'views/pages/expense/list';
 import ExpenseDetail from 'views/pages/expense/detail';
+import ExpenseAudit from 'views/pages/expense/audit';
 
 
 //app 根组件
@@ -41,11 +42,17 @@ render((
 		<Route path="/" component={App}>
 			<Route component={Layout}>
 				<IndexRoute component={Home}/>
-				<Route path="auditList" >
+				<Route path="list" >
 					<IndexRedirect to="expense" />
 					<Route path=":auditType" component={ ExpenseList }/>
 				</Route>
-				<Redirect from="*" to="/auditList" />
+				<Route path="detail">
+					<Route path="expense(/:id)" component={ ExpenseDetail }/>
+				</Route>
+				<Route path="audit">
+					<Route path="expense(/:id)" component={ ExpenseAudit }/>
+				</Route>
+				<Redirect from="*" to="/list" />
 			</Route>
 		</Route>
 	</Router>

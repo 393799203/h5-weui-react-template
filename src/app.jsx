@@ -18,8 +18,21 @@ import 'style/app.scss';//样式引入
 
 //*************页面引入**************
 
+//app 根组件
+class App extends Component {
+	render() {
+		return (
+			<div className="w-full">
+				{this.props.children}
+			</div>
+		)
+	}
+}
+
 render((
 	<Router history={hashHistory}>
-	111
+		<Route path="/" component={App}>
+
+		</Route>
 	</Router>
 ), document.getElementById('appWrapper'));

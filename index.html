@@ -25,7 +25,7 @@
 		{% } %}
 	</head>
 	<body>
-		<div id="appWrapper">{%=o.htmlWebpackPlugin.files %}</div>
+		<div id="appWrapper"></div>
 		{% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
 		<script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
 		{% } %}

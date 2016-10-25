@@ -18,6 +18,8 @@ import 'style/app.scss';//样式引入
 
 //*************页面引入**************
 
+
+
 //app 根组件
 class App extends Component {
 	render() {
@@ -32,7 +34,7 @@ class App extends Component {
 render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
-
+			
 		</Route>
 	</Router>
 ), document.getElementById('appWrapper'));

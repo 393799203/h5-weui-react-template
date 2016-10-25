@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>蘑菇</title>
+		<title>财务系统</title>
 		<meta charset="UTF-8">
 		<meta name="keywords" content="">
 		<meta name="description" content="">
-		<meta name="apple-mobile-web-app-title" content="蘑菇街内网">
+		<meta name="apple-mobile-web-app-title" content="财务H5">
 		<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
 		<meta name="aplus-terminal" content="1">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="grey">
-		<meta name="apple-mobile-web-app-title" content="内网">
 		<meta content="telephone=no" name="format-detection" />
 		<meta content="email=no" name="format-detection" />
 		<meta name="apple-touch-fullscreen" content="yes" />
@@ -26,7 +25,7 @@
 		{% } %}
 	</head>
 	<body>
-		<div id="appWrapper"></div>
+		<div id="appWrapper">{%=o.htmlWebpackPlugin.files %}</div>
 		{% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
 		<script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
 		{% } %}

@@ -18,4 +18,8 @@ import 'style/app.scss';//样式引入
 
 //*************页面引入**************
 
-render(<Router />, document.getElementById('appWrapper'));
+render((
+	<Router history={hashHistory}>
+	111
+	</Router>
+), document.getElementById('appWrapper'));

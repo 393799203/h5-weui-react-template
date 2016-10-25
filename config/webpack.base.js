@@ -19,8 +19,7 @@ module.exports = {
 		root: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../static')],
 		alias: {
 			'src': path.resolve(__dirname, '../src'),
-			'static': path.resolve(__dirname, '../static'),
-			'react-avatar-editor':"@mogu/react-avatar-editor"
+			'static': path.resolve(__dirname, '../static')
 		}
 	},
 	resolveLoader: {

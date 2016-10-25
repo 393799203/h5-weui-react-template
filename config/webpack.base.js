@@ -19,7 +19,8 @@ module.exports = {
 		root: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../static')],
 		alias: {
 			'src': path.resolve(__dirname, '../src'),
-			'static': path.resolve(__dirname, '../static')
+			'static': path.resolve(__dirname, '../static'),
+			'tui': path.resolve(__dirname, '../tui')
 		}
 	},
 	resolveLoader: {

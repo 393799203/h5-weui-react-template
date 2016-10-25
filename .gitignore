@@ -2,5 +2,6 @@ npm-debug.log
 nohup.log
 nohup.out
 node_modules
+tui
 .DS_Store
 

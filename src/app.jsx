@@ -44,21 +44,21 @@ render((
 		<Route path="/" component={App}>
 			<Route component={Layout}>
 				<IndexRedirect to="apply/menu" />
-				<Route path="apply" >
+				<Route path="apply">
 					<IndexRedirect to="menu" />
 					<Route path="menu" component={ ApplyMenu } />
 				</Route>
-				<Route path="audit" >
+				<Route path="audit" key="audit">
 					<IndexRedirect to="expense" />
 					<Route path=":auditType" component={ ExpenseList } />
 				</Route>
 				<Route path="audited" key="audited">
 					<IndexRedirect to="expense" />
-					<Route path=":auditType" component={ ExpenseList }/>
+					<Route path=":auditType" component={ ExpenseList } />
 				</Route>
 				<Route path="application" key="application">
 					<IndexRedirect to="expense" />
-					<Route path=":auditType" component={ ExpenseList }/>
+					<Route path=":auditType" component={ ExpenseList } />
 				</Route>
 				<Redirect from="*" to="/apply/menu" />
 			</Route>

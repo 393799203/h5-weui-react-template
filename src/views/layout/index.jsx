@@ -6,27 +6,35 @@ import Icon from 'components/icon'
 export default class Layout extends Component {
 	state = {
 		tabBarDataList: [
-			{link: "/apply", tabName: "申请", icon: "waiting-circle", key:"Apply"},
-			{link: "/audit", tabName: "待审批", icon: "download", key:"Audit"},
-			{link: "/audited", tabName: "已审批", icon: "waiting", key:"Audited"},
-			{link: "/application", tabName: "我", icon: "circle", key:"Application"}
+			{link: "/apply", tabName: "申请", icon: "waiting-circle", key: "apply"},
+			{link: "/audit", tabName: "待审批", icon: "download", key: "audit"},
+			{link: "/audited", tabName: "已审批", icon: "waiting", key: "audited"},
+			{link: "/application", tabName: "我", icon: "circle", key: "application"}
 		],
-		activeMenu: "Home"
+		activeMenu: ""
 	}
 
 	constructor(props){
 		super(props);
-		this.state.activeMenu = ""
+		this.selectActiveMenu(props);
 	}
 
 	componentWillReceiveProps(nextProps) {
-	    this.state.activeMenu = ""
+	    this.selectActiveMenu(nextProps);
+	}
+
+	selectActiveMenu = (props) => {
+		let activeTypes = [];
+		this.state.tabBarDataList.map((item) => {
+			activeTypes.push(item.key);
+		})
+		this.state.activeMenu = activeTypes.filter((type) => props.location.pathname.indexOf(type)!=-1 )[0];
 	}
 
 	render() {
 		let { children } = this.props;
 		let tabBarDataList = this.state.tabBarDataList;
-		console.log(this.props);
+		
 		return (
 			<div className="weui-tab">
 				<div className="weui-tab__panel">

@@ -1,13 +1,14 @@
 *{
   box-sizing: border-box;
 }
+html, body {
+    height: 100%;
+    -webkit-tap-highlight-color: transparent;
+    font-size:$text-normal;
+    line-height:1.2;
+}
 body{
-	color:$color;
-	min-height:100%;
-	/**min-width:$page-min-width;*/
-	font-size:$text-normal;
-	line-height:1.2;
-  font-family: PingHei;
+    font-family: -apple-system-font, "Helvetica Neue", Helvetica, sans-serif;
 }
 p{
     margin:0;
@@ -24,4 +25,10 @@ h3,h4,dl,dd{
 a{
 	cursor:pointer;
   text-decoration:none;
+}
+[class^="weui-icon-"]:before,
+[class*=" weui-icon-"]:before {
+  display: inline-block;
+  margin-left: 0;
+  margin-right: 0;
 }

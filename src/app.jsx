@@ -14,13 +14,14 @@ FastClick.attach(document.body)
 
 
 //*************样式加载**************
-import 'normalize.css';//样式引入
+// import 'normalize.css';//样式引入
+import 'weui/dist/style/weui.css';
 import 'style/app.scss';//样式引入
 
 //*************页面引入**************
 import Layout from 'views/layout';
 
-import Home from 'views/pages/home';
+import ApplyMenu from 'views/pages/apply/menu';
 import ExpenseList from 'views/pages/expense/list';
 import ExpenseDetail from 'views/pages/expense/detail';
 import ExpenseAudit from 'views/pages/expense/audit';
@@ -30,7 +31,8 @@ import ExpenseAudit from 'views/pages/expense/audit';
 class App extends Component {
 	render() {
 		return (
-			<div>
+			<div className="container" id="container">
+				<div className="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
 				{this.props.children}
 			</div>
 		)
@@ -41,18 +43,24 @@ render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
 			<Route component={Layout}>
-				<IndexRoute component={Home}/>
-				<Route path="list" >
+				<IndexRedirect to="apply/menu" />
+				<Route path="apply" >
+					<IndexRedirect to="menu" />
+					<Route path="menu" component={ ApplyMenu } />
+				</Route>
+				<Route path="audit" >
+					<IndexRedirect to="expense" />
+					<Route path=":auditType" component={ ExpenseList } />
+				</Route>
+				<Route path="audited" key="audited">
 					<IndexRedirect to="expense" />
 					<Route path=":auditType" component={ ExpenseList }/>
 				</Route>
-				<Route path="detail">
-					<Route path="expense(/:id)" component={ ExpenseDetail }/>
+				<Route path="application" key="application">
+					<IndexRedirect to="expense" />
+					<Route path=":auditType" component={ ExpenseList }/>
 				</Route>
-				<Route path="audit">
-					<Route path="expense(/:id)" component={ ExpenseAudit }/>
-				</Route>
-				<Redirect from="*" to="/list" />
+				<Redirect from="*" to="/apply/menu" />
 			</Route>
 		</Route>
 	</Router>

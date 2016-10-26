@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import Icon from 'components/icon'
 
 export default class Layout extends Component {
-	activeTypes = [];
 	state = {
 		tabBarDataList: [
 			{link: "/apply", tabName: "申请", icon: "waiting-circle", key: "apply"},
@@ -17,9 +16,6 @@ export default class Layout extends Component {
 
 	constructor(props){
 		super(props);
-		this.state.tabBarDataList.map((item) => {
-			this.activeTypes.push(item.key);
-		})
 		this.selectActiveMenu(props);
 	}
 
@@ -28,13 +24,12 @@ export default class Layout extends Component {
 	}
 
 	selectActiveMenu = (props) => {
-		this.state.activeMenu = this.activeTypes.filter((type) => props.location.pathname.indexOf(type)!=-1 )[0];
+		this.state.activeMenu = props.location.pathname.split('/')[1];
 	}
 
 	render() {
 		let { children } = this.props;
 		let tabBarDataList = this.state.tabBarDataList;
-		
 		return (
 			<div className="weui-tab">
 				<div className="weui-tab__panel">

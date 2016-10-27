@@ -28,7 +28,6 @@ import ExpenseList from 'views/pages/expense/list';
 import ExpenseDetail from 'views/pages/expense/detail';
 import ExpenseAudit from 'views/pages/expense/audit';
 
-
 //app 根组件
 class App extends Component {
 	render() {
@@ -53,10 +52,10 @@ render((
 				<Route path="audit" key="audit">
 					<IndexRedirect to="list" />
 					<Route path="list" component={ AuditList } />
-					<Route path=":auditType" component={ ExpenseList } />
+					<Route path="expense(/:id)" component={ ExpenseAudit } />
 				</Route>
 				<Route path="audited" key="audited">
-					<IndexRedirect to="expense" />
+					<IndexRedirect to="list" />
 					<Route path=":auditType" component={ ExpenseList } />
 				</Route>
 				<Route path="application" key="application">

@@ -68,7 +68,7 @@ export default class ListItem extends Component {
 			            <div className="weui-form-preview__hd">
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">报销金额</label>
-			                    <em className="weui-form-preview__value">¥{item.amt}</em>
+			                    <em className="weui-form-preview__value">¥{Util.money(item.amt)}</em>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__bd">

@@ -19,7 +19,7 @@ export default class auditList extends Component {
 		let params = this.state.params;
 		let ajaxUrl = this.state.ajaxUrl;
 		return (
-			<List params = { params } ajaxUrl = { ajaxUrl }/>
+			<List className="m-t-n" params = { params } ajaxUrl = { ajaxUrl }/>
 		)
 	}
 }

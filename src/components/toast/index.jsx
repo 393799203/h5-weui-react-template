@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from  'react-router';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import Icon from 'components/icon';
 
 export default class Toast extends Component {
@@ -38,7 +38,7 @@ export default class Toast extends Component {
 			<div id="Toast">
 		        <div className="weui-mask_transparent"></div>
 		        <div className="weui-toast">
-		            <i className={classNames("weui-icon_toast", cls)}></i>
+		            <i className={classnames("weui-icon_toast", cls)}></i>
 		            <p className="weui-toast__content">{ msg }</p>
 		        </div>
 		    </div>

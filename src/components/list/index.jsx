@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from  'react-router'
+import classnames from 'classnames';
 import Dispatcher from 'core/dispatcher';
 import EventNames from 'data/eventNames';
 import Util from 'core/util';
@@ -58,9 +59,10 @@ export default class ListItem extends Component {
 	}
 
 	render() {
+		let className = this.props.className;
 		let list = this.state.list;
 		return (
-			<div className="weui-cells">
+			<div className={classnames("weui-cells", className)}>
 				<For each = "item" of = { list } index = "index">
 					<div className="weui-form-preview" key = {index}>
 			            <div className="weui-form-preview__hd">

@@ -1,5 +1,4 @@
 import { hashHistory } from 'react-router';
-import { notification } from 'antd';
 import valueData from 'data/values';
 
 //基础工具
@@ -42,11 +41,12 @@ class Util{
 	}
 
 	toastr = (type, msg, desc, duration, other) => {
-		notification[type](Object.assign({
-			message: msg,
-			description: desc,
-			duration: duration || 4
-		},other))
+		console.log(msg);
+		// notification[type](Object.assign({
+		// 	message: msg,
+		// 	description: desc,
+		// 	duration: duration || 4
+		// },other))
 	}
 
 	money = (s, n) => {

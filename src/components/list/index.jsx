@@ -24,17 +24,17 @@ export default class ListItem extends Component {
 			            <div className="weui-form-preview__hd">
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">报销金额</label>
-			                    <em className="weui-form-preview__value">¥2400.00</em>
+			                    <em className="weui-form-preview__value">¥{item.amt}</em>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__bd">
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">商品</label>
-			                    <span className="weui-form-preview__value">电动打蛋机</span>
+			                    <label className="weui-form-preview__label">申请人</label>
+			                    <span className="weui-form-preview__value">{!item.agentNickName? item.applyNickName: `${item.applyNickName}(${item.agentNickName}代申请)`}</span>
 			                </div>
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">标题标题</label>
-			                    <span className="weui-form-preview__value">名字名字名字</span>
+			                    <label className="weui-form-preview__label">类型</label>
+			                    <span className="weui-form-preview__value">{item.typeName}</span>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">

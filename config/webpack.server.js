@@ -1,7 +1,8 @@
 var path = require('path');
 var appConf = require('./app.conf');
 var proxyPaths = [
-	
+	'user',
+	'expense'
 ];
 var serverConf = {
 	contentBase: path.resolve(__dirname, '..'),

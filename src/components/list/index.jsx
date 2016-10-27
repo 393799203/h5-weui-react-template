@@ -58,10 +58,10 @@ export default class ListItem extends Component {
 	}
 
 	render() {
-		let dataSource = this.state.dataSource;
+		let list = this.state.list;
 		return (
 			<div className="weui-cells">
-				<For each = "item" of = { dataSource } index = "index">
+				<For each = "item" of = { list } index = "index">
 					<div className="weui-form-preview" key = {index}>
 			            <div className="weui-form-preview__hd">
 			                <div className="weui-form-preview__item">

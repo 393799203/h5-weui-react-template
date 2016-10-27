@@ -4,10 +4,10 @@ import Grid from 'components/grid'
 export default class Menu extends Component {
 	state = {
 		gridDataList : [
-			{link: "/expense", title: "报销", icon: "waiting-circle"},
-			{link: "", title: "报销3", icon: "download"},
-			{link: "", title: "报销4", icon: "waiting"},
-			{link: "", title: "报销5", icon: "circle"}
+			{link: "/expense", title: "报销1", icon: "waiting-circle"},
+			{link: "/expense", title: "报销2", icon: "download"},
+			{link: "/expense", title: "报销3", icon: "waiting"},
+			{link: "/expense", title: "报销4", icon: "circle"}
 		]
 	}
 	render() {

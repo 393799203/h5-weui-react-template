@@ -49,7 +49,7 @@ export default class ListItem extends Component {
 			this.state.total = data.data.total;
 			this.props.onChange(data.data.list);
 			this.state.loading = false;
-			this.state.isEnd = true;
+			this.state.isEnd = data.data.isEnd;
 			this.setState(this.state);
 		}, (err) => {
 			this.state.loading = false;

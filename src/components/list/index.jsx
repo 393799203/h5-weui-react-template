@@ -53,6 +53,7 @@ export default class ListItem extends Component {
 			this.setState(this.state);
 		}, (err) => {
 			this.state.loading = false;
+			this.state.isEnd = true;
 			this.state.list = [];
 			if(err == this.state.ajaxUrl)return;
 			this.setState(this.state);

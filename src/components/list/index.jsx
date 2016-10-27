@@ -35,9 +35,11 @@ export default class ListItem extends Component {
 				this.setState(this.state);
 			}
 		});
-		window.addEventListener("scroll",(e) => {
-			console.log(22);
-		});
+		window.addEventListener("scroll", this.scrollHandler);
+	}
+
+	scrollHandler = (e) => {
+		console.log(e);
 	}
 
 	getList = (currentIndex = 1) => {
@@ -46,7 +48,6 @@ export default class ListItem extends Component {
 		this.setState(this.state);
 		Ajax.post(this.props.ajaxUrl, params, 1).then(data => {
 			this.state.list = data.data.list || [];
-			this.state.total = data.data.total;
 			this.props.onChange(data.data.list);
 			this.state.loading = false;
 			this.state.isEnd = data.data.isEnd;
@@ -68,7 +69,7 @@ export default class ListItem extends Component {
 
 	componentWillUnmount(){
 		Dispatcher.unregister(this.dispatchId);
-		window.removeEventListener('scroll');
+		window.removeEventListener('scroll', this.scrollHandler);
 	}
 
 	render() {
@@ -97,7 +98,12 @@ export default class ListItem extends Component {
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">
+			            <If condition={item.viewerOperateItems == 20}>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" to={"javascript:;"}>认领</Link>
+			            </If>
+			            <If condition={item.viewerOperateItems == 10}>
 			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" to={{pathname: `/expense/audit/${item.id}` , query: { "updated": item.updated}}}>审核</Link>
+			            </If>
 			            </div>
 			        </div>
 	            </For>

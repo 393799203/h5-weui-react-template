@@ -106,7 +106,7 @@ export default class ListItem extends Component {
 			            <span className="weui-loadmore__tips">正在加载</span>
 			        </div>
 		        </If>
-		        <If condition={isEnd} >
+		        <If condition={ list.length && isEnd} >
 			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot">
 			            <span className="weui-loadmore__tips bg-none"></span>
 			        </div>

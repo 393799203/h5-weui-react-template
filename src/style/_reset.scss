@@ -36,6 +36,9 @@ a{
 .weui-cells{
   background: none;
 }
+.weui-cells:after{
+  border-bottom: none;
+}
 .weui-form-preview{
   margin-bottom: 1.17647059em;
 }

@@ -3,6 +3,7 @@ import { Link } from  'react-router'
 import Dispatcher from 'core/dispatcher';
 import EventNames from 'data/eventNames';
 import Util from 'core/util';
+import Ajax from 'core/ajax';
 
 export default class ListItem extends Component {
 	static defaultProps = {
@@ -23,8 +24,7 @@ export default class ListItem extends Component {
 
 	getList = (currentIndex = 1) => {
 		let params = Object.assign({}, this.state.params, { pageNum: currentIndex, pageSize: 10 });
-		this.state.loading = true;
-		this.setState(this.state);
+		Util.startLoading();
 		Ajax.post(this.props.ajaxUrl, params, 1).then(data => {
 			this.state.list = data.data.list || [];
 			this.state.total = data.data.total;
@@ -32,7 +32,7 @@ export default class ListItem extends Component {
 			Util.closeLoading();
 			this.setState(this.state);
 		}, (err) => {
-			this.state.loading = false;
+			Util.closeLoading();
 			this.state.list = [];
 			if(err == this.state.ajaxUrl)return;
 			this.setState(this.state);
@@ -41,11 +41,9 @@ export default class ListItem extends Component {
 
 	componentDidMount() {
 		this.state.params = this.props.params;
-		Util.success();
-		// this.getList();
+		this.getList();
 	   	this.dispatchId = Dispatcher.register((action) => {
 			if(action.actionType === EventNames.FLUSH_LIST){
-				Util.startLoading();
 				this.state.params = action.params || this.state.params;
 				this.getList();
 			}

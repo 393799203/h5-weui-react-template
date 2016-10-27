@@ -6,7 +6,7 @@ import Icon from 'components/icon'
 export default class Layout extends Component {
 	state = {
 		tabBarDataList: [
-			{link: "/apply", tabName: "申请", icon: "waiting-circle", key: "apply"},
+			{link: "/", tabName: "申请", icon: "waiting-circle", key: "apply"},
 			{link: "/audit", tabName: "待审批", icon: "download", key: "audit"},
 			{link: "/audited", tabName: "已审批", icon: "waiting", key: "audited"},
 			{link: "/application", tabName: "我", icon: "circle", key: "application"}
@@ -24,7 +24,8 @@ export default class Layout extends Component {
 	}
 
 	selectActiveMenu = (props) => {
-		this.state.activeMenu = props.location.pathname.split('/')[1];
+		console.log(props.location.pathname);
+		this.state.activeMenu = props.location.pathname.split('/')[1] || "apply";
 	}
 
 	render() {

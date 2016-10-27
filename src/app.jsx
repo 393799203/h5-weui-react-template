@@ -23,6 +23,8 @@ import Layout from 'views/layout';
 
 import ApplyMenu from 'views/pages/apply/menu';
 import AuditList from 'views/pages/audit/list';
+import AuditedList from 'views/pages/audited/list';
+import Application from 'views/pages/application';
 
 import ExpenseList from 'views/pages/expense/list';
 import ExpenseDetail from 'views/pages/expense/detail';
@@ -44,25 +46,11 @@ render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
 			<Route component={Layout}>
-				<IndexRedirect to="apply/menu" />
-				<Route path="apply">
-					<IndexRedirect to="menu" />
-					<Route path="menu" component={ ApplyMenu } />
-				</Route>
-				<Route path="audit" key="audit">
-					<IndexRedirect to="list" />
-					<Route path="list" component={ AuditList } />
-					<Route path="expense(/:id)" component={ ExpenseAudit } />
-				</Route>
-				<Route path="audited" key="audited">
-					<IndexRedirect to="list" />
-					<Route path=":auditType" component={ ExpenseList } />
-				</Route>
-				<Route path="application" key="application">
-					<IndexRedirect to="expense" />
-					<Route path=":auditType" component={ ExpenseList } />
-				</Route>
-				<Redirect from="*" to="/apply/menu" />
+				<IndexRoute component={ ApplyMenu } />
+				<Route path="audit" component={ AuditList } />
+				<Route path="audited" component={ AuditedList } />
+				<Route path="application" component={ Application } />
+				<Redirect from="*" to="/" />
 			</Route>
 		</Route>
 	</Router>

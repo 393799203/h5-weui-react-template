@@ -3,7 +3,7 @@ import { Link } from  'react-router'
 import classNames from 'classnames'
 import Icon from 'components/icon'
 
-export default class Layout extends Component {
+export default class TabLayout extends Component {
 	state = {
 		tabBarDataList: [
 			{link: "/", tabName: "申请", icon: "waiting-circle", key: "apply"},

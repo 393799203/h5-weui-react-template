@@ -15,7 +15,7 @@ export default class ListItem extends Component {
 
 	state = {
 		params: {},
-		dataSource: []
+		list: []
 	}
 
 	constructor(props){

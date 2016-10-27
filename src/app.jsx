@@ -22,6 +22,8 @@ import 'style/app.scss';//样式引入
 import Layout from 'views/layout';
 
 import ApplyMenu from 'views/pages/apply/menu';
+import AuditList from 'views/pages/audit/list';
+
 import ExpenseList from 'views/pages/expense/list';
 import ExpenseDetail from 'views/pages/expense/detail';
 import ExpenseAudit from 'views/pages/expense/audit';
@@ -49,7 +51,8 @@ render((
 					<Route path="menu" component={ ApplyMenu } />
 				</Route>
 				<Route path="audit" key="audit">
-					<IndexRedirect to="expense" />
+					<IndexRedirect to="list" />
+					<Route path="list" component={ AuditList } />
 					<Route path=":auditType" component={ ExpenseList } />
 				</Route>
 				<Route path="audited" key="audited">

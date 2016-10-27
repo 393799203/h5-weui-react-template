@@ -26,7 +26,6 @@ import AuditList from 'views/pages/audit/list';
 import AuditedList from 'views/pages/audited/list';
 import Application from 'views/pages/application';
 
-import ExpenseList from 'views/pages/expense/list';
 import ExpenseDetail from 'views/pages/expense/detail';
 import ExpenseAudit from 'views/pages/expense/audit';
 
@@ -45,6 +44,10 @@ class App extends Component {
 render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
+			<Route path="expense">
+				<Route path="detail(/:id)" component={ ExpenseDetail } />
+				<Route path="audit(/:id)" component={ ExpenseAudit } />
+			</Route>
 			<Route component={TabLayout}>
 				<IndexRoute component={ ApplyMenu } />
 				<Route path="audit" component={ AuditList } />

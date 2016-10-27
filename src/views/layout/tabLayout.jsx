@@ -24,7 +24,6 @@ export default class TabLayout extends Component {
 	}
 
 	selectActiveMenu = (props) => {
-		console.log(props.location.pathname);
 		this.state.activeMenu = props.location.pathname.split('/')[1] || "apply";
 	}
 

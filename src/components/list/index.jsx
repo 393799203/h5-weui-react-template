@@ -82,7 +82,7 @@ export default class ListItem extends Component {
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" to={{pathname: `/expense/${item.id}` , query: { "updated": item.updated}}}>操作</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" to={{pathname: `/expense/audit/${item.id}` , query: { "updated": item.updated}}}>操作</Link>
 			            </div>
 			        </div>
 	            </For>

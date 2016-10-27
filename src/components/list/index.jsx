@@ -1,18 +1,62 @@
 import React, { Component } from 'react'
 import { Link } from  'react-router'
+import Dispatcher from 'core/dispatcher';
+import EventNames from 'data/eventNames';
+import Util from 'core/util';
 
 export default class ListItem extends Component {
+	static defaultProps = {
+		ajaxUrl : "",
+		params : {},
+		rowKey: "",
+		onChange: (list) => { }
+	}
+
 	state = {
+		params: {},
 		dataSource: []
 	}
 
 	constructor(props){
 		super(props);
-		this.state.dataSource = props.dataSource;
 	}
 
-	componentWillReceiveProps(nextProps) {
-	    this.state.dataSource = nextProps.dataSource;
+	getList = (currentIndex = 1) => {
+		let params = Object.assign({}, this.state.params, { pageNum: currentIndex, pageSize: 10 });
+		this.state.loading = true;
+		this.setState(this.state);
+		Ajax.post(this.props.ajaxUrl, params, 1).then(data => {
+			this.state.list = data.data.list || [];
+			this.state.total = data.data.total;
+			this.props.onChange(data.data.list);
+			Util.closeLoading();
+			this.setState(this.state);
+		}, (err) => {
+			this.state.loading = false;
+			this.state.list = [];
+			if(err == this.state.ajaxUrl)return;
+			this.setState(this.state);
+		});
+	}
+
+	componentDidMount() {
+		this.state.params = this.props.params;
+		Util.success();
+		// this.getList();
+	   	this.dispatchId = Dispatcher.register((action) => {
+			if(action.actionType === EventNames.FLUSH_LIST){
+				Util.startLoading();
+				this.state.params = action.params || this.state.params;
+				this.getList();
+			}
+			if(action.actionType === EventNames.RESET_LIST){
+				this.setState(this.state);
+			}
+		});
+	}
+
+	componentWillUnmount(){
+		Dispatcher.unregister(this.dispatchId);
 	}
 
 	render() {

@@ -1,5 +1,6 @@
 import { hashHistory } from 'react-router';
 import valueData from 'data/values';
+import Toast from 'components/toast';
 
 //基础工具
 class Util{
@@ -40,13 +41,12 @@ class Util{
 	  return paramStr;
 	}
 
-	toastr = (type, msg, desc, duration, other) => {
-		console.log(msg);
-		// notification[type](Object.assign({
-		// 	message: msg,
-		// 	description: desc,
-		// 	duration: duration || 4
-		// },other))
+	toast = (type, msg, duration) => {
+		Toast.open({
+			type: type,
+			msg: msg,
+			duration: duration
+		})
 	}
 
 	money = (s, n) => {
@@ -65,21 +65,22 @@ class Util{
 	   return parseFloat(s.replace(/[^\d\.-]/g, ""));   
 	} 
 
-	success = (msg, desc, duration) => {
-		this.toastr("success", msg, desc, duration)
+	startLoading = (msg) => {
+		this.toast("loading", msg );
 	}
 
-	error = (msg, desc, duration) => {
-		this.toastr("error", msg, desc, duration)
+	closeLoading = () => {
+		Toast.close();
 	}
 
-	info = (msg, desc, duration) => {
-		this.toastr("info", msg, desc, duration)
+	success = (msg, desc, duration = 3000) => {
+		this.toast("success", msg, duration)
+	}
+	//错误用notification 再改
+	error = (msg, desc, duration = 3000) => {
+		this.toast("error", msg, duration)
 	}
 
-	warning = (msg, desc, duration) => {
-		this.toastr("warning", msg, desc, duration)
-	}
 }
 export default new Util;
 

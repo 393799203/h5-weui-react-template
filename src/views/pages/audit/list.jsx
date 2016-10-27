@@ -5,25 +5,21 @@ import Ajax from 'core/ajax';
 
 export default class auditList extends Component {
 	state = {
-		dataSource: [],
 		params: {
 			"outlineType": 3
-		}
+		},
+		ajaxUrl: "/expense/request/getMyOutlineList"
 	}
 
 	constructor(props){
 		super(props);
-		let postData = Object.assign({}, this.state.params);
-		Ajax.post('/expense/request/getMyOutlineList', postData).then((res)=>{
-			this.state.dataSource = res.data.list;
-			this.setState(this.state);
-		})
 	}
 
 	render() {
-		let dataSource = this.state.dataSource;
+		let params = this.state.params;
+		let ajaxUrl = this.state.ajaxUrl;
 		return (
-			<List dataSource={ dataSource } />
+			<List params = { params } ajaxUrl = { ajaxUrl }/>
 		)
 	}
 }

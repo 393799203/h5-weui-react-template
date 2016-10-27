@@ -3,8 +3,8 @@ import { Link } from  'react-router'
 import classnames from 'classnames';
 import Dispatcher from 'core/dispatcher';
 import EventNames from 'data/eventNames';
-import Util from 'core/util';
 import Ajax from 'core/ajax';
+import Util from 'core/util';
 
 export default class ListItem extends Component {
 	static defaultProps = {
@@ -16,6 +16,8 @@ export default class ListItem extends Component {
 
 	state = {
 		params: {},
+		loading: false,
+		isEnd: false,
 		list: []
 	}
 
@@ -23,27 +25,8 @@ export default class ListItem extends Component {
 		super(props);
 	}
 
-	getList = (currentIndex = 1) => {
-		let params = Object.assign({}, this.state.params, { pageNum: currentIndex, pageSize: 10 });
-		Util.startLoading();
-		Ajax.post(this.props.ajaxUrl, params, 1).then(data => {
-			this.state.list = data.data.list || [];
-			this.state.total = data.data.total;
-			this.props.onChange(data.data.list);
-			Util.closeLoading();
-			this.setState(this.state);
-		}, (err) => {
-			Util.closeLoading();
-			this.state.list = [];
-			if(err == this.state.ajaxUrl)return;
-			this.setState(this.state);
-		});
-	}
-
-	componentDidMount() {
-		this.state.params = this.props.params;
-		this.getList();
-	   	this.dispatchId = Dispatcher.register((action) => {
+	addEvents = () => {
+		this.dispatchId = Dispatcher.register((action) => {
 			if(action.actionType === EventNames.FLUSH_LIST){
 				this.state.params = action.params || this.state.params;
 				this.getList();
@@ -52,14 +35,45 @@ export default class ListItem extends Component {
 				this.setState(this.state);
 			}
 		});
+		window.addEventListener("scroll",(e) => {
+			console.log(22);
+		});
+	}
+
+	getList = (currentIndex = 1) => {
+		let params = Object.assign({}, this.state.params, { pageNum: currentIndex, pageSize: 10 });
+		this.state.loading = true;
+		this.setState(this.state);
+		Ajax.post(this.props.ajaxUrl, params, 1).then(data => {
+			this.state.list = data.data.list || [];
+			this.state.total = data.data.total;
+			this.props.onChange(data.data.list);
+			this.state.loading = false;
+			this.state.isEnd = true;
+			this.setState(this.state);
+		}, (err) => {
+			this.state.loading = false;
+			this.state.list = [];
+			if(err == this.state.ajaxUrl)return;
+			this.setState(this.state);
+		});
+	}
+
+	componentDidMount() {
+		this.state.params = this.props.params;
+		this.addEvents();
+		this.getList();
 	}
 
 	componentWillUnmount(){
 		Dispatcher.unregister(this.dispatchId);
+		window.removeEventListener('scroll');
 	}
 
 	render() {
 		let className = this.props.className;
+		let isEnd = this.state.isEnd;
+		let loading = this.state.loading;
 		let list = this.state.list;
 		return (
 			<div className={classnames("weui-cells", className)}>
@@ -82,10 +96,26 @@ export default class ListItem extends Component {
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" to={{pathname: `/expense/audit/${item.id}` , query: { "updated": item.updated}}}>操作</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" to={{pathname: `/expense/audit/${item.id}` , query: { "updated": item.updated}}}>审核</Link>
 			            </div>
 			        </div>
 	            </For>
+	            <If condition={loading}>
+		            <div className="weui-loadmore">
+			            <i className="weui-loading"></i>
+			            <span className="weui-loadmore__tips">正在加载</span>
+			        </div>
+		        </If>
+		        <If condition={isEnd} >
+			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+			            <span className="weui-loadmore__tips bg-none"></span>
+			        </div>
+		        </If>
+		        <If condition={!list.length && isEnd} >
+			        <div className="weui-loadmore weui-loadmore_line">
+			            <span className="weui-loadmore__tips bg-none">暂无数据</span>
+			        </div>
+		        </If>
 	        </div>
 		)
 	}

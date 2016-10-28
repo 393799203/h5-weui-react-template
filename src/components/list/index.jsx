@@ -36,7 +36,8 @@ export default class ListItem extends Component {
 				this.setState(this.state);
 			}
 		});
-		window.addEventListener("scroll", (e)=>{
+		let scrollWrap = document.querySelector('.weui-tab__panel') || document.querySelector('.containerWrap') ;
+		scrollWrap.addEventListener("scroll", (e)=>{
 			console.log(22)
 		});
 	}

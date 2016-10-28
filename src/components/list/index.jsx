@@ -46,6 +46,20 @@ export default class ListItem extends Component {
 		console.log(e);
 	}
 
+	claim = (item) => {
+		let postData = {
+			applyId: item.id, 
+			taskId: item.currTask.taskId,
+			taskUpdated: item.currTask.updated,
+			updated: item.updated
+		}
+		Ajax.post("/expense/request/claim", postData).then((res) => {
+			item.updated = res.data.updated;
+			item.viewerOperateItems.replace("20","21");
+			this.setState(this.state);
+		})
+	}
+
 	getList = (currentIndex = 1) => {
 		let params = Object.assign({}, this.state.params, { pageNum: currentIndex, pageSize: 10 });
 		this.state.loading = true;
@@ -103,7 +117,7 @@ export default class ListItem extends Component {
 			            </div>
 			            <div className="weui-form-preview__ft">
 			            <If condition={item.viewerOperateItems.indexOf(20)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" >认领</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" onClick={this.claim.bind(this, item)}>认领</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(21)!=-1}>
 			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" to={{pathname: `/expense/audit/${item.id}` , query: { "updated": item.updated}}}>审核</Link>

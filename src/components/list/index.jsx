@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from  'react-router'
+import Infinite from 'react-infinite';
 import classnames from 'classnames';
 import Dispatcher from 'core/dispatcher';
 import EventNames from 'data/eventNames';
@@ -35,7 +36,9 @@ export default class ListItem extends Component {
 				this.setState(this.state);
 			}
 		});
-		window.addEventListener("scroll", this.scrollHandler);
+		window.addEventListener("scroll", (e)=>{
+			console.log(22)
+		});
 	}
 
 	scrollHandler = (e) => {

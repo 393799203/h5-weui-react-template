@@ -15,7 +15,7 @@ class Ajax{
 	        return Promise.resolve(response.json());
 	    }
 	    else{
-	    	Util.error(response.status,response.url);
+	    	// Util.error(response.status,response.url);
 	        return Promise.reject(response);
 	    }
 	}

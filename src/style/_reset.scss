@@ -36,6 +36,10 @@ a{
 .weui-cells{
   background: none;
 }
+.weui-cells__title{
+  padding-top: 0.77em;
+  margin-top: 0;
+}
 .weui-cells:after{
   border-bottom: none;
 }

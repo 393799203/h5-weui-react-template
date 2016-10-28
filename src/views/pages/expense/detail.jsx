@@ -85,46 +85,6 @@ export default class ExpenseDetail extends Component {
 			            </If>
 		            </div>
 		        </div>
-		        <If condition = { detailInfo.detailFormList && detailInfo.detailFormList.length } >
-			        <div className="weui-cells__title">其他明细信息</div>
-			        <div className="weui-cells m-t-n">
-			        	<For each = "item" of = { detailInfo.detailFormList } index = "index">
-				        	<div className="bg-white m-b" key={ index }>
-				        		<div className="weui-cell">
-					                <div className="weui-cell__bd">
-					                    <p>时间</p>
-					                </div>
-					                <div className="weui-cell__ft">{item.actionDate}</div>
-					            </div>
-					            <div className="weui-cell">
-					                <div className="weui-cell__bd">
-					                    <p>费用类型</p>
-					                </div>
-					                <div className="weui-cell__ft">{item.expenseTypeName}</div>
-					            </div>
-					            <div className="weui-cell">
-					                <div className="weui-cell__bd">
-					                    <p>金额</p>
-					                </div>
-					                <div className="weui-cell__ft">{Util.money(item.amt)}</div>
-					            </div>
-					            <div className="weui-cell">
-					            	<If condition={ item.comments && item.comments.length > 15 }>
-						            	<div className="weui-media-box_text">
-						                    <h4 className="weui-media-box__title">说明</h4>
-						                    <p className="weui-media-box__desc">{item.comments}</p>
-						                </div>
-						            <Else />
-						                <div className="weui-cell__bd">
-						                    <p>明细说明</p>
-						                </div>
-						                <div className="weui-cell__ft">{item.comments}</div>
-						            </If>
-					            </div>
-				        	</div>
-			            </For>
-			        </div>
-		        </If>
 		        <If condition = { detailInfo.trifficForms && detailInfo.trifficForms.length }>
 		        	<div className="weui-cells__title">差旅明细信息</div>
 		        	<div className="weui-cells m-t-n">
@@ -271,6 +231,138 @@ export default class ExpenseDetail extends Component {
 						            <Else />
 						                <div className="weui-cell__bd">
 						                    <p>说明</p>
+						                </div>
+						                <div className="weui-cell__ft">{item.comments}</div>
+						            </If>
+					            </div>
+				        	</div>
+			            </For>
+			        </div>
+		        </If>
+		        <If condition = { detailInfo.mealsFormList && detailInfo.mealsFormList.length } >
+		        	<div className="weui-cells__title">餐饮费明细信息</div>
+		        	<div className="weui-cells m-t-n">
+			        	<For each = "item" of = { detailInfo.mealsFormList } index = "index">
+				        	<div className="bg-white m-b" key={ index }>
+				        		<div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <div className="pull-left">时间</div>
+					                    <div className="pull-right m-r-sm text-light">{item.actionDate}</div>
+					                </div>
+					                <div className="weui-cell__bd">
+					                    <div className="pull-left m-l-sm">地点</div>
+					                    <div className="pull-right text-light">{item.location}</div>
+					                </div>
+					            </div>
+					            <div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <div className="pull-left">金额</div>
+					                    <div className="pull-right text-light">{Util.money(item.amt)}</div>
+					                </div>
+					            </div>
+					            <div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <p>费用类型</p>
+					                </div>
+					                <div className="weui-cell__ft">{item.expenseTypeName}</div>
+					            </div>
+					            <div className="weui-cell">
+					            	<If condition={ item.comments && item.comments.length > 15 }>
+						            	<div className="weui-media-box_text">
+						                    <h4 className="weui-media-box__title">与餐人员</h4>
+						                    <p className="weui-media-box__desc">{item.content}</p>
+						                </div>
+						            <Else />
+						                <div className="weui-cell__bd">
+						                    <p>与餐人员</p>
+						                </div>
+						                <div className="weui-cell__ft">{item.content}</div>
+						            </If>
+					            </div>
+				        	</div>
+			            </For>
+			        </div>
+		        </If>
+		        <If condition = { detailInfo.tripHotelList && detailInfo.tripHotelList.length } >
+		        	<div className="weui-cells__title">住宿费明细信息</div>
+		        	<div className="weui-cells m-t-n">
+			        	<For each = "item" of = { detailInfo.tripHotelList } index = "index">
+				        	<div className="bg-white m-b" key={ index }>
+				        		<div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <div className="pull-left">入住日期</div>
+					                    <div className="pull-right m-r-sm text-light">{item.checkInDate}</div>
+					                </div>
+					                <div className="weui-cell__bd">
+					                    <div className="pull-left m-l-sm">离开日期</div>
+					                    <div className="pull-right text-light">{item.checkoutDate}</div>
+					                </div>
+					            </div>
+					            <div className="weui-cell">
+					            	<div className="weui-cell__bd">
+					                    <div className="pull-left">酒店</div>
+					                    <div className="pull-right m-r-sm text-light">{item.typeName}</div>
+					                </div>
+					                <div className="weui-cell__bd">
+					                    <div className="pull-left m-l-sm">金额</div>
+					                    <div className="pull-right text-light">{Util.money(item.amt)}</div>
+					                </div>
+					            </div>
+					            <div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <p>费用类型</p>
+					                </div>
+					                <div className="weui-cell__ft">{item.expenseTypeName}</div>
+					            </div>
+					            <div className="weui-cell">
+					            	<If condition={ item.comments && item.comments.length > 15 }>
+						            	<div className="weui-media-box_text">
+						                    <h4 className="weui-media-box__title">说明</h4>
+						                    <p className="weui-media-box__desc">{item.comments}</p>
+						                </div>
+						            <Else />
+						                <div className="weui-cell__bd">
+						                    <p>说明</p>
+						                </div>
+						                <div className="weui-cell__ft">{item.comments}</div>
+						            </If>
+					            </div>
+				        	</div>
+			            </For>
+			        </div>
+		        </If>
+		        <If condition = { detailInfo.detailFormList && detailInfo.detailFormList.length } >
+			        <div className="weui-cells__title">其他明细信息</div>
+			        <div className="weui-cells m-t-n">
+			        	<For each = "item" of = { detailInfo.detailFormList } index = "index">
+				        	<div className="bg-white m-b" key={ index }>
+				        		<div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <p>时间</p>
+					                </div>
+					                <div className="weui-cell__ft">{item.actionDate}</div>
+					            </div>
+					            <div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <p>费用类型</p>
+					                </div>
+					                <div className="weui-cell__ft">{item.expenseTypeName}</div>
+					            </div>
+					            <div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <p>金额</p>
+					                </div>
+					                <div className="weui-cell__ft">{Util.money(item.amt)}</div>
+					            </div>
+					            <div className="weui-cell">
+					            	<If condition={ item.comments && item.comments.length > 15 }>
+						            	<div className="weui-media-box_text">
+						                    <h4 className="weui-media-box__title">说明</h4>
+						                    <p className="weui-media-box__desc">{item.comments}</p>
+						                </div>
+						            <Else />
+						                <div className="weui-cell__bd">
+						                    <p>明细说明</p>
 						                </div>
 						                <div className="weui-cell__ft">{item.comments}</div>
 						            </If>

@@ -12,7 +12,8 @@ export default class ExpenseDetail extends Component {
 			tripHotelList: [],
 			teamBuildFormList: [],
 			entertainFormList:[]
-		}
+		},
+		showAuditArea: false
 	}
 
 	constructor(props){
@@ -23,6 +24,7 @@ export default class ExpenseDetail extends Component {
 	 	Util.startLoading();
 		Ajax.get("/expense/request/detail", {id: this.props.params.id, updated: this.props.location.query.updated}).then((res)=>{
 			this.state.detailInfo = res.data;
+			this.state.showAuditArea = true;
 			this.setState(this.state);
 			Util.closeLoading();
 		}, (err) => {
@@ -30,8 +32,14 @@ export default class ExpenseDetail extends Component {
 		});     
 	}
 
+	audit = (status) => {
+		console.log(status);
+		
+	}
+
 	render() {
 		let detailInfo = this.state.detailInfo;
+		let showAuditArea = this.state.showAuditArea;
 		return (
 			<div className="expense-detail">
 				<div className="weui-cells__title">基本信息</div>
@@ -370,6 +378,25 @@ export default class ExpenseDetail extends Component {
 					            </div>
 				        	</div>
 			            </For>
+			        </div>
+		        </If>
+		        <If condition= {showAuditArea}>
+			        <div className="auditArea">
+			        	<div className="weui-cells weui-cells_form">
+				            <div className="weui-cell">
+				                <div className="weui-cell__bd">
+				                    <textarea className="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+				                </div>
+				            </div>
+				        </div>
+				        <div className="weui-flex p">
+				        	<div className="weui-flex__item">
+				        		<a href="javascript:;" className="weui-btn weui-btn_primary" onClick={this.audit.bind(this, "pass")}>同意</a>
+				        	</div>
+				        	<div className="weui-flex__item">
+				        		<a href="javascript:;" className="weui-btn weui-weui weui-btn_warn" onClick={this.audit.bind(this, "fail")}>拒绝</a>
+				        	</div>
+				        </div>
 			        </div>
 		        </If>
 			</div>

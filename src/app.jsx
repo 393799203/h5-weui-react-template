@@ -19,7 +19,7 @@ import 'weui/dist/style/weui.css';
 import 'style/app.scss';//样式引入
 
 //*************页面引入**************
-import TabLayout from 'views/layout/tabLayout';
+import Layout from 'views/layout/Layout';
 
 import ApplyMenu from 'views/pages/apply/menu';
 import AuditList from 'views/pages/audit/list';
@@ -46,16 +46,16 @@ class App extends Component {
 render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
-			<Route path="expense">
-				<Route path="apply" component={ ExpenseApply } />
-				<Route path="detail(/:id)" component={ ExpenseDetail } />
-				<Route path="audit(/:id)" component={ ExpenseAudit } />
-			</Route>
-			<Route component={TabLayout}>
+			<Route component={Layout}>
 				<IndexRoute component={ ApplyMenu } />
 				<Route path="audit" component={ AuditList } />
 				<Route path="audited" component={ AuditedList } />
 				<Route path="application" component={ Application } />
+				<Route path="expense">
+					<Route path="apply" component={ ExpenseApply } />
+					<Route path="detail(/:id)" component={ ExpenseDetail } />
+					<Route path="audit(/:id)" component={ ExpenseAudit } />
+				</Route>
 				<Redirect from="*" to="/" />
 			</Route>
 		</Route>

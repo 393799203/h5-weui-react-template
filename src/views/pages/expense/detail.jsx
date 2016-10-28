@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classnames from 'classnames';
 import Ajax from 'core/ajax';
 import Util from 'core/util';
 
@@ -89,7 +90,7 @@ export default class ExpenseDetail extends Component {
 		        	<div className="weui-cells__title">差旅明细信息</div>
 		        	<div className="weui-cells m-t-n">
 			        	<For each = "item" of = { detailInfo.trifficForms } index = "index">
-				        	<div className="bg-white m-b" key={ index }>
+				        	<div className={classnames("bg-white", {"m-b": index != detailInfo.trifficForms.length -1})} key={ index }>
 				        		<div className="weui-cell">
 					                <div className="weui-cell__bd">
 					                    <div className="pull-left">时间</div>
@@ -137,7 +138,7 @@ export default class ExpenseDetail extends Component {
 		        	<div className="weui-cells__title">招待费明细信息</div>
 		        	<div className="weui-cells m-t-n">
 			        	<For each = "item" of = { detailInfo.entertainFormList } index = "index">
-				        	<div className="bg-white m-b" key={ index }>
+				        	<div className={classnames("bg-white",{ "m-b": index != detailInfo.entertainFormList.length -1 })} key={ index }>
 				        		<div className="weui-cell">
 					                <div className="weui-cell__bd">
 					                    <div className="pull-left">时间</div>
@@ -195,7 +196,7 @@ export default class ExpenseDetail extends Component {
 		        	<div className="weui-cells__title">团建费明细信息</div>
 		        	<div className="weui-cells m-t-n">
 			        	<For each = "item" of = { detailInfo.teamBuildFormList } index = "index">
-				        	<div className="bg-white m-b" key={ index }>
+				        	<div className={classnames("bg-white",{ "m-b" : index != detailInfo.teamBuildFormList.length -1 })} key={ index }>
 				        		<div className="weui-cell">
 					                <div className="weui-cell__bd">
 					                    <div className="pull-left">时间</div>
@@ -243,7 +244,7 @@ export default class ExpenseDetail extends Component {
 		        	<div className="weui-cells__title">餐饮费明细信息</div>
 		        	<div className="weui-cells m-t-n">
 			        	<For each = "item" of = { detailInfo.mealsFormList } index = "index">
-				        	<div className="bg-white m-b" key={ index }>
+				        	<div className={classnames("bg-white",{ "m-b" : index != detailInfo.mealsFormList.length -1 })} key={ index }>
 				        		<div className="weui-cell">
 					                <div className="weui-cell__bd">
 					                    <div className="pull-left">时间</div>
@@ -287,7 +288,7 @@ export default class ExpenseDetail extends Component {
 		        	<div className="weui-cells__title">住宿费明细信息</div>
 		        	<div className="weui-cells m-t-n">
 			        	<For each = "item" of = { detailInfo.tripHotelList } index = "index">
-				        	<div className="bg-white m-b" key={ index }>
+				        	<div className={classnames("bg-white",{ "m-b" :index != detailInfo.tripHotelList.length -1 })} key={ index }>
 				        		<div className="weui-cell">
 					                <div className="weui-cell__bd">
 					                    <div className="pull-left">入住日期</div>
@@ -335,7 +336,7 @@ export default class ExpenseDetail extends Component {
 			        <div className="weui-cells__title">其他明细信息</div>
 			        <div className="weui-cells m-t-n">
 			        	<For each = "item" of = { detailInfo.detailFormList } index = "index">
-				        	<div className="bg-white m-b" key={ index }>
+				        	<div className={classnames("bg-white",{ "m-b" : index != detailInfo.detailFormList.length -1 })} key={ index }>
 				        		<div className="weui-cell">
 					                <div className="weui-cell__bd">
 					                    <p>时间</p>

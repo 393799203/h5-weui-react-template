@@ -121,7 +121,7 @@ export default class ListItem extends Component {
                     isInfiniteLoading={ true }
 					>
 				<For each = "item" of = { list } index = "index">
-					<div className="weui-form-preview" key = {index}>
+					<div className={classnames("weui-form-preview", {"m-b-n": index = list.length - 1 })} key = {index}>
 			            <div className="weui-form-preview__hd">
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">报销金额</label>

@@ -35,9 +35,7 @@
 .m-l{
     margin-left:$space;
 }
-.m-b-0{
-    margin-bottom: 0px;
-}
+
 .m-b{
     margin-bottom:$space;
 }
@@ -184,6 +182,9 @@
 
 .m-t-n{
   margin-top:0 !important;
+}
+.m-b-n{
+  margin-bottom: 0!important;
 }
 
 /**padding*/

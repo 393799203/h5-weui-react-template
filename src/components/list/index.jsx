@@ -48,7 +48,6 @@ export default class ListItem extends Component {
 	}
 
 	elementInfiniteLoad = () => {
-		console.log(this.state.loading);
 		return (
 			<div className="weui-loadmore">
 	            <i className="weui-loading"></i>

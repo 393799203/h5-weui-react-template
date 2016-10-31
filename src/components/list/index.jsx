@@ -109,7 +109,7 @@ export default class ListItem extends Component {
 			<div className={classnames("weui-cells", className)}>
 				<Infinite 
 					elementHeight = {210}
-					containerHeight = {window.innerHeight - 55}
+					containerHeight = {window.innerHeight - 53 }
 					infiniteLoadBeginEdgeOffset={100} 
 					onInfiniteLoad={this.onInfiniteLoad}
 					loadingSpinnerDelegate={this.elementInfiniteLoad()}

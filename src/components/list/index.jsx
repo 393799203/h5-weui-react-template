@@ -30,7 +30,7 @@ export default class ListItem extends Component {
 
 	onInfiniteLoad = () => {
 		if(this.state.isEnd)return;
-		this.getList(this.state.currentIndex++);
+		this.getList(this.state.currentIndex);
 	}
 
 	claim = (item) => {
@@ -48,11 +48,26 @@ export default class ListItem extends Component {
 	}
 
 	elementInfiniteLoad = () => {
+		console.log(this.state.isEnd)
 		return (
-			<div className="weui-loadmore">
-	            <i className="weui-loading"></i>
-	            <span className="weui-loadmore__tips">正在加载</span>
-	        </div>
+			<div className="tips">
+				<If condition={ this.state.loading }>
+					<div className="weui-loadmore">
+			            <i className="weui-loading"></i>
+			            <span className="weui-loadmore__tips">正在加载</span>
+			        </div>
+		        </If>
+		        <If condition={ this.state.list.length && this.state.isEnd} >
+			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+			            <span className="weui-loadmore__tips bg-none"></span>
+			        </div>
+		        </If>
+		        <If condition={ !this.state.list.length && this.state.isEnd} >
+			        <div className="weui-loadmore weui-loadmore_line">
+			            <span className="weui-loadmore__tips bg-none">暂无数据</span>
+			        </div>
+		        </If>
+		    </div>
 		)
 	}
 
@@ -65,11 +80,10 @@ export default class ListItem extends Component {
 			this.props.onChange(data.data.list);
 			this.state.loading = false; 
 			this.state.isEnd = data.data.isEnd;
+			this.state.currentIndex ++;
 			this.setState(this.state);
 		}, (err) => {
 			this.state.loading = false;
-			this.state.isEnd = true;
-			this.state.list = [];
 			if(err == this.state.ajaxUrl)return;
 			this.setState(this.state);
 		});
@@ -100,11 +114,11 @@ export default class ListItem extends Component {
 			<div className={classnames("weui-cells", className)}>
 				<Infinite 
 					elementHeight = {210}
-					containerHeight = {window.innerHeight - 53 }
+					containerHeight = {window.innerHeight - 55 }
 					infiniteLoadBeginEdgeOffset={150} 
 					onInfiniteLoad={this.onInfiniteLoad}
 					loadingSpinnerDelegate={this.elementInfiniteLoad()}
-                    isInfiniteLoading={ loading }
+                    isInfiniteLoading={ true }
 					>
 				<For each = "item" of = { list } index = "index">
 					<div className="weui-form-preview" key = {index}>
@@ -137,17 +151,8 @@ export default class ListItem extends Component {
 			            </div>
 			        </div>
 	            </For>
+	            
 	            </Infinite>
-		        <If condition={ list.length && isEnd} >
-			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot">
-			            <span className="weui-loadmore__tips bg-none"></span>
-			        </div>
-		        </If>
-		        <If condition={!list.length && isEnd} >
-			        <div className="weui-loadmore weui-loadmore_line">
-			            <span className="weui-loadmore__tips bg-none">暂无数据</span>
-			        </div>
-		        </If>
 	        </div>
 		)
 	}

@@ -28,20 +28,6 @@ export default class ListItem extends Component {
 		this.state.params = props.params;
 	}
 
-	addEvents = () => {
-		this.dispatchId = Dispatcher.register((action) => {
-			if(action.actionType === EventNames.FLUSH_LIST){
-				this.state.params = action.params || this.state.params;
-				this.getList();
-			}
-			if(action.actionType === EventNames.RESET_LIST){
-				this.setState(this.state);
-			}
-		});
-		/* let scrollWrap = document.querySelector('.weui-tab__panel') || document.querySelector('.containerWrap') ;
-		scrollWrap.addEventListener("scroll", this.scrollHandler); */
-	}
-
 	onInfiniteLoad = () => {
 		if(this.state.isEnd)return;
 		this.getList(this.state.currentIndex++);
@@ -91,13 +77,19 @@ export default class ListItem extends Component {
 	}
 
 	componentDidMount() {
-		this.addEvents();
-		/* this.getList(); */
+		this.dispatchId = Dispatcher.register((action) => {
+			if(action.actionType === EventNames.FLUSH_LIST){
+				this.state.params = action.params || this.state.params;
+				this.getList();
+			}
+			if(action.actionType === EventNames.RESET_LIST){
+				this.setState(this.state);
+			}
+		});
 	}
 
 	componentWillUnmount(){
 		Dispatcher.unregister(this.dispatchId);
-		/* window.removeEventListener('scroll', this.scrollHandler); */
 	}
 
 	render() {
@@ -110,7 +102,7 @@ export default class ListItem extends Component {
 				<Infinite 
 					elementHeight = {210}
 					containerHeight = {window.innerHeight - 53 }
-					infiniteLoadBeginEdgeOffset={100} 
+					infiniteLoadBeginEdgeOffset={150} 
 					onInfiniteLoad={this.onInfiniteLoad}
 					loadingSpinnerDelegate={this.elementInfiniteLoad()}
                     isInfiniteLoading={ loading }

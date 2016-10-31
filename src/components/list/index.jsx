@@ -48,7 +48,6 @@ export default class ListItem extends Component {
 	}
 
 	elementInfiniteLoad = () => {
-		console.log(this.state.isEnd)
 		return (
 			<div className="tips">
 				<If condition={ this.state.loading }>
@@ -57,12 +56,12 @@ export default class ListItem extends Component {
 			            <span className="weui-loadmore__tips">正在加载</span>
 			        </div>
 		        </If>
-		        <If condition={ this.state.list.length && this.state.isEnd} >
+		        <If condition={ this.state.list.length && this.state.isEnd } >
 			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot m-b-n">
 			            <span className="weui-loadmore__tips bg-none"></span>
 			        </div>
 		        </If>
-		        <If condition={ !this.state.list.length && this.state.isEnd} >
+		        <If condition={ !this.state.list.length && this.state.isEnd } >
 			        <div className="weui-loadmore weui-loadmore_line m-b-n">
 			            <span className="weui-loadmore__tips bg-none">暂无数据</span>
 			        </div>
@@ -84,7 +83,6 @@ export default class ListItem extends Component {
 			this.setState(this.state);
 		}, (err) => {
 			this.state.loading = false;
-			if(err == this.state.ajaxUrl)return;
 			this.setState(this.state);
 		});
 	}
@@ -115,10 +113,10 @@ export default class ListItem extends Component {
 				<Infinite 
 					elementHeight = {210}
 					containerHeight = {window.innerHeight - 55 }
-					infiniteLoadBeginEdgeOffset={150} 
+					infiniteLoadBeginEdgeOffset={ 100 } 
 					onInfiniteLoad={this.onInfiniteLoad}
 					loadingSpinnerDelegate={this.elementInfiniteLoad()}
-                    isInfiniteLoading={ true }
+                    isInfiniteLoading={ loading }
 					>
 				<For each = "item" of = { list } index = "index">
 					<div className={classnames("weui-form-preview", {"m-b-n": index == list.length - 1 })} key = {index}>
@@ -151,7 +149,6 @@ export default class ListItem extends Component {
 			            </div>
 			        </div>
 	            </For>
-	            
 	            </Infinite>
 	        </div>
 		)

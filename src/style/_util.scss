@@ -6,6 +6,9 @@
 .m{
     margin:$space;
 }
+.m-xs{
+    margin:$space-xs;
+}
 .clearfix{
   @include clearfix;
 }
@@ -186,6 +189,9 @@
 /**padding*/
 .p{
   padding:$space;
+}
+.p-xs{
+  padding:$space-xs;
 }
 .p-l{
     padding-left:$space;

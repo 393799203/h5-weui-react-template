@@ -22,10 +22,13 @@ export default class ExpenseDetail extends Component {
 	}
 
 	componentDidMount() {
+		console.log(this.props);
 	 	Util.startLoading();
 		Ajax.get("/expense/request/detail", {id: this.props.params.id, updated: this.props.location.query.updated}).then((res)=>{
 			this.state.detailInfo = res.data;
-			this.state.showAudit = true;
+			if(this.props.route.path.indexOf('audit') != -1){
+				this.state.showAudit = true;
+			}
 			this.setState(this.state);
 			Util.closeLoading();
 		}, (err) => {
@@ -396,7 +399,7 @@ export default class ExpenseDetail extends Component {
 			            </For>
 			        </div>
 		        </If>
-		        <If condition= {showAudit}>
+		        <If condition = {showAudit}>
 			        <div className="auditArea">
 			        	<div className="weui-cells weui-cells_form">
 				            <div className="weui-cell">
@@ -405,12 +408,12 @@ export default class ExpenseDetail extends Component {
 				                </div>
 				            </div>
 				        </div>
-				        <div className="weui-flex p">
+				        <div className="weui-flex p-xs">
 				        	<div className="weui-flex__item">
-				        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_primary",{"weui-btn_disabled": disabled})} onClick={this.audit.bind(this, "pass")}>同意</a>
+				        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_primary", "m-xs", {"weui-btn_disabled": disabled})} onClick={this.audit.bind(this, "pass")}>同意</a>
 				        	</div>
 				        	<div className="weui-flex__item">
-				        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_warn",{"weui-btn_disabled": disabled})} onClick={this.audit.bind(this, "fail")}>拒绝</a>
+				        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_warn", "m-xs", {"weui-btn_disabled": disabled})} onClick={this.audit.bind(this, "fail")}>拒绝</a>
 				        	</div>
 				        </div>
 			        </div>

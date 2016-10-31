@@ -28,8 +28,7 @@ import Application from 'views/pages/application';
 
 //报销
 import ExpenseApply from 'views/pages/expense/apply';
-import ExpenseDetail from 'views/pages/expense/detail';
-import ExpenseAudit from 'views/pages/expense/audit';
+import ExpenseDetailAudit from 'views/pages/expense/detailAudit';
 
 //app 根组件
 class App extends Component {
@@ -53,8 +52,8 @@ render((
 				<Route path="application" component={ Application } />
 				<Route path="expense">
 					<Route path="apply" component={ ExpenseApply } />
-					<Route path="detail(/:id)" component={ ExpenseDetail } />
-					<Route path="audit(/:id)" component={ ExpenseAudit } />
+					<Route path="detail(/:id)" component={ ExpenseDetailAudit } />
+					<Route path="audit(/:id)" component={ ExpenseDetailAudit } />
 				</Route>
 				<Redirect from="*" to="/" />
 			</Route>

@@ -49,12 +49,19 @@ export default class ListItem extends Component {
 
 	elementInfiniteLoad = () => {
 		return (
-			<If condition={this.state.loading}>
-				<div className="weui-loadmore">
-		            <i className="weui-loading"></i>
-		            <span className="weui-loadmore__tips">正在加载</span>
-		        </div>
-	        </If>
+			<div className="tips">
+				<If condition={this.state.loading}>
+					<div className="weui-loadmore">
+			            <i className="weui-loading"></i>
+			            <span className="weui-loadmore__tips">正在加载</span>
+			        </div>
+		        </If>
+		        <If condition={ this.state.list.length && this.state.isEnd } >
+			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot m-b-n">
+			            <span className="weui-loadmore__tips bg-none"></span>
+			        </div>
+		        </If>
+	        </div>
 		)
 	}
 
@@ -138,11 +145,6 @@ export default class ListItem extends Component {
 			        </div>
 	            </For>
 	            </Infinite>
-	            <If condition={ this.state.list.length && this.state.isEnd } >
-			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot ab-top">
-			            <span className="weui-loadmore__tips bg-none"></span>
-			        </div>
-		        </If>
 		        <If condition={ !this.state.list.length && this.state.isEnd } >
 			        <div className="weui-loadmore weui-loadmore_line ab-top">
 			            <span className="weui-loadmore__tips bg-none">暂无数据</span>

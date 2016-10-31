@@ -103,7 +103,7 @@ export default class ExpenseDetail extends Component {
 			            <If condition={ detailInfo.content && detailInfo.content.length > 15 }>
 			            	<div className="weui-media-box_text">
 			                    <h4 className="weui-media-box__title">报销说明</h4>
-			                    <p className="weui-media-box__desc">{detailInfo.content}</p>
+			                    <p className="weui-media-box__desc text-normal">{detailInfo.content}</p>
 			                </div>
 			            <Else />
 			                <div className="weui-cell__bd">
@@ -148,7 +148,7 @@ export default class ExpenseDetail extends Component {
 					            	<If condition={ item.comments && item.comments.length > 15 }>
 						            	<div className="weui-media-box_text">
 						                    <h4 className="weui-media-box__title">出行事由</h4>
-						                    <p className="weui-media-box__desc">{item.comments}</p>
+						                    <p className="weui-media-box__desc text-normal">{item.comments}</p>
 						                </div>
 						            <Else />
 						                <div className="weui-cell__bd">
@@ -206,7 +206,7 @@ export default class ExpenseDetail extends Component {
 					            	<If condition={ item.comments && item.comments.length > 15 }>
 						            	<div className="weui-media-box_text">
 						                    <h4 className="weui-media-box__title">说明</h4>
-						                    <p className="weui-media-box__desc">{item.comments}</p>
+						                    <p className="weui-media-box__desc text-normal">{item.comments}</p>
 						                </div>
 						            <Else />
 						                <div className="weui-cell__bd">
@@ -224,25 +224,29 @@ export default class ExpenseDetail extends Component {
 		        	<div className="weui-cells m-t-n">
 			        	<For each = "item" of = { detailInfo.teamBuildFormList } index = "index">
 				        	<div className={classnames("bg-white",{ "m-b" : index != detailInfo.teamBuildFormList.length -1 })} key={ index }>
-				        		<div className="weui-cell">
+					            <div className="weui-cell">
 					                <div className="weui-cell__bd">
-					                    <div className="pull-left">时间</div>
-					                    <div className="pull-right m-r-sm text-light">{item.actionDate}</div>
+					                    <p>时间</p>
 					                </div>
-					                <div className="weui-cell__bd">
-					                    <div className="pull-left m-l-sm">部门</div>
-					                    <div className="pull-right text-light">{item.deptName}</div>
-					                </div>
+					                <div className="weui-cell__ft">{item.actionDate}</div>
 					            </div>
 					            <div className="weui-cell">
-					            	<div className="weui-cell__bd">
-					                    <div className="pull-left">含子部门</div>
-					                    <div className="pull-right m-r-sm text-light">{item.isSubDeptString}</div>
-					                </div>
 					                <div className="weui-cell__bd">
-					                    <div className="pull-left m-l-sm">金额</div>
-					                    <div className="pull-right text-light">{Util.money(item.amt)}</div>
+					                    <p>部门</p>
 					                </div>
+					                <div className="weui-cell__ft">{item.deptName}</div>
+					            </div>
+					            <div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <p>含子部门</p>
+					                </div>
+					                <div className="weui-cell__ft">{item.isSubDeptString}</div>
+					            </div>
+					            <div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <p>金额</p>
+					                </div>
+					                <div className="weui-cell__ft">{Util.money(item.amt)}</div>
 					            </div>
 					            <div className="weui-cell">
 					                <div className="weui-cell__bd">
@@ -254,7 +258,7 @@ export default class ExpenseDetail extends Component {
 					            	<If condition={ item.comments && item.comments.length > 15 }>
 						            	<div className="weui-media-box_text">
 						                    <h4 className="weui-media-box__title">说明</h4>
-						                    <p className="weui-media-box__desc">{item.comments}</p>
+						                    <p className="weui-media-box__desc text-normal">{item.comments}</p>
 						                </div>
 						            <Else />
 						                <div className="weui-cell__bd">
@@ -298,7 +302,7 @@ export default class ExpenseDetail extends Component {
 					            	<If condition={ item.comments && item.comments.length > 15 }>
 						            	<div className="weui-media-box_text">
 						                    <h4 className="weui-media-box__title">与餐人员</h4>
-						                    <p className="weui-media-box__desc">{item.content}</p>
+						                    <p className="weui-media-box__desc text-normal">{item.content}</p>
 						                </div>
 						            <Else />
 						                <div className="weui-cell__bd">
@@ -346,7 +350,7 @@ export default class ExpenseDetail extends Component {
 					            	<If condition={ item.comments && item.comments.length > 15 }>
 						            	<div className="weui-media-box_text">
 						                    <h4 className="weui-media-box__title">说明</h4>
-						                    <p className="weui-media-box__desc">{item.comments}</p>
+						                    <p className="weui-media-box__desc text-normal">{item.comments}</p>
 						                </div>
 						            <Else />
 						                <div className="weui-cell__bd">
@@ -386,7 +390,7 @@ export default class ExpenseDetail extends Component {
 					            	<If condition={ item.comments && item.comments.length > 15 }>
 						            	<div className="weui-media-box_text">
 						                    <h4 className="weui-media-box__title">说明</h4>
-						                    <p className="weui-media-box__desc">{item.comments}</p>
+						                    <p className="weui-media-box__desc text-normal">{item.comments}</p>
 						                </div>
 						            <Else />
 						                <div className="weui-cell__bd">

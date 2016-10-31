@@ -52,18 +52,18 @@ export default class ListItem extends Component {
 		return (
 			<div className="tips">
 				<If condition={ this.state.loading }>
-					<div className="weui-loadmore">
+					<div className="weui-loadmore m-b-n">
 			            <i className="weui-loading"></i>
 			            <span className="weui-loadmore__tips">正在加载</span>
 			        </div>
 		        </If>
 		        <If condition={ this.state.list.length && this.state.isEnd} >
-			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot m-b-n">
 			            <span className="weui-loadmore__tips bg-none"></span>
 			        </div>
 		        </If>
 		        <If condition={ !this.state.list.length && this.state.isEnd} >
-			        <div className="weui-loadmore weui-loadmore_line">
+			        <div className="weui-loadmore weui-loadmore_line m-b-n">
 			            <span className="weui-loadmore__tips bg-none">暂无数据</span>
 			        </div>
 		        </If>
@@ -121,7 +121,7 @@ export default class ListItem extends Component {
                     isInfiniteLoading={ true }
 					>
 				<For each = "item" of = { list } index = "index">
-					<div className={classnames("weui-form-preview", {"m-b-n": index = list.length - 1 })} key = {index}>
+					<div className={classnames("weui-form-preview", {"m-b-n": index == list.length - 1 })} key = {index}>
 			            <div className="weui-form-preview__hd">
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">报销金额</label>

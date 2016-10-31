@@ -17,6 +17,7 @@ export default class ListItem extends Component {
 
 	state = {
 		params: {},
+		currentIndex: 1,
 		loading: false,
 		isEnd: false,
 		list: []
@@ -24,6 +25,7 @@ export default class ListItem extends Component {
 
 	constructor(props){
 		super(props);
+		this.state.params = props.params;
 	}
 
 	addEvents = () => {
@@ -36,14 +38,13 @@ export default class ListItem extends Component {
 				this.setState(this.state);
 			}
 		});
-		let scrollWrap = document.querySelector('.weui-tab__panel') || document.querySelector('.containerWrap') ;
-		scrollWrap.addEventListener("scroll", (e)=>{
-			console.log(22)
-		});
+		/* let scrollWrap = document.querySelector('.weui-tab__panel') || document.querySelector('.containerWrap') ;
+		scrollWrap.addEventListener("scroll", this.scrollHandler); */
 	}
 
-	scrollHandler = (e) => {
-		console.log(e);
+	onInfiniteLoad = () => {
+		if(this.state.isEnd)return;
+		this.getList(this.state.currentIndex++);
 	}
 
 	claim = (item) => {
@@ -60,14 +61,24 @@ export default class ListItem extends Component {
 		})
 	}
 
+	elementInfiniteLoad = () => {
+		console.log(this.state.loading);
+		return (
+			<div className="weui-loadmore">
+	            <i className="weui-loading"></i>
+	            <span className="weui-loadmore__tips">正在加载</span>
+	        </div>
+		)
+	}
+
 	getList = (currentIndex = 1) => {
 		let params = Object.assign({}, this.state.params, { pageNum: currentIndex, pageSize: 10 });
 		this.state.loading = true;
 		this.setState(this.state);
 		Ajax.post(this.props.ajaxUrl, params, 1).then(data => {
-			this.state.list = data.data.list || [];
+			this.state.list = this.state.list.concat(data.data.list || []);
 			this.props.onChange(data.data.list);
-			this.state.loading = false;
+			this.state.loading = false; 
 			this.state.isEnd = data.data.isEnd;
 			this.setState(this.state);
 		}, (err) => {
@@ -80,14 +91,13 @@ export default class ListItem extends Component {
 	}
 
 	componentDidMount() {
-		this.state.params = this.props.params;
 		this.addEvents();
-		this.getList();
+		/* this.getList(); */
 	}
 
 	componentWillUnmount(){
 		Dispatcher.unregister(this.dispatchId);
-		window.removeEventListener('scroll', this.scrollHandler);
+		/* window.removeEventListener('scroll', this.scrollHandler); */
 	}
 
 	render() {
@@ -97,6 +107,14 @@ export default class ListItem extends Component {
 		let list = this.state.list;
 		return (
 			<div className={classnames("weui-cells", className)}>
+				<Infinite 
+					elementHeight = {210}
+					containerHeight = {window.innerHeight - 55}
+					infiniteLoadBeginEdgeOffset={100} 
+					onInfiniteLoad={this.onInfiniteLoad}
+					loadingSpinnerDelegate={this.elementInfiniteLoad()}
+                    isInfiniteLoading={ loading }
+					>
 				<For each = "item" of = { list } index = "index">
 					<div className="weui-form-preview" key = {index}>
 			            <div className="weui-form-preview__hd">
@@ -128,12 +146,7 @@ export default class ListItem extends Component {
 			            </div>
 			        </div>
 	            </For>
-	            <If condition={loading}>
-		            <div className="weui-loadmore">
-			            <i className="weui-loading"></i>
-			            <span className="weui-loadmore__tips">正在加载</span>
-			        </div>
-		        </If>
+	            </Infinite>
 		        <If condition={ list.length && isEnd} >
 			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot">
 			            <span className="weui-loadmore__tips bg-none"></span>

@@ -21,7 +21,7 @@ class Util{
 	}
 
 	isTT = () => {
-		this.inUserAgent(/tt4ios|tt4android/);
+		return this.inUserAgent(/tt4ios|tt4android/);
 	}
 
 	inUserAgent = (val) => {

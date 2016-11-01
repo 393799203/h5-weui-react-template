@@ -36,6 +36,10 @@ export default class ExpenseDetail extends Component {
 	}
 
 	audit = (status) => {
+		if(status == "fail" && !this.refs.auditTextarea.value){
+			Util.error("驳回意见不能为空~", 1500);
+			return;
+		}
 		let currTask = Object.assign({},this.state.detailInfo.currTask, {action: status, comment: this.refs.auditTextarea.value})
 		let postData = {
 			id: this.state.detailInfo.id,

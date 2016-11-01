@@ -20,6 +20,14 @@ class Util{
 		return str.replace(/(^\s*)|(\s*$)/g,"");
 	}
 
+	isTT = () => {
+		this.inUserAgent(/tt4ios|tt4android/);
+	}
+
+	inUserAgent = (val) => {
+        return val.test(navigator.userAgent.toLowerCase());
+    }
+
 	/**
 	 * param 将要转为URL参数字符串的对象
 	 * key URL参数字符串的前缀

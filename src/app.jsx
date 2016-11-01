@@ -46,7 +46,7 @@ render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
 			<Route component={Layout}>
-				<IndexRoute component={ ApplyMenu } />
+				<IndexRedirect to="audit"/>
 				<Route path="audit" component={ AuditList } />
 				<Route path="audited" component={ AuditedList } />
 				<Route path="application" component={ Application } />
@@ -55,7 +55,7 @@ render((
 					<Route path="detail(/:id)" component={ ExpenseDetailAudit } />
 					<Route path="audit(/:id)" component={ ExpenseDetailAudit } />
 				</Route>
-				<Redirect from="*" to="/" />
+				<Redirect from="*" to="/audit" />
 			</Route>
 		</Route>
 	</Router>

@@ -56,7 +56,6 @@ export default class ExpenseDetail extends Component {
 				Util.popWindow();
 			});
 		}, (err) => {
-			Util.closeLoading();
 			this.state.disabled = false;
 			this.setState(this.state);
 		});

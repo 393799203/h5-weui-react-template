@@ -22,8 +22,8 @@ import 'style/app.scss';//样式引入
 import Layout from 'views/layout/Layout';
 
 import ApplyMenu from 'views/pages/apply/menu';
-import AuditList from 'views/pages/audit/list';
-import AuditedList from 'views/pages/audited/list';
+import AuditList from 'views/pages/audit';
+import AuditedList from 'views/pages/audited';
 import Application from 'views/pages/application';
 
 //报销

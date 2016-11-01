@@ -62,6 +62,9 @@ render((
 		</Route>
 	</Router>
 ), document.getElementById('appWrapper'));
+
+//注册全局reload事件
+Util.registerNotification("reload");
 //全局pushWindow
 document.getElementById("appWrapper").addEventListener("click", (e) => {
 	let target = e.target;

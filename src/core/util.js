@@ -3,6 +3,7 @@ import valueData from 'data/values';
 import Toast from 'components/toast';
 
 //基础工具
+
 class Util{
 
 	parseContent = (str) => {
@@ -81,14 +82,34 @@ class Util{
 	error = (msg, duration = 3000, callback) => {
 		this.toast("error", msg, duration, callback)
 	}
+	//容器部分
+	setTitle = (title, color) => {
+        return hdp.do('tt.navigation.setTitle', title, color)
+    }
+
+    setRightItemTitle = (title, color) => {
+        return hdp.do('tt.navigation.rightitem.setTitle', title, color)
+    }
 
 	pushWindow = (url) => {
-		hdp && hdp.do && hdp.do('mgj.navigation.pushWindow', url);
+		return hdp.do('tt.navigation.pushWindow', url);
 	}
 
 	popWindow = () => {
-		hdp && hdp.do && hdp.do('mgj.navigation.popWindow');
+		return hdp.do('tt.navigation.popWindow');
 	}
+
+	removeNotification = (name) => {
+        return hdp.do('tt.notification.removeNotification', name)
+    }
+
+    sendNotification = (name, data) => {
+        return hdp.do('tt.notification.sendNotification', name, data)
+    }
+
+    registerNotification = (name) => {
+        return hdp.do('tt.notification.registerNotification', name)
+    }
 }
 export default new Util;
 

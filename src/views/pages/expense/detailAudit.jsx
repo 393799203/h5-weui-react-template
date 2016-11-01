@@ -47,8 +47,9 @@ export default class ExpenseDetail extends Component {
 		this.state.disabled = true;
 		this.setState(this.state);
 		Ajax.post("/expense/request/audit",postData).then((res)=>{
-			Util.success("操作成功", 3000, ()=>{
-				//关闭当前webView
+			Util.sendNotification("reload");
+			Util.success("操作成功", 1500, ()=>{
+				Util.popWindow();
 			});
 		}, (err) => {
 			Util.closeLoading();
@@ -419,7 +420,7 @@ export default class ExpenseDetail extends Component {
 				        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_primary", "m-xs", {"weui-btn_disabled": disabled})} onClick={this.audit.bind(this, "pass")}>同意</a>
 				        	</div>
 				        	<div className="weui-flex__item">
-				        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_warn", "m-xs", {"weui-btn_disabled": disabled})} onClick={this.audit.bind(this, "fail")}>拒绝</a>
+				        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_warn", "m-xs", {"weui-btn_disabled": disabled})} onClick={this.audit.bind(this, "fail")}>驳回</a>
 				        	</div>
 				        </div>
 			        </div>

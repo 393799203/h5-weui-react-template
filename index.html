@@ -27,6 +27,7 @@
 	<body>
 		<div id="appWrapper"></div>
 		<script src="/static/moment.min.js"></script>
+		<script src="/static/hdp.min.js"></script>
 		{% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
 		<script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
 		{% } %}

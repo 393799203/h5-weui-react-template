@@ -136,7 +136,7 @@ export default class ListItem extends Component {
 			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" onClick={this.claim.bind(this, item)}>认领</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(21)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" to={{pathname: `/expense/audit/${item.id}` , query: { "updated": item.updated}}}>审核</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/audit/${item.id}` , query: { "updated": item.updated}}}>审核</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(10)!=-1}>
 			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" to={{pathname: `/expense/detail/${item.id}` , query: { "updated": item.updated}}}>查看</Link>

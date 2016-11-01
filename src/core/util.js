@@ -81,6 +81,14 @@ class Util{
 	error = (msg, duration = 3000, callback) => {
 		this.toast("error", msg, duration, callback)
 	}
+
+	pushWindow = (url) => {
+		hdp && hdp.do && hdp.do('mgj.navigation.pushWindow', url);
+	}
+
+	popWindow = () => {
+		hdp && hdp.do && hdp.do('mgj.navigation.popWindow');
+	}
 }
 export default new Util;
 

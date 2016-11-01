@@ -64,6 +64,7 @@ render((
 ), document.getElementById('appWrapper'));
 //全局pushWindow
 document.getElementById("appWrapper").addEventListener("click", (e) => {
+	alert(navigator.userAgent);
 	let target = e.target;
 	if( target && target.nodeName.toLocaleLowerCase() == "a" && target.className.indexOf('pushWindow') != -1) {
 		e.preventDefault();

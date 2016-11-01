@@ -65,7 +65,7 @@ render((
 //全局pushWindow
 document.getElementById("appWrapper").addEventListener("click", (e) => {
 	let target = e.target;
-	if( target && target.nodeName.toLocaleLowerCase() == "a" && target.className.indexOf('pushWindow') != -1 && (navigator.userAgent.indexOf('tt4ios') || navigator.userAgent.indexOf('tt4android'))) {
+	if( target && target.nodeName.toLocaleLowerCase() == "a" && target.className.indexOf('pushWindow') != -1 && (navigator.userAgent.indexOf('tt4ios') != -1 || navigator.userAgent.indexOf('tt4android') != -1)) {
 		e.preventDefault();
 		Util.pushWindow(target.href);
 		return false;

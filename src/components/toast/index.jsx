@@ -34,14 +34,21 @@ export default class Toast extends Component {
 		switch(this.props.type){
 			case "loading" : cls = "weui-loading"; msg = this.props.msg || "数据加载中" ;break;
 			case "success" : cls = "weui-icon-success-no-circle"; msg = this.props.msg || "已完成"; break;
+			case "error" : msg = this.props.msg || "服务器开小差啦~请稍后再试"; break;
 		}
 		return (
 			<div id="Toast">
 		        <div className="weui-mask_transparent"></div>
-		        <div className="weui-toast">
-		            <i className={classnames("weui-icon_toast", cls)}></i>
-		            <p className="weui-toast__content">{ msg }</p>
-		        </div>
+		        <If condition={this.props.type != "error"}>
+			        <div className="weui-toast">
+			            <i className={classnames("weui-icon_toast", cls)}></i>
+			            <p className="weui-toast__content">{ msg }</p>
+			        </div>
+		        <Else/>
+		        	<div className="weui-tips">
+			            <p>{ msg }</p>
+			        </div>
+		        </If>
 		    </div>
 		)
 	}

@@ -15,19 +15,20 @@ class Ajax{
 	        return Promise.resolve(response.json());
 	    }
 	    else{
-	    	// Util.error(response.status,response.url);
+	    	console.error(response.status, response.url);
+	    	Util.error("服务器开小差啦~请稍后再试");
 	        return Promise.reject(response);
 	    }
 	}
 
 	resultVerify = (response) => {
 		if(response.code && response.code == 302){
-			Util.warning(response.msg,"稍后将跳转登陆页面~");
+			Util.error(response.msg,"稍后将跳转登陆页面~");
 			setTimeout(() => {
 				location.href = response.data.redirect + '?redirect=' + location.href;
-			},4500);
+			},3000);
 		}else if(response.code && response.code != 1001){
-			Util.warning(response.msg);
+			Util.error(response.msg);
 			return Promise.reject(response);
 		}else{
 			return Promise.resolve(response);

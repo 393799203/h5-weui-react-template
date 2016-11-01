@@ -46,3 +46,15 @@ a{
 .weui-form-preview{
   margin-bottom: 1.17647059em;
 }
+.weui-tips{
+  position: fixed;
+  width: 40%;
+  top: 180px;
+  left: 30%;
+  z-index: 5000;
+  padding: 10px;
+  text-align: center;
+  background: rgba(40, 40, 40, 0.75);
+  border-radius: 5px;
+  color: #fff;
+}

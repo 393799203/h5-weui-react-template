@@ -77,11 +77,10 @@ class Util{
 	success = (msg, duration = 3000, callback) => {
 		this.toast("success", msg, duration, callback)
 	}
-	//错误用notification 再改
-	error = (msg, desc, duration = 3000, callback) => {
+	
+	error = (msg, duration = 3000, callback) => {
 		this.toast("error", msg, duration, callback)
 	}
-
 }
 export default new Util;
 

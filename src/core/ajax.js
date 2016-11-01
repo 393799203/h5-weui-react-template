@@ -23,10 +23,11 @@ class Ajax{
 
 	resultVerify = (response) => {
 		if(response.code && response.code == 302){
-			Util.error(response.msg,"稍后将跳转登陆页面~");
+			Util.error(response.msg + "，稍后将跳转登陆页面~");
 			setTimeout(() => {
 				location.href = response.data.redirect + '?redirect=' + location.href;
 			},3000);
+			return Promise.resolve(response);
 		}else if(response.code && response.code != 1001){
 			Util.error(response.msg);
 			return Promise.reject(response);

@@ -7,9 +7,9 @@ const ActiveArray = [];
 export default class Layout extends Component {
 	state = {
 		tabBarDataList: [
-			{link: "/", tabName: "申请", icon: "waiting-circle", key: "apply"},
+			/* {link: "/", tabName: "申请", icon: "waiting-circle", key: "apply"}, */
 			{link: "/audit", tabName: "待审批", icon: "waiting", key: "audit"},
-			{link: "/audited", tabName: "已审批", icon: "download", key: "audited"},
+			{link: "/audited", tabName: "已审批", icon: "info-circle", key: "audited"},
 			{link: "/application", tabName: "我", icon: "circle", key: "application"}
 		],
 		activeMenu: ""

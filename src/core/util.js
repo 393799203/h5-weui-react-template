@@ -41,11 +41,12 @@ class Util{
 	  return paramStr;
 	}
 
-	toast = (type, msg, duration) => {
+	toast = (type, msg, duration, callback) => {
 		Toast.open({
 			type: type,
 			msg: msg,
-			duration: duration
+			duration: duration,
+			callback: callback
 		})
 	}
 
@@ -73,12 +74,12 @@ class Util{
 		Toast.close();
 	}
 
-	success = (msg, desc, duration = 3000) => {
-		this.toast("success", msg, duration)
+	success = (msg, duration = 3000, callback) => {
+		this.toast("success", msg, duration, callback)
 	}
 	//错误用notification 再改
-	error = (msg, desc, duration = 3000) => {
-		this.toast("error", msg, duration)
+	error = (msg, desc, duration = 3000, callback) => {
+		this.toast("error", msg, duration, callback)
 	}
 
 }

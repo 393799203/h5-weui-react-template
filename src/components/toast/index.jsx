@@ -19,6 +19,7 @@ export default class Toast extends Component {
 			clearTimeout(this.timeout)
 			this.timeout = setTimeout(()=>{
 				this.close();
+				options.callback && options.callback();
 			}, options.duration);
 		}
 	}

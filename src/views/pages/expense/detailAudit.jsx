@@ -22,7 +22,6 @@ export default class ExpenseDetail extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props);
 	 	Util.startLoading();
 		Ajax.get("/expense/request/detail", {id: this.props.params.id, updated: this.props.location.query.updated}).then((res)=>{
 			this.state.detailInfo = res.data;
@@ -48,8 +47,11 @@ export default class ExpenseDetail extends Component {
 		this.state.disabled = true;
 		this.setState(this.state);
 		Ajax.post("/expense/request/audit",postData).then((res)=>{
-			Util.closeLoading();
+			Util.success("操作成功", 3000, ()=>{
+				//关闭当前webView
+			});
 		}, (err) => {
+			Util.closeLoading();
 			this.state.disabled = false;
 			this.setState(this.state);
 		});

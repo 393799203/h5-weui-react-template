@@ -46,7 +46,7 @@ export default class Toast extends Component {
 			        </div>
 		        <Else/>
 		        	<div className="weui-tips">
-			            <p>{ msg }</p>
+			            <p className="weui-tips__content">{ msg }</p>
 			        </div>
 		        </If>
 		    </div>

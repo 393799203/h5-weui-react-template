@@ -16,7 +16,7 @@ class Ajax{
 	    }
 	    else{
 	    	console.error(response.status, response.url);
-	    	Util.error("服务器开小差啦~请稍后再试");
+	    	Util.error("服务器开小差啦~请稍后再试!");
 	        return Promise.reject(response);
 	    }
 	}

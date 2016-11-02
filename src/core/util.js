@@ -110,6 +110,7 @@ class Hybrid extends UtilBase{
     }
 
 	pushWindow = (url) => {
+		alert(url);
 		return hdp.do('tt.navigation.pushWindow', url);
 	}
 
@@ -131,6 +132,7 @@ class Hybrid extends UtilBase{
 }
 
 let isTT = window.hasOwnProperty("hdp") && UtilBase.isTT();
+alert(isTT)
 let util = isTT ? (new Hybrid) : (new H5Util);
 util.isTT = isTT;
 export default util;

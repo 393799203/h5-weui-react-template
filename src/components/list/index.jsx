@@ -106,7 +106,7 @@ export default class ListItem extends Component {
 		return (
 			<div className={classnames("weui-cells", className)}>
 				<Infinite 
-					elementHeight = {200}
+					elementHeight = {155}
 					containerHeight = {window.innerHeight - 55 }
 					infiniteLoadBeginEdgeOffset={ 100 } 
 					onInfiniteLoad={this.onInfiniteLoad}

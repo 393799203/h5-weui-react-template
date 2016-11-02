@@ -40,6 +40,7 @@ a{
 .weui-cells{
   background: none;
   margin-top: 0;
+  font-size: 14px;
 }
 .weui-cell{
   font-size: 14px;
@@ -53,6 +54,12 @@ a{
 }
 .weui-form-preview{
   margin-bottom: 0.5em;
+  .weui-form-preview__hd, .weui-form-preview__bd{
+    padding: 5px 15px;
+  }
+  .weui-form-preview__ft{
+    line-height: 3em;
+  }
 }
 .weui-media-box__title{
   font-size: 14px;

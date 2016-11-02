@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from  'react-router'
 import List from 'components/list';
 import Ajax from 'core/ajax';
+import Util from 'core/util';
 
 export default class auditList extends Component {
 	state = {
@@ -13,6 +14,7 @@ export default class auditList extends Component {
 
 	constructor(props){
 		super(props);
+		Util.setTitle("报销审批-已审批");
 	}
 
 	render() {

@@ -76,7 +76,9 @@ class UtilBase{
 //H5部分
 class H5Util extends UtilBase{
 
-	setTitle = (title, color) => {}
+	setTitle = (title, color) => {
+		document.title = title;
+	}
 
 	setRightItemTitle = (title, color) => {}
 

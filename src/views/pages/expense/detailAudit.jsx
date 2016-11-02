@@ -19,6 +19,7 @@ export default class ExpenseDetail extends Component {
 
 	constructor(props){
 		super(props);
+		Util.setTitle("报销详情");
 	}
 
 	componentDidMount() {

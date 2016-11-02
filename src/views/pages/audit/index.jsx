@@ -14,6 +14,7 @@ export default class auditList extends Component {
 
 	constructor(props){
 		super(props);
+		Util.setTitle("报销审批-待审批");
 	}
 
 	componentDidMount() {

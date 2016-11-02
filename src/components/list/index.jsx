@@ -42,7 +42,7 @@ export default class ListItem extends Component {
 		}
 		Ajax.post("/expense/request/claim", postData).then((res) => {
 			item.updated = res.data.updated;
-			item.viewerOperateItems.replace("20","21");
+			item.viewerOperateItems = item.viewerOperateItems.replace("20", "21");
 			this.setState(this.state);
 		})
 	}

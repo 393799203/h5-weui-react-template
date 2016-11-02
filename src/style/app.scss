@@ -16,6 +16,7 @@
 	height: 100%;
 	background: $body-background;
 	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 }
 
 

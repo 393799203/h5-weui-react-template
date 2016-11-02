@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import { hashHistory, Router, IndexRoute, IndexRedirect, Redirect, Route, Link } from 'react-router'
 import FastClick from 'fastclick'
 
-import Util from 'core/util';
 
 //*************补丁**************
 import 'whatwg-fetch';
@@ -63,15 +62,6 @@ render((
 	</Router>
 ), document.getElementById('appWrapper'));
 
-Util.registerNotification("reload");
-document.getElementById("appWrapper").addEventListener("click", (e) => {
-	let target = e.target;
-	if( target && target.nodeName.toLocaleLowerCase() == "a" && target.className.indexOf('pushWindow') != -1 ) {
-		e.preventDefault();
-		Util.pushWindow(target.href);
-		return false;
-	}
-	return true;
-},false);
+
 
 

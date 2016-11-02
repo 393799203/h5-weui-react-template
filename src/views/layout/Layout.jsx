@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from  'react-router'
 import classNames from 'classnames'
 import Icon from 'components/icon'
+import Util from 'core/util';
 const ActiveArray = [];
 
 export default class Layout extends Component {
@@ -21,6 +22,19 @@ export default class Layout extends Component {
 			ActiveArray.push(item.key);
 		});
 		this.selectActiveMenu(props);
+	}
+
+	componentDidMount() {
+	    Util.registerNotification("reload");
+		document.getElementById("appWrapper").addEventListener("click", (e) => {
+			let target = e.target;
+			if( target && target.nodeName.toLocaleLowerCase() == "a" && target.className.indexOf('pushWindow') != -1 ) {
+				e.preventDefault();
+				Util.pushWindow(target.href);
+				return false;
+			}
+			return true;
+		},false);  
 	}
 
 	componentWillReceiveProps(nextProps) {

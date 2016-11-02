@@ -37,20 +37,38 @@ a{
   line-height: 2.2em;
   padding: 0;
 }
-.weui-cells{
-  background: none;
-  margin-top: 0;
-  font-size: 14px;
-}
-.weui-cell{
-  font-size: 14px;
+.weui-textarea{
+  padding: 5px;
 }
 .weui-cells__title{
   padding-top: 0.77em;
   margin-top: 0;
 }
-.weui-cells:after{
-  border-bottom: none;
+.weui-cells{
+  background: none;
+  margin-top: 0;
+  font-size: 14px;
+  &:before{
+    border-top: none;
+  }
+  &:after{
+    border-bottom: none;
+  }
+}
+.weui-cell{
+  font-size: 14px;
+  &:before{
+    border-top: none;
+  }
+  .weui-cell__bd{
+    min-width: 35%;
+  }
+  .weui-cell__ft{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 65%;
+    overflow: hidden;
+  }
 }
 .weui-form-preview{
   margin-bottom: 0.5em;

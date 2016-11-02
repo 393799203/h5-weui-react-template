@@ -153,7 +153,6 @@ class Hybrid extends UtilBase {
     // android 显示问题
     popWindow(url) {
         location.href = url;
-        // return hdp.do('tt.navigation.popWindow', 0)
     }
 
     redirect(url) {

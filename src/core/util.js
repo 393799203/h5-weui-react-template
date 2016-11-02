@@ -1,40 +1,20 @@
-import { hashHistory } from 'react-router';
-import valueData from 'data/values';
 import Toast from 'components/toast';
 
 //基础工具
+class UtilBase{
 
-class Util{
-
-	parseContent = (str) => {
-		return {
-			__html:str
-		}
+	static isTT = () => {
+		return UtilBase.inUserAgent(/tt4ios|tt4android/);
 	}
 
-	scrollToTop = () => {
-		window.scrollTo(window.scrollX,0);
-	}
-
-	trim = (str) => {
-		return str.replace(/(^\s*)|(\s*$)/g,"");
-	}
-
-	isTT = () => {
-		return this.inUserAgent(/tt4ios|tt4android/);
-	}
-
-	inUserAgent = (val) => {
+	static inUserAgent = (val) => {
         return val.test(navigator.userAgent.toLowerCase());
     }
 
-	/**
-	 * param 将要转为URL参数字符串的对象
-	 * key URL参数字符串的前缀
-	 * encode true/false 是否进行URL编码,默认为true
-	 * 
-	 * return URL参数字符串
-	 */
+    trim = (str) => {
+		return str.replace(/(^\s*)|(\s*$)/g,"");
+	}
+
 	param = (data, key, encode) => {
 	  if( data == null ) return '';
 	  var paramStr = '';
@@ -48,15 +28,6 @@ class Util{
 	    }
 	  }
 	  return paramStr;
-	}
-
-	toast = (type, msg, duration, callback) => {
-		Toast.open({
-			type: type,
-			msg: msg,
-			duration: duration,
-			callback: callback
-		})
 	}
 
 	money = (s, n) => {
@@ -75,6 +46,15 @@ class Util{
 	   return parseFloat(s.replace(/[^\d\.-]/g, ""));   
 	} 
 
+	toast = (type, msg, duration, callback) => {
+		Toast.open({
+			type: type,
+			msg: msg,
+			duration: duration,
+			callback: callback
+		})
+	}
+
 	startLoading = (msg) => {
 		this.toast("loading", msg );
 	}
@@ -90,7 +70,35 @@ class Util{
 	error = (msg, duration = 3000, callback) => {
 		this.toast("error", msg, duration, callback)
 	}
-	//容器部分
+
+}
+
+//H5部分
+class H5Util extends UtilBase{
+
+	setTitle = (title, color) => {}
+
+	setRightItemTitle = (title, color) => {}
+
+	pushWindow = (url) => {
+		location.href = url;
+	}
+
+	popWindow = (url) => {
+        location.href = url;
+    }
+
+    removeNotification = (name) => {}
+
+    sendNotification = (name, data) => {}
+
+    registerNotification = (name) => {}
+
+}
+
+//容器部分
+class Hybrid extends UtilBase{
+
 	setTitle = (title, color) => {
         return hdp.do('tt.navigation.setTitle', title, color)
     }
@@ -103,7 +111,7 @@ class Util{
 		return hdp.do('tt.navigation.pushWindow', url);
 	}
 
-	popWindow = () => {
+	popWindow = (url) => {
 		return hdp.do('tt.navigation.popWindow');
 	}
 
@@ -119,5 +127,9 @@ class Util{
         return hdp.do('tt.notification.registerNotification', name)
     }
 }
-export default new Util;
+
+let isTT = window.hasOwnProperty("hdp") && UtilBase.isTT();
+let util = isTT ? (new Hybrid) : (new H5Util);
+util.isTT = isTT;
+export default util;
 

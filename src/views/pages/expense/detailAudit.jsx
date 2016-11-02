@@ -53,7 +53,7 @@ export default class ExpenseDetail extends Component {
 		Ajax.post("/expense/request/audit",postData).then((res)=>{
 			Util.sendNotification("reload");
 			Util.success("操作成功", 1500, ()=>{
-				Util.popWindow();
+				Util.popWindow("#/audit");
 			});
 		}, (err) => {
 			this.state.disabled = false;

@@ -63,18 +63,15 @@ render((
 	</Router>
 ), document.getElementById('appWrapper'));
 
-
-if(Util.isTT()){
-	Util.registerNotification("reload");
-	document.getElementById("appWrapper").addEventListener("click", (e) => {
-		let target = e.target;
-		if( target && target.nodeName.toLocaleLowerCase() == "a" && target.className.indexOf('pushWindow') != -1 ) {
-			e.preventDefault();
-			Util.pushWindow(target.href);
-			return false;
-		}
-		return true;
-	},false);
-}
+Util.registerNotification("reload");
+document.getElementById("appWrapper").addEventListener("click", (e) => {
+	let target = e.target;
+	if( target && target.nodeName.toLocaleLowerCase() == "a" && target.className.indexOf('pushWindow') != -1 ) {
+		e.preventDefault();
+		Util.pushWindow(target.href);
+		return false;
+	}
+	return true;
+},false);
 
 

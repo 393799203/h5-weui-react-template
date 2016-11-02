@@ -33,8 +33,16 @@ a{
   margin-right: 0;
 }
 
+.weui-btn{
+  line-height: 2.2em;
+  padding: 0;
+}
 .weui-cells{
   background: none;
+  margin-top: 0;
+}
+.weui-cell{
+  font-size: 14px;
 }
 .weui-cells__title{
   padding-top: 0.77em;
@@ -45,6 +53,9 @@ a{
 }
 .weui-form-preview{
   margin-bottom: 0.5em;
+}
+.weui-media-box__title{
+  font-size: 14px;
 }
 .weui-tips{
   position: fixed;

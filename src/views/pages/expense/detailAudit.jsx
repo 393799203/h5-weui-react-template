@@ -124,8 +124,8 @@ export default class ExpenseDetail extends Component {
 					                    <div className="pull-right m-r-sm text-light">{item.actionDate}</div>
 					                </div>
 					                <div className="weui-cell__bd">
-					                    <div className="pull-left m-l-sm">行程</div>
-					                    <div className="pull-right text-light">{item.departurePlace}-{item.destination}</div>
+					                    <div className="pull-left m-l-sm">费用类型</div>
+					                    <div className="pull-right text-light">{item.expenseTypeName}</div>
 					                </div>
 					            </div>
 					            <div className="weui-cell">
@@ -140,9 +140,9 @@ export default class ExpenseDetail extends Component {
 					            </div>
 					            <div className="weui-cell">
 					                <div className="weui-cell__bd">
-					                    <p>费用类型</p>
+					                    <p>行程</p>
 					                </div>
-					                <div className="weui-cell__ft">{item.expenseTypeName}</div>
+					                <div className="weui-cell__ft">{item.departurePlace}-{item.destination}</div>
 					            </div>
 					            <div className="weui-cell">
 					            	<If condition={ item.comments && item.comments.length > 15 }>

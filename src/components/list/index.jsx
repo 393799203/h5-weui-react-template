@@ -57,7 +57,7 @@ export default class ListItem extends Component {
 			        </div>
 		        </If>
 		        <If condition={ this.state.list.length && this.state.isEnd } >
-			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot m-b-n m-t-md">
+			        <div className="weui-loadmore weui-loadmore_line weui-loadmore_dot m-b-n m-t">
 			            <span className="weui-loadmore__tips bg-none"></span>
 			        </div>
 		        </If>

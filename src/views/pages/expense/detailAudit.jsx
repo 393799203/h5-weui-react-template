@@ -95,12 +95,6 @@ export default class ExpenseDetail extends Component {
 		            </div>
 		            <div className="weui-cell">
 		                <div className="weui-cell__bd">
-		                    <p>发票张数</p>
-		                </div>
-		                <div className="weui-cell__ft">{detailInfo.invoiceCount}</div>
-		            </div>
-		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
 		                    <p>总计金额</p>
 		                </div>
 		                <div className="weui-cell__ft">{Util.money(detailInfo.amt || 0)}</div>

@@ -1,0 +1,18 @@
+.listView{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 55px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+.listView-pullDownView{
+    position: absolute;
+    width: 100%;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+.listView-pullUpView{
+	
+}

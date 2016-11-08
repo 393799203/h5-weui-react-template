@@ -32,7 +32,19 @@ a{
   margin-left: 0;
   margin-right: 0;
 }
-
+.weui-loadmore{
+  margin: 0 auto;
+  line-height: 50px;
+  height: 50px;
+  .weui-loadmore_line{
+    margin-top: 0;
+    height: 0;
+    transform: translateY(25px);
+    .weui-loadmore__tips{
+      top: -27px;
+    }
+  }
+}
 .weui-btn{
   line-height: 2.2em;
   padding: 0;

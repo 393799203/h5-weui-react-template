@@ -29,6 +29,8 @@ export default class Application extends Component {
 			this.state.isEnd = data.data.isEnd;
 			this.state.currentIndex ++;
 			this.setState(this.state);
+		}, err => {
+			Util.error(err);
 		});
 	}
 

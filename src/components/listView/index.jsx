@@ -34,8 +34,7 @@ export default class ListView extends Component {
 
 	state = {
 		pulling: false,
-		loading: false,
-        waitingReleaseToRefresh: false
+		loading: false
 	}
 
 	getScrollWrap = () => {
@@ -106,16 +105,15 @@ export default class ListView extends Component {
 				return;
 			}
             if (this.props.distanceToRefresh < this.iScrollInstance.y) {
-                this.state.waitingReleaseToRefresh = true;
+            	
             } else {
-                this.state.waitingReleaseToRefresh = false;
+            	
             }
-            this.setState(this.state);
         }
 	}
 
 	handlePullRefresh = () => {
-		if(this.state.pulling && this.state.waitingReleaseToRefresh){
+		if(this.state.pulling){
 			this.showLoader();
             this.props.onRefresh().then(this.hideLoader, this.hideLoader);
 		}
@@ -123,7 +121,9 @@ export default class ListView extends Component {
 
     showLoader = () => {
     	this.state.loading = true;
-    	this.state.waitingReleaseToRefresh = false;
+    	Util.css(findDOMNode(this.refs.scrollWrap),{
+    		transform: 'translate3d(0,' + this.props.refreshThreshold + 'px,0)'
+    	})
         this.setState(this.state);
     }
 
@@ -155,17 +155,12 @@ export default class ListView extends Component {
 				<div className="listViewWrap" ref="scrollWrap">
 					<If condition={refreshable}>
 						<div className="listView-pullDownView" ref="pullDown">
-							<If condition={!this.state.loading && !this.state.waitingReleaseToRefresh}>
+							<If condition={ !this.state.loading }>
 								<div className="weui-loadmore">
 						            <span className="weui-loadmore__tips">下拉刷新</span>
 						        </div>
 							</If>
-							<If condition={!this.state.loading && this.state.waitingReleaseToRefresh}>
-								<div className="weui-loadmore">
-						            <span className="weui-loadmore__tips">释放开始刷新</span>
-						        </div>
-							</If>
-							<If condition={this.state.loading}>
+							<If condition={ this.state.loading }>
 								<div className="weui-loadmore">
 						            <i className="weui-loading"></i>
 						            <span className="weui-loadmore__tips">数据加载中</span>

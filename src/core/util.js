@@ -30,6 +30,61 @@ class UtilBase{
 	  return paramStr;
 	}
 
+	css = (dom,data) => {
+		let sty = dom.getAttribute("style");
+		let oldSty = this.formatStyle(sty)
+		dom.setAttribute("style",this.parseStyle(Object.assign({},oldSty,data)));
+	}
+	//将字符串解析为style对象
+	formatStyle = (data) => {
+		if(!data){
+			return {};
+		}
+
+		let styObj = {}
+		data.split(';').filter((v)=>{
+			return v;
+		}).forEach((v)=>{
+			let vArr = v.split(":");
+			if(vArr.length == 2 && vArr[0] && vArr[1]){
+				styObj[vArr[0]] = vArr[1];
+			}
+		})
+		return styObj;
+	}
+	
+	parseStyle = (data) => {
+		let cssNumber = [
+			"columnCount",
+			"fillOpacity",
+			"fontWeight",
+			"lineHeight",
+			"opacity",
+			"order",
+			"orphans",
+			"widows",
+			"zIndex",
+			"zoom"
+		];
+		let prefixList = [
+			'transform'
+		]
+		let styArr = [];
+		Object.keys(data).forEach((v)=>{
+			if(prefixList.indexOf(v) >= 0){
+				data["-webkit-"+v] = data[v];
+			}
+		})
+		Object.keys(data).forEach((v)=>{
+			if(typeof(data[v]) == 'number' && cssNumber.indexOf(v) < 0){
+				styArr.push(v+":"+data[v]+'px');
+			}else{
+				styArr.push(v+":"+data[v]);
+			}
+		})
+		return styArr.join(";");
+	}
+
 	money = (s, n) => {
 		n = n > 0 && n <= 20 ? n : 2;
 	    s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";  

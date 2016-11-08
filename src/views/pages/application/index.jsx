@@ -22,8 +22,8 @@ export default class Application extends Component {
 		this.onRefresh();
 	}
 
-	getList = (currentIndex = 1) => {
-		let params = Object.assign({}, this.state.params, { pageNum: currentIndex, pageSize: 10 });
+	getList = () => {
+		let params = Object.assign({}, this.state.params, { pageNum: this.state.currentIndex, pageSize: 10 });
 		return Ajax.post(this.state.ajaxUrl, params, 1).then(data => {
 			this.state.list = this.state.list.concat(data.data.list || []);
 			this.state.isEnd = data.data.isEnd;
@@ -33,7 +33,9 @@ export default class Application extends Component {
 	}
 
 	onRefresh = () => {
-		return this.getList();
+		this.state.list = [];
+		this.state.currentIndex = 1;
+		return this.getList(this.state.currentIndex);
 	}
 
 	onLoad = () => {

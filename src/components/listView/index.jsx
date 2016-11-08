@@ -9,10 +9,16 @@ export default class ListView extends Component {
 	static defaultProps = {
 		className: "",
 		refreshable:true,
-		loadable:true,
 		distanceToRefresh:70,
+		refreshViewHeight:50,
+		loadable:true,
 		distanceToLoad:50,
-		refreshViewHeight:50
+		onRefresh: () => {
+			return Promise.resolve()
+		},
+		onLoad: () => {
+			return Promise.resolve()
+		}
 	}
 
 	constructor(props){
@@ -27,18 +33,19 @@ export default class ListView extends Component {
 	}
 
 	state = {
-		isTouching: false,
-		isOnRefresh: false
+		pulling: false,
+		loading: false,
+        waitingReleaseToRefresh: false
 	}
 
-	goTop(){
-		this.refs.listViewWrap.scrollTop = 0;
-	}
+	getScrollWrap = () => {
+        return this.refs.listViewWrap;
+    }
 
 	componentDidMount() {
 		const options = {
-            // 默认iscroll会拦截元素的默认事件处理函数，我们需要响应onClick，因此要配置
-            preventDefault: false,
+            // iscroll会拦截元素的默认事件处理函数
+            preventDefault: true,
             // 禁止缩放
             zoom: false,
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
@@ -50,12 +57,11 @@ export default class ListView extends Component {
             // 展示滚动条
             scrollbars: true,
         };
-        let listViewWrap = findDOMNode( this.refs.listViewWrap )
+        let listViewWrap = this.getScrollWrap();
         this.iScrollInstance = new iScroll(listViewWrap, options );
         this.iScrollInstance.on('scroll', this.onScroll );
         this.iScrollInstance.on('scrollEnd', this.onScrollEnd );
-        this.iScrollInstance.on('touchStart', () => { this.state.isTouching = true });
-        this.iScrollInstance.on('touchEnd', () => { this.state.isTouching = false });
+        listViewWrap.addEventListener('touchend', this.handlePullRefresh, false);
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -64,41 +70,65 @@ export default class ListView extends Component {
     }
 
     componentDidUpdate() {
-        this.iScrollInstance.refresh();
+    	if (!this.state.pulling) {
+        	this.iScrollInstance.refresh();
+        }
     }
 
+    onScrollEnd = () => {}
+
 	onScroll = () => {
-		if(this.state.isOnLoading || !this.props.loadable || this.props.isEnd){
-			return;
-		}
-		let listViewHeight = this.refs.listViewWrap.offsetHeight;
-		let scrollHeight = this.refs.scrollWrap.offsetHeight;
-		console.log(-1 * this.iScrollInstance.y + listViewHeight + this.props.distanceToLoad, scrollHeight)
-		if(-1 * this.iScrollInstance.y + listViewHeight + this.props.distanceToLoad >= scrollHeight){
-			this.state.isOnLoading = true;
-			if(this.props.onLoad){
+		//滚动加载
+		if(this.iScrollInstance.y <= 0){
+			this.state.pulling = false;
+			if(this.state.loading || !this.props.loadable || this.props.isEnd){
+				return;
+			}
+			let listViewHeight = this.refs.listViewWrap.offsetHeight;
+			let scrollHeight = this.refs.scrollWrap.offsetHeight;
+			if(-1 * this.iScrollInstance.y + listViewHeight + this.props.distanceToLoad >= scrollHeight){
+				this.state.loading = true;
 				this.props.onLoad().then(()=>{
-					setTimeout(()=>{
-						this.state.isOnLoading = false;
-					},100)
+					this.state.loading = false;
+					/* this.setState(this.state); */
 				}).catch((e)=>{
-					setTimeout(()=>{
-						this.state.isOnLoading = false;
-					},100)
+					this.state.loading = false;
+					/* this.setState(this.state); */
 				})
 			}
 		}
-		/* let pullDown = findDOMNode( this.refs.PullDown );
- 		if (this.iScrollInstance.y > this.props.distanceToRefresh) {
- 			this.props.onRefresh();
-        } else {
-            console.log(2);
-        } */
-
+		//上拉刷新
+		if (this.iScrollInstance.y > 0 ) {
+            this.state.pulling = true;
+            if(this.state.loading || !this.props.refreshable){
+				return;
+			}
+            if (this.props.distanceToRefresh < this.iScrollInstance.y) {
+                this.state.waitingReleaseToRefresh = true;
+            } else {
+                this.state.waitingReleaseToRefresh = false;
+            }
+            this.setState(this.state);
+        }
 	}
 
-	onScrollEnd = () => {
-	}
+	handlePullRefresh = () => {
+		if(this.state.pulling && this.state.waitingReleaseToRefresh){
+			this.showLoader();
+            this.props.onRefresh().then(this.hideLoader, this.hideLoader);
+		}
+    }
+
+    showLoader = () => {
+    	this.state.loading = true;
+    	this.state.waitingReleaseToRefresh = false;
+        this.setState(this.state);
+    }
+
+    hideLoader = () => {
+    	this.state.loading = false;
+        this.setState(this.state);
+    }
 
 	componentWillUnmount(){
 		this.unmount = true;
@@ -109,10 +139,8 @@ export default class ListView extends Component {
 			onScroll,				//将滚动事件绑定在body上
 			className,				//样式
 			refreshViewHeight,		//等待刷新视图高度
-			pullDownView,			//下拉刷新展示视图
 			distanceToRefresh,		//刷新下拉间隔
 			onRefresh,				//刷新事件
-			pullUpView,				//上拉加载展示视图
 			onLoad,					//加载事件
 			refreshable,			//可刷新
 			loadable,				//可加载
@@ -125,42 +153,36 @@ export default class ListView extends Component {
 				<div className="listViewWrap" ref="scrollWrap">
 					<If condition={refreshable}>
 						<div className="listView-pullDownView" ref="pullDown">
-							<If condition={!pullDownView}>
-								<If condition={!this.state.isOnRefresh}>
-									<div className="weui-loadmore">
-							            <i className="weui-loading"></i>
-							            <span className="weui-loadmore__tips">下拉刷新</span>
-							        </div>
-								</If>
-								<If condition={this.state.isOnRefresh}>
-									<div className="weui-loadmore">
-							            <i className="weui-loading"></i>
-							            <span className="weui-loadmore__tips">数据加载中</span>
-							        </div>
-								</If>
+							<If condition={!this.state.loading && !this.state.waitingReleaseToRefresh}>
+								<div className="weui-loadmore">
+						            <span className="weui-loadmore__tips">下拉刷新</span>
+						        </div>
 							</If>
-							<If condition={pullDownView}>
-								{pullDownView}
+							<If condition={!this.state.loading && this.state.waitingReleaseToRefresh}>
+								<div className="weui-loadmore">
+						            <span className="weui-loadmore__tips">释放开始刷新</span>
+						        </div>
+							</If>
+							<If condition={this.state.loading}>
+								<div className="weui-loadmore">
+						            <i className="weui-loading"></i>
+						            <span className="weui-loadmore__tips">数据加载中</span>
+						        </div>
 							</If>
 						</div>
 					</If>
 					<div className="scrollContent">
 						{children}
 					</div>
-					<If condition={loadable && !isEnd && !this.state.isOnRefresh}>
+					<If condition={loadable && !isEnd}>
 						<div className="listView-pullUpView" ref="pullUp">
-							<If condition={!pullUpView}>
-								<div className="weui-loadmore">
-						            <i className="weui-loading"></i>
-						            <span className="weui-loadmore__tips">数据加载中</span>
-						        </div>
-							</If>
-							<If condition={pullUpView}>
-								{pullUpView}
-							</If>
+							<div className="weui-loadmore">
+					            <i className="weui-loading"></i>
+					            <span className="weui-loadmore__tips">数据加载中</span>
+					        </div>
 						</div>
 					</If>
-					<If condition={loadable && isEnd && !this.state.isOnRefresh}>
+					<If condition={loadable && isEnd}>
 						<div className="weui-loadmore">
 							<div className="weui-loadmore_line weui-loadmore_dot">
 				            	<span className="weui-loadmore__tips bg-none"></span>

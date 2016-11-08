@@ -65,12 +65,14 @@ export default class ListView extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-        nextProps.children !== this.props.children
-        return true;
+		/*if(nextProps.children !== this.props.children){
+			return true;
+		}*/
+		return true;
     }
 
-    componentDidUpdate() {
-    	if (!this.state.pulling) {
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.children !== this.props.children){
         	this.iScrollInstance.refresh();
         }
     }

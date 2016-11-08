@@ -58,8 +58,8 @@ export default class Application extends Component {
 			            </div>
 			            <div className="weui-form-preview__bd">
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">申请人</label>
-			                    <span className="weui-form-preview__value">{!item.agentNickName? item.applyNickName: `${item.applyNickName}(${item.agentNickName}代申请)`}</span>
+			                    <label className="weui-form-preview__label">处理人</label>
+			                    <span className="weui-form-preview__value">{item.currTask.assigneeNickName}</span>
 			                </div>
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">类型</label>

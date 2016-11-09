@@ -67,6 +67,7 @@ export default class ListView extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if(prevProps.children !== this.props.children){
+        	console.log("refreshfinshed")
         	this.iScrollInstance.refresh();
         }
     }
@@ -81,17 +82,10 @@ export default class ListView extends Component {
 				return;
 			}
 			let listViewHeight = this.refs.listViewWrap.offsetHeight;
-			let scrollHeight = this.refs.scrollWrap.offsetHeight - this.props.refreshViewHeight;
-			console.log(-1 * this.iScrollInstance.y + listViewHeight + this.props.distanceToLoad ,scrollHeight);
+			let scrollHeight = this.refs.scrollWrap.offsetHeight;
 			if(-1 * this.iScrollInstance.y + listViewHeight + this.props.distanceToLoad >= scrollHeight){
 				this.state.loading = true;
-				this.props.onLoad().then(()=>{
-					this.state.loading = false;
-					this.setState(this.state);
-				}).catch((e)=>{
-					this.state.loading = false;
-					this.setState(this.state);
-				})
+				this.props.onLoad().then(this.hideLoader, this.hideLoader)
 			}
 		}
 		//上拉刷新
@@ -115,20 +109,22 @@ export default class ListView extends Component {
 
 	handlePullRefresh = () => {
 		if(this.state.pulling){
-			this.showLoader();
+			this.showRefreshLoader();
             this.props.onRefresh().then(this.hideLoader, this.hideLoader);
 		}
     }
 
-    showLoader = () => {
+    showRefreshLoader = () => {
     	this.state.refreshing = true;
     	this.state.waitingReleaseToRefresh = false;
         this.setState(this.state);
     }
 
     hideLoader = () => {
+    	this.state.loading = false;
     	this.state.refreshing = false;
         this.setState(this.state);
+        this.iScrollInstance.refresh();
     }
 
 	componentWillUnmount(){
@@ -151,10 +147,11 @@ export default class ListView extends Component {
 			children,
 			...props } = this.props
 
+			console.log("render")
 		let pullCls = this.state.waitingReleaseToRefresh||this.state.refreshing ? "waiting" : ""; 
 		return (
 			<div className={classnames("listView",className)} {...props} ref="listViewWrap">
-				<div className="listViewWrap" ref="scrollWrap">
+				<div className="scrollWrap" ref="scrollWrap" >
 					<If condition={refreshable}>
 						<div className={classnames("listView-pullDownView",pullCls)} ref="pullDown">
 							<If condition={ !this.state.refreshing && !this.state.waitingReleaseToRefresh }>

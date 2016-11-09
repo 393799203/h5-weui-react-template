@@ -8,10 +8,14 @@
     overflow: hidden;
 }
 .listView-pullDownView{
+    position: absolute;
     width: 100%;
-    margin-top: -50px;
+    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
     &.waiting{
-        margin-top: 0
+        position: static;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
     }
 }
 

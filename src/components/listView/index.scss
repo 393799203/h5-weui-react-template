@@ -8,10 +8,12 @@
     overflow: hidden;
 }
 .listView-pullDownView{
-    position: absolute;
     width: 100%;
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
+    margin-top: -50px;
+    &.waiting{
+        margin-top: 0
+    }
 }
+
 .listView-pullUpView{
 }

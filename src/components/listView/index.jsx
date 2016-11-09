@@ -9,7 +9,7 @@ export default class ListView extends Component {
 	static defaultProps = {
 		className: "",
 		refreshable:true,
-		distanceToRefresh:70,
+		distanceToRefresh:60,
 		refreshViewHeight:50,
 		loadable:true,
 		distanceToLoad:50,
@@ -34,7 +34,9 @@ export default class ListView extends Component {
 
 	state = {
 		pulling: false,
-		loading: false
+		loading: false,
+		refreshing: false,
+		waitingReleaseToRefresh: false
 	}
 
 	getScrollWrap = () => {
@@ -50,7 +52,7 @@ export default class ListView extends Component {
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
             mouseWheel: true,
             // 滚动事件的探测灵敏度，1-3，越高越灵敏，兼容性越好，性能越差
-            probeType: 3,
+            probeType: 2,
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
@@ -62,13 +64,6 @@ export default class ListView extends Component {
         this.iScrollInstance.on('scrollEnd', this.onScrollEnd );
         listViewWrap.addEventListener('touchend', this.handlePullRefresh, false);
 	}
-
-	shouldComponentUpdate(nextProps, nextState) {
-		/*if(nextProps.children !== this.props.children){
-			return true;
-		}*/
-		return true;
-    }
 
     componentDidUpdate(prevProps, prevState) {
         if(prevProps.children !== this.props.children){
@@ -86,28 +81,34 @@ export default class ListView extends Component {
 				return;
 			}
 			let listViewHeight = this.refs.listViewWrap.offsetHeight;
-			let scrollHeight = this.refs.scrollWrap.offsetHeight;
+			let scrollHeight = this.refs.scrollWrap.offsetHeight - this.props.refreshViewHeight;
+			console.log(-1 * this.iScrollInstance.y + listViewHeight + this.props.distanceToLoad ,scrollHeight);
 			if(-1 * this.iScrollInstance.y + listViewHeight + this.props.distanceToLoad >= scrollHeight){
 				this.state.loading = true;
 				this.props.onLoad().then(()=>{
 					this.state.loading = false;
-					/* this.setState(this.state); */
+					this.setState(this.state);
 				}).catch((e)=>{
 					this.state.loading = false;
-					/* this.setState(this.state); */
+					this.setState(this.state);
 				})
 			}
 		}
 		//上拉刷新
 		if (this.iScrollInstance.y > 0 ) {
             this.state.pulling = true;
-            if(this.state.loading || !this.props.refreshable){
+            if(this.state.refreshing || !this.props.refreshable){
 				return;
 			}
-            if (this.props.distanceToRefresh < this.iScrollInstance.y) {
-            	
-            } else {
-            	
+            if ( this.iScrollInstance.y >= this.props.distanceToRefresh && !this.state.waitingReleaseToRefresh) {
+            	this.state.waitingReleaseToRefresh = true;
+            	this.setState(this.state);
+            	this.iScrollInstance.scrollBy(0, -this.props.refreshViewHeight)
+            }
+            if( this.iScrollInstance.y + this.props.refreshViewHeight < this.props.distanceToRefresh && this.state.waitingReleaseToRefresh){
+            	this.state.waitingReleaseToRefresh = false;
+            	this.setState(this.state);
+            	this.iScrollInstance.scrollBy(0, this.props.refreshViewHeight)
             }
         }
 	}
@@ -120,20 +121,19 @@ export default class ListView extends Component {
     }
 
     showLoader = () => {
-    	this.state.loading = true;
-    	Util.css(findDOMNode(this.refs.scrollWrap),{
-    		transform: 'translate3d(0,' + this.props.refreshThreshold + 'px,0)'
-    	})
+    	this.state.refreshing = true;
+    	this.state.waitingReleaseToRefresh = false;
         this.setState(this.state);
     }
 
     hideLoader = () => {
-    	this.state.loading = false;
+    	this.state.refreshing = false;
         this.setState(this.state);
     }
 
 	componentWillUnmount(){
 		this.unmount = true;
+		this.iScrollInstance.destroy();
 	}
 
 	render() {
@@ -150,17 +150,24 @@ export default class ListView extends Component {
 			distanceToLoad,			//加载间隔
 			children,
 			...props } = this.props
+
+		let pullCls = this.state.waitingReleaseToRefresh||this.state.refreshing ? "waiting" : ""; 
 		return (
 			<div className={classnames("listView",className)} {...props} ref="listViewWrap">
 				<div className="listViewWrap" ref="scrollWrap">
 					<If condition={refreshable}>
-						<div className="listView-pullDownView" ref="pullDown">
-							<If condition={ !this.state.loading }>
+						<div className={classnames("listView-pullDownView",pullCls)} ref="pullDown">
+							<If condition={ !this.state.refreshing && !this.state.waitingReleaseToRefresh }>
 								<div className="weui-loadmore">
 						            <span className="weui-loadmore__tips">下拉刷新</span>
 						        </div>
 							</If>
-							<If condition={ this.state.loading }>
+							<If condition={ !this.state.refreshing && this.state.waitingReleaseToRefresh }>
+								<div className="weui-loadmore">
+						            <span className="weui-loadmore__tips">释放开始刷新</span>
+						        </div>
+							</If>
+							<If condition={ this.state.refreshing }>
 								<div className="weui-loadmore">
 						            <i className="weui-loading"></i>
 						            <span className="weui-loadmore__tips">数据加载中</span>

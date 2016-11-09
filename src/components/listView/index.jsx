@@ -179,11 +179,16 @@ export default class ListView extends Component {
 					        </div>
 						</div>
 					</If>
-					<If condition={loadable && isEnd}>
+					<If condition={loadable && isEnd && children.length}>
 						<div className="weui-loadmore">
 							<div className="weui-loadmore_line weui-loadmore_dot">
 				            	<span className="weui-loadmore__tips bg-none"></span>
 				            </div>
+				        </div>
+					</If>
+					<If condition={loadable && isEnd && !children.length}>
+						<div className="weui-loadmore weui-loadmore_line">
+				            <span className="bg-none">暂无数据</span>
 				        </div>
 					</If>
 				</div>

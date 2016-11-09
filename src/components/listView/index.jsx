@@ -12,7 +12,7 @@ export default class ListView extends Component {
 		distanceToRefresh:60,
 		refreshViewHeight:50,
 		loadable:true,
-		distanceToLoad:50,
+		distanceToLoad:100,
 		onRefresh: () => {
 			return Promise.resolve()
 		},
@@ -108,7 +108,7 @@ export default class ListView extends Component {
 	}
 
 	handlePullRefresh = () => {
-		if(this.state.pulling){
+		if(this.state.pulling && this.state.waitingReleaseToRefresh){
 			this.showRefreshLoader();
             this.props.onRefresh().then(this.hideLoader, this.hideLoader);
 		}
@@ -124,6 +124,7 @@ export default class ListView extends Component {
     	this.state.loading = false;
     	this.state.refreshing = false;
         this.setState(this.state);
+        //refreshing设置为false之后,setState之后pullCls变化，需要重新refresh
         this.iScrollInstance.refresh();
     }
 

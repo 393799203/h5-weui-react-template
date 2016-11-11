@@ -32,7 +32,13 @@ export default class ExpenseDetail extends Component {
 			this.setState(this.state);
 			Util.closeLoading();
 		}, (err) => {
-			Util.closeLoading();
+			setTimeout(()=>{
+				if(this.props.route.path.indexOf('audit') != -1){
+					Util.popWindow("#/audit");
+				}else{
+					Util.popWindow("#/audited");
+				}
+			}, 3000)
 		});     
 	}
 

@@ -26,6 +26,9 @@ a{
 	cursor:pointer;
   text-decoration:none;
 }
+.iScrollVerticalScrollbar.iScrollLoneScrollbar{
+  width: 4px!important;
+}
 [class^="weui-icon-"]:before,
 [class*=" weui-icon-"]:before {
   display: inline-block;
@@ -107,3 +110,5 @@ a{
   color: #fff;
   .weui-tips__content{}
 }
+
+

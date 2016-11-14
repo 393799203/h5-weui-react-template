@@ -18,7 +18,7 @@ export default class Application extends Component {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("我的报销");
+		Util.setTitle("我的报销-待审批");
 		this.onRefresh();
 	}
 

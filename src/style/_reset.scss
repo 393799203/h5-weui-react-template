@@ -39,13 +39,14 @@ a{
   margin: 0 auto;
   line-height: 50px;
   height: 50px;
-  .weui-loadmore_line{
-    margin-top: 0;
-    height: 0;
-    transform: translateY(25px);
-    .weui-loadmore__tips{
-      top: -27px;
-    }
+}
+.weui-loadmore_line{
+  margin-top: 0;
+  height: 0;
+  transform: translateY(25px);
+  .weui-loadmore__tips{
+    top: -27px;
+    background: #f8f8f8;
   }
 }
 .weui-btn{

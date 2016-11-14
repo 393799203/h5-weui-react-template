@@ -193,7 +193,7 @@ export default class ListView extends Component {
 					</If>
 					<If condition={loadable && isEnd && !children.length}>
 						<div className="weui-loadmore weui-loadmore_line">
-				            <span className="bg-none">暂无数据</span>
+				            <span className="weui-loadmore__tips">暂无数据</span>
 				        </div>
 					</If>
 				</div>

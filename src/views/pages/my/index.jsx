@@ -8,7 +8,7 @@ import Util from 'core/util';
 export default class myGrid extends Component {
 	state = {
 		gridDataList: [
-			{"title":"报销","link":"/my/expense","icon":"expense"}
+			{"title":"报销","link":"/my/expense","icon":"custom-expense"}
 		]
 	}
 

@@ -1,4 +1,4 @@
-@font-face {font-family: "weui-icon";
+@font-face {font-family: "weui-icon-custom";
   src: url('//at.alicdn.com/t/font_se44l1zfv866flxr.eot?t=1479805798939'); /* IE9*/
   src: url('//at.alicdn.com/t/font_se44l1zfv866flxr.eot?t=1479805798939#iefix') format('embedded-opentype'), /* IE6-IE8 */
   url('//at.alicdn.com/t/font_se44l1zfv866flxr.woff?t=1479805798939') format('woff'), /* chrome, firefox */
@@ -6,9 +6,9 @@
   url('//at.alicdn.com/t/font_se44l1zfv866flxr.svg?t=1479805798939#weui-icon') format('svg'); /* iOS 4.1- */
 }
 
-[class^="weui-icon-"],
-[class*="weui-icon-"]:before {
-  font-family:'weui-icon', sans-serif;
+[class^="weui-icon-custom"],
+[class*="weui-icon-custom"]:before {
+  font-family:'weui-icon-custom', sans-serif;
   font-style: normal;
   text-transform: none !important;
   speak: none;
@@ -16,12 +16,12 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.weui-icon-my:before { content: "\e64f"; }
+.weui-icon-custom-my:before { content: "\e64f"; }
 
-.weui-icon-audit:before { content: "\e63f"; }
+.weui-icon-custom-audit:before { content: "\e63f"; }
 
-.weui-icon-expense:before { content: "\e630"; }
+.weui-icon-custom-expense:before { content: "\e630"; }
 
-.weui-icon-audited:before { content: "\e679"; }
+.weui-icon-custom-audited:before { content: "\e679"; }
 
 

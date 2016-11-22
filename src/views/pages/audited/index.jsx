@@ -8,7 +8,7 @@ import Util from 'core/util';
 export default class auditedGrid extends Component {
 	state = {
 		gridDataList: [
-			{"title":"报销","link":"/audited/expense","icon":"expense"}
+			{"title":"报销","link":"/audited/expense","icon":"custom-expense"}
 		]
 	}
 

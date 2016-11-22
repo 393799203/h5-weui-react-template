@@ -38,7 +38,7 @@ export default class ExpenseDetail extends Component {
 				}else{
 					Util.popWindow("#/audited/expense");
 				}
-			}, 3000)
+			}, 2000)
 		});     
 	}
 

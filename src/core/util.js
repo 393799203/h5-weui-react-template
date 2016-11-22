@@ -118,11 +118,11 @@ class UtilBase{
 		Toast.close();
 	}
 
-	success = (msg, duration = 3000, callback) => {
+	success = (msg, duration = 2000, callback) => {
 		this.toast("success", msg, duration, callback)
 	}
 	
-	error = (msg, duration = 3000, callback) => {
+	error = (msg, duration = 2000, callback) => {
 		this.toast("error", msg, duration, callback)
 	}
 

@@ -3,6 +3,7 @@ var config = require('./webpack.base')
 var appConf = require('./app.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 
 config.output.filename = '[name].js'
 config.output.chunkFilename = '[id].js'
@@ -45,7 +46,9 @@ new webpack.NoErrorsPlugin(),
 new ExtractTextPlugin('[name].css'),
 new HtmlWebpackPlugin({
 	filename: 'index.html',
-	template: 'index.html'
-})])
+	template: 'static/index.html'
+}),
+new OpenBrowserWebpackPlugin({ url: "http://"+appConf.serverName+":"+appConf.port })
+])
 
 module.exports = config

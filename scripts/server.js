@@ -42,15 +42,17 @@ var compiler = webpack(webpackDev);
 
 //webpack服务设置
 var webpackServerConf = require(path.join(currentDir,'config','webpack.server.js'));
+
 //启动webpack服务
-new webpackServer(compiler, webpackServerConf).listen(appConf.port, appConf.serverName, function(err) {
-    if (err) throw new gutil.PluginError("webpack-dev-server", err);
-    const appWebPath = "http://" + appConf.serverName + ":" + appConf.port;
-    //gutil.log("[webpack-dev-server]", appWebPath);
-    //打开浏览器
-    gulp.src('').pipe(open({
-        app: 'google chrome',
-        uri: appWebPath
-    }));
-}.bind(this));
+var server = new webpackServer(compiler, webpackServerConf);
+
+server.use('/*', function(req, res, next){
+    if(req.get('X-Requested-With') != 'XMLHttpRequest'){
+        res.sendFile(path.resolve(__dirname, '..', 'static/index.html'));
+    }else{
+        next();
+    }
+})
+
+server.listen(appConf.port, appConf.serverName);
 

@@ -14,12 +14,21 @@ export default class Grid extends Component {
 		return (
 			<div className="weui-grids">
 				<For each = "item" of = { gridDataList } index = "index">
-			        <Link className="weui-grid bg-white" to={item.link} key = {index}>
-			            <div className="weui-grid__icon">
-			            	<Icon name={item.icon}/>
-			            </div>
-			            <p className="weui-grid__label">{item.title}</p>
-			        </Link>
+					<If condition={item.link.indexOf('http')!=-1}>
+						<a className="weui-grid bg-white" href={item.link} key = {index}>
+				            <div className="weui-grid__icon">
+				            	<Icon name={item.icon}/>
+				            </div>
+				            <p className="weui-grid__label">{item.title}</p>
+				        </a>
+					<Else />
+						<Link className="weui-grid bg-white" to={item.link} key = {index}>
+				            <div className="weui-grid__icon">
+				            	<Icon name={item.icon}/>
+				            </div>
+				            <p className="weui-grid__label">{item.title}</p>
+				        </Link>
+					</If>
 		        </For>
 		    </div>
 		)

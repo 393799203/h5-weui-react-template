@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { hashHistory, Router, IndexRoute, IndexRedirect, Redirect, Route, Link } from 'react-router'
+import { browserHistory, Router, IndexRoute, IndexRedirect, Redirect, Route, Link } from 'react-router'
 import FastClick from 'fastclick'
 
 
@@ -47,7 +47,7 @@ class App extends Component {
 }
 
 render((
-	<Router history={hashHistory}>
+	<Router history={ browserHistory }>
 		<Route path="/" component={App}>
 			<Route component={Layout}>
 				<IndexRedirect to="audit"/>

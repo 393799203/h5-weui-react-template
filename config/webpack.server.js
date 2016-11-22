@@ -1,25 +1,23 @@
 var path = require('path');
 var appConf = require('./app.conf');
-var proxyPaths = [
-	'user',
-	'expense'
-];
 var serverConf = {
 	contentBase: path.resolve(__dirname, '..'),
 	//progress:true,
 	devtool: 'eval-source-map',
 	hot: true,
 	inline: true,
-	proxy: {},
+	proxy: {
+		'/api/*' : {
+			target: appConf.proxy,
+			changeOrigin: true,
+			rewrite: function (req){
+	        	req.url = req.url.replace(/^\/api(.+)$/,'$1');
+	        }
+		}
+	},
 	stats: {
 		colors: true
 	}
 }
-proxyPaths.forEach(function(v){
-	serverConf.proxy['/'+v+'*'] = {
-		target: appConf.proxy,
-		changeOrigin: true
-	}
-});
 module.exports = serverConf;
 

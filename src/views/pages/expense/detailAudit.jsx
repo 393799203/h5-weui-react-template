@@ -24,7 +24,7 @@ export default class ExpenseDetail extends Component {
 
 	componentDidMount() {
 	 	Util.startLoading();
-		Ajax.get("/expense/request/detail", {id: this.props.params.id, updated: this.props.location.query.updated}).then((res)=>{
+		Ajax.get("/api/expense/request/detail", {id: this.props.params.id, updated: this.props.location.query.updated}).then((res)=>{
 			this.state.detailInfo = res.data;
 			if(this.props.route.path.indexOf('audit') != -1){
 				this.state.showAudit = true;
@@ -57,7 +57,7 @@ export default class ExpenseDetail extends Component {
 		Util.startLoading();
 		this.state.disabled = true;
 		this.setState(this.state);
-		Ajax.post("/expense/request/audit",postData).then((res)=>{
+		Ajax.post("/api/expense/request/audit",postData).then((res)=>{
 			Util.sendNotification("reload");
 			Util.success("操作成功", 1500, ()=>{
 				Util.popWindow("#/audit");

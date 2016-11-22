@@ -34,9 +34,9 @@ export default class ExpenseDetail extends Component {
 		}, (err) => {
 			setTimeout(()=>{
 				if(this.props.route.path.indexOf('audit') != -1){
-					Util.popWindow("#/audit");
+					Util.popWindow("#/audit/expense");
 				}else{
-					Util.popWindow("#/audited");
+					Util.popWindow("#/audited/expense");
 				}
 			}, 3000)
 		});     

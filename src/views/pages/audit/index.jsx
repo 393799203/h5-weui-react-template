@@ -5,9 +5,11 @@ import Grid from 'components/grid';
 import Ajax from 'core/ajax';
 import Util from 'core/util';
 
-export default class auditList extends Component {
+export default class auditGrid extends Component {
 	state = {
-		
+		gridDataList: [
+			{"title":"报销","link":"/audit/expense","icon":"expense"}
+		]
 	}
 
 	constructor(props){
@@ -23,7 +25,7 @@ export default class auditList extends Component {
 
 	render() {
 		return (
-			<Grid />
+			<Grid gridDataList={this.state.gridDataList}/>
 		)
 	}
 }

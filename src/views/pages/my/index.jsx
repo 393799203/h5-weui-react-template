@@ -5,22 +5,16 @@ import Grid from 'components/grid';
 import Ajax from 'core/ajax';
 import Util from 'core/util';
 
-export default class auditedGrid extends Component {
+export default class myGrid extends Component {
 	state = {
 		gridDataList: [
-			{"title":"报销","link":"/audited/expense","icon":"expense"}
+			{"title":"报销","link":"/my/expense","icon":"expense"}
 		]
 	}
 
 	constructor(props){
 		super(props);
-		Util.setTitle("已审批");
-	}
-
-	componentDidMount() {
-		document.addEventListener("reload", function(data){
-			window.location.reload();
-		}, false);
+		Util.setTitle("我的");
 	}
 
 	render() {

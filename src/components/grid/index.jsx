@@ -4,7 +4,7 @@ import Icon from 'components/icon';
 
 export default class Grid extends Component {
 	static defaultProps = {
-		gridDataList : [{"title":"报销","link":"/audit/expense","icon":"expense"}]
+		gridDataList : []
 	}
 	
 	state = {}

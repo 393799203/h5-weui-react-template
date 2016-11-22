@@ -25,8 +25,10 @@ import Layout from 'views/layout/Layout';
 import ApplyMenu from 'views/pages/apply/menu';
 import auditGrid from 'views/pages/audit';
 import AuditList from 'views/pages/audit/list';
-import AuditedList from 'views/pages/audited';
-import Application from 'views/pages/application';
+import auditedGrid from 'views/pages/audited';
+import AuditedList from 'views/pages/audited/list';
+import myGrid from 'views/pages/my';
+import myList from 'views/pages/my/list';
 
 //报销
 import ExpenseApply from 'views/pages/expense/apply';
@@ -53,8 +55,14 @@ render((
 					<IndexRoute component={auditGrid} />
 					<Route path="expense" component={ AuditList } />
 				</Route>
-				<Route path="audited" component={ AuditedList } />
-				<Route path="application" component={ Application } />
+				<Route path="audited">
+					<IndexRoute component={auditedGrid} />
+					<Route path="expense" component={ AuditedList } />
+				</Route>
+				<Route path="my">
+					<IndexRoute component={myGrid} />
+					<Route path="expense" component={ myList } />
+				</Route>
 				<Route path="expense">
 					<Route path="apply" component={ ExpenseApply } />
 					<Route path="detail(/:id)" component={ ExpenseDetailAudit } />

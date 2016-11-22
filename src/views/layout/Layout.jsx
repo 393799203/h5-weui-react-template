@@ -9,9 +9,9 @@ export default class Layout extends Component {
 	state = {
 		tabBarDataList: [
 			/* {link: "/", tabName: "申请", icon: "waiting-circle", key: "apply"}, */
-			{link: "/audit", tabName: "待审批", icon: "waiting-circle", key: "audit"},
-			{link: "/audited", tabName: "已审批", icon: "info-circle", key: "audited"},
-			{link: "/application", tabName: "我的", icon: "circle", key: "application"} 
+			{link: "/audit", tabName: "待审批", icon: "audit", key: "audit"},
+			{link: "/audited", tabName: "已审批", icon: "audited", key: "audited"},
+			{link: "/my", tabName: "我的", icon: "my", key: "my"} 
 		],
 		activeMenu: ""
 	}

@@ -5,10 +5,10 @@ import ListView from 'components/listView';
 import Ajax from 'core/ajax';
 import Util from 'core/util';
 
-export default class auditList extends Component {
+export default class Application extends Component {
 	state = {
 		params: {
-			"outlineType": 3
+			"outlineType": 1
 		},
 		ajaxUrl: "/api/expense/request/getMyOutlineList",
 		isEnd: false,
@@ -18,22 +18,8 @@ export default class auditList extends Component {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("报销审批");
+		Util.setTitle("我的待审批报销");
 		this.onRefresh();
-	}
-
-	claim = (item) => {
-		let postData = {
-			applyId: item.id, 
-			taskId: item.currTask.taskId,
-			taskUpdated: item.currTask.updated,
-			updated: item.updated
-		}
-		Ajax.post("/api/expense/request/claim", postData).then((res) => {
-			item.updated = res.data.updated;
-			item.viewerOperateItems = item.viewerOperateItems.replace("20", "21");
-			this.setState(this.state);
-		})
 	}
 
 	getList = () => {
@@ -58,12 +44,6 @@ export default class auditList extends Component {
 		return this.getList(this.state.currentIndex); 
 	}
 
-	componentDidMount() {
-		document.addEventListener("reload", function(data){
-			window.location.reload();
-		}, false);
-	}
-
 	render() {
 		let params = this.state.params;
 		let ajaxUrl = this.state.ajaxUrl;
@@ -80,8 +60,8 @@ export default class auditList extends Component {
 			            </div>
 			            <div className="weui-form-preview__bd">
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">申请人</label>
-			                    <span className="weui-form-preview__value">{!item.agentNickName? item.applyNickName: `${item.applyNickName}(${item.agentNickName}代申请)`}</span>
+			                    <label className="weui-form-preview__label">状态</label>
+			                    <span className="weui-form-preview__value">{item.currTask.assigneeNickName? `${item.statusName}(${item.currTask.assigneeNickName})`: `${item.statusName}`}</span>
 			                </div>
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">类型</label>

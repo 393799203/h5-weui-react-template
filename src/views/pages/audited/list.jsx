@@ -5,10 +5,10 @@ import ListView from 'components/listView';
 import Ajax from 'core/ajax';
 import Util from 'core/util';
 
-export default class Application extends Component {
+export default class auditList extends Component {
 	state = {
 		params: {
-			"outlineType": 1
+			"outlineType": 4
 		},
 		ajaxUrl: "/api/expense/request/getMyOutlineList",
 		isEnd: false,
@@ -18,7 +18,7 @@ export default class Application extends Component {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("我的报销-待审批");
+		Util.setTitle("报销审批");
 		this.onRefresh();
 	}
 
@@ -44,6 +44,12 @@ export default class Application extends Component {
 		return this.getList(this.state.currentIndex); 
 	}
 
+	componentDidMount() {
+		document.addEventListener("reload", function(data){
+			window.location.reload();
+		}, false);
+	}
+
 	render() {
 		let params = this.state.params;
 		let ajaxUrl = this.state.ajaxUrl;
@@ -60,8 +66,8 @@ export default class Application extends Component {
 			            </div>
 			            <div className="weui-form-preview__bd">
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">状态</label>
-			                    <span className="weui-form-preview__value">{item.currTask.assigneeNickName? `${item.statusName}(${item.currTask.assigneeNickName})`: `${item.statusName}`}</span>
+			                    <label className="weui-form-preview__label">申请人</label>
+			                    <span className="weui-form-preview__value">{!item.agentNickName? item.applyNickName: `${item.applyNickName}(${item.agentNickName}代申请)`}</span>
 			                </div>
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">类型</label>

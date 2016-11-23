@@ -8,7 +8,7 @@ import Util from 'core/util';
 export default class auditedGrid extends Component {
 	state = {
 		gridDataList: [
-			{"title":"报销","link":"http://erp.meili-inc.com/#/app/expense/audits","icon":"custom-expense"},
+			{"title":"报销","link":"/audited/expense","icon":"custom-expense"},
 			{"title":"差旅","link":"https://erp.meili-inc.com/h5/index.html?_TTtoolbar=0#!/","icon":"custom-travel"},
 			{"title":"借还款","link":"http://erp.meili-inc.com/#/app/loan/audits","icon":"custom-lend"},
 			{"title":"付款","link":"http://erp.meili-inc.com/#/app/payment/audits","icon":"custom-payment"},

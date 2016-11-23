@@ -10,7 +10,7 @@ export default class Application extends Component {
 		params: {
 			"outlineType": 1
 		},
-		ajaxUrl: "/api/expense/request/getMyOutlineList",
+		ajaxUrl: "/expense/request/getMyOutlineList",
 		isEnd: false,
 		list: [],
 		currentIndex: 1

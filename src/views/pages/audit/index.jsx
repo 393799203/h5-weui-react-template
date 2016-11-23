@@ -10,13 +10,13 @@ export default class auditGrid extends Component {
 		gridDataList: [
 			{"title":"报销","link":"/audit/expense","icon":"custom-expense"},
 			{"title":"差旅","link":"https://erp.meili-inc.com/h5/index.html?_TTtoolbar=0#!/","icon":"custom-travel"},
-			{"title":"借还款","link":"http://erp.meili-inc.com/#/app/loan/audits","icon":"custom-lend"},
-			{"title":"付款","link":"http://erp.meili-inc.com/#/app/payment/audits","icon":"custom-payment"},
-			{"title":"一般花钱","link":"http://erp.meili-inc.com/#/app/feePreApply/commonFeeAudit/","icon":"custom-spend"},
-			{"title":"活动花钱","link":"http://erp.meili-inc.com/#/app/feePreApply/activityFeeAudits","icon":"custom-activity"},
-			{"title":"合同","link":"http://erp.meili-inc.com/#/app/contract/audits","icon":"custom-contract"},
-			{"title":"资产","link":"http://erp.meili-inc.com/#/app/asset/audits","icon":"custom-assets"},
-			{"title":"花钱调整","link":"http://erp.meili-inc.com/#/app/feePreApply/myMoneyAjustAudit","icon":"custom-adjust"}
+			{"title":"借还款","link":"https://erp.meili-inc.com/#/app/loan/audits","icon":"custom-lend"},
+			{"title":"付款","link":"https://erp.meili-inc.com/#/app/payment/audits","icon":"custom-payment"},
+			{"title":"一般花钱","link":"https://erp.meili-inc.com/#/app/feePreApply/commonFeeAudit/","icon":"custom-spend"},
+			{"title":"活动花钱","link":"https://erp.meili-inc.com/#/app/feePreApply/activityFeeAudits","icon":"custom-activity"},
+			{"title":"合同","link":"https://erp.meili-inc.com/#/app/contract/audits","icon":"custom-contract"},
+			{"title":"资产","link":"https://erp.meili-inc.com/#/app/asset/audits","icon":"custom-assets"},
+			{"title":"花钱调整","link":"https://erp.meili-inc.com/#/app/feePreApply/myMoneyAjustAudit","icon":"custom-adjust"}
 		]
 	}
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from  'react-router'
+import { browserHistory, Link } from  'react-router'
 import classNames from 'classnames'
 import Icon from 'components/icon'
 import Util from 'core/util';
@@ -33,6 +33,11 @@ export default class Layout extends Component {
 				Util.pushWindow(target.href);
 				return false;
 			}
+			if( target && target.nodeName.toLocaleLowerCase() == "a" && target.className.indexOf('replaceHistory') != -1 ) {
+				e.preventDefault();
+				browserHistory.replace(target.href);
+				return false;
+			}
 			return true;
 		},false);  
 	}
@@ -56,7 +61,7 @@ export default class Layout extends Component {
 		            </div>
 		            <div className="weui-tabbar">
 		            	<For each = "item" of = { tabBarDataList } index = "index">
-			                <Link to={item.link} className={classNames({"weui-bar__item_on":this.state.activeMenu==item.key},"weui-tabbar__item")} key={item.key}>
+			                <Link to={item.link} className={classNames({"weui-bar__item_on":this.state.activeMenu==item.key},"weui-tabbar__item replaceHistory")} key={item.key}>
 			                	<Icon name={item.icon} className="weui-tabbar__icon"/>
 			                    <p className="weui-tabbar__label">{item.tabName}</p>
 			                </Link>

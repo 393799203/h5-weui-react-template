@@ -29,6 +29,9 @@ a{
 .iScrollVerticalScrollbar.iScrollLoneScrollbar{
   width: 4px!important;
 }
+.weui-tabbar__icon,.weui-tabbar__label{
+  pointer-events: none
+}
 [class^="weui-icon-"]:before,
 [class*=" weui-icon-"]:before {
   display: inline-block;

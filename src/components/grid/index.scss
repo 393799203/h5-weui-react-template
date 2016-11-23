@@ -1,6 +1,10 @@
 .weui-grid__icon{
+	pointer-events: none;
 	[class^="weui-icon-"],[class*="weui-icon-"]:before{
 		font-size: 28px;
 		color: #09BB07;
 	}
+}
+.weui-grid__label{
+	pointer-events: none;
 }

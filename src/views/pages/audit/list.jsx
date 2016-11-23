@@ -44,7 +44,8 @@ export default class auditList extends Component {
 			this.state.currentIndex ++;
 			this.setState(this.state);
 		}, err => {
-			Util.error(err);
+			this.state.isEnd = true;
+			this.setState(this.state);
 		});
 	}
 

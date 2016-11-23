@@ -15,7 +15,7 @@ export default class Grid extends Component {
 			<div className="weui-grids">
 				<For each = "item" of = { gridDataList } index = "index">
 					<If condition={item.link.indexOf('http')!=-1}>
-						<a className="weui-grid bg-white" href={item.link} key = {index}>
+						<a className="weui-grid bg-white pushWindow" href={item.link} key = {index}>
 				            <div className="weui-grid__icon">
 				            	<Icon name={item.icon}/>
 				            </div>

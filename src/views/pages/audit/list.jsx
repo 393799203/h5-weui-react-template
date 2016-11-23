@@ -10,7 +10,7 @@ export default class auditList extends Component {
 		params: {
 			"outlineType": 3
 		},
-		ajaxUrl: "/api/expense/request/getMyOutlineList",
+		ajaxUrl: "/expense/request/getMyOutlineList",
 		isEnd: false,
 		list: [],
 		currentIndex: 1
@@ -29,7 +29,7 @@ export default class auditList extends Component {
 			taskUpdated: item.currTask.updated,
 			updated: item.updated
 		}
-		Ajax.post("/api/expense/request/claim", postData).then((res) => {
+		Ajax.post("/expense/request/claim", postData).then((res) => {
 			item.updated = res.data.updated;
 			item.viewerOperateItems = item.viewerOperateItems.replace("20", "21");
 			this.setState(this.state);

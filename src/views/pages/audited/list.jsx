@@ -10,7 +10,7 @@ export default class auditList extends Component {
 		params: {
 			"outlineType": 4
 		},
-		ajaxUrl: "/api/expense/request/getMyOutlineList",
+		ajaxUrl: "/expense/request/getMyOutlineList",
 		isEnd: false,
 		list: [],
 		currentIndex: 1

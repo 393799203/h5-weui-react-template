@@ -20,6 +20,9 @@ export default class Grid extends Component {
 				            	<Icon name={item.icon}/>
 				            </div>
 				            <p className="weui-grid__label">{item.title}</p>
+				            <If condition={item.number}>
+				            	<div className="weui-grid__number">{item.number}</div>
+				            </If>
 				        </a>
 					<Else />
 						<Link className="weui-grid bg-white" to={item.link} key = {index}>
@@ -27,6 +30,9 @@ export default class Grid extends Component {
 				            	<Icon name={item.icon}/>
 				            </div>
 				            <p className="weui-grid__label">{item.title}</p>
+				            <If condition={item.number}>
+				            	<div className="weui-grid__number">{item.number}</div>
+				            </If>
 				        </Link>
 					</If>
 		        </For>

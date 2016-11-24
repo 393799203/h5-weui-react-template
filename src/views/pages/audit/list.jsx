@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from  'react-router'
+import { browserHistory, Link } from  'react-router'
 import classnames from 'classnames';
 import ListView from 'components/listView';
 import Ajax from 'core/ajax';
@@ -47,7 +47,7 @@ export default class auditList extends Component {
 			this.state.isEnd = true;
 			this.setState(this.state);
 			setTimeout(() => {
-				
+				browserHistory.goBack();
 			}, 2000);
 		});
 	}

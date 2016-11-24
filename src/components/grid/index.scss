@@ -8,3 +8,17 @@
 .weui-grid__label{
 	pointer-events: none;
 }
+.weui-grid__number{
+	pointer-events: none;
+	position: absolute;
+	color: #fff;
+	background: #ff0000;
+	padding: 3px 5px;
+	border-radius: 10px;
+	line-height: 14px;
+	height: 20px;
+	min-width: 20px;
+	text-align: center;
+	top: 10px;
+	left: 82px;
+}

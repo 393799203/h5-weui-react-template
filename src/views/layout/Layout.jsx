@@ -35,7 +35,7 @@ export default class Layout extends Component {
 			}
 			if( target && target.nodeName.toLocaleLowerCase() == "a" && target.className.indexOf('replaceHistory') != -1 ) {
 				e.preventDefault();
-				browserHistory.replace(target.href);
+				browserHistory.replace(target.getAttribute("href"));
 				return false;
 			}
 			return true;

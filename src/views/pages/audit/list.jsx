@@ -46,6 +46,9 @@ export default class auditList extends Component {
 		}, err => {
 			this.state.isEnd = true;
 			this.setState(this.state);
+			setTimeout(() => {
+				
+			}, 2000);
 		});
 	}
 

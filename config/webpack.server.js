@@ -10,9 +10,9 @@ var serverConf = {
 		'/api/*' : {
 			target: appConf.proxy,
 			changeOrigin: true,
-			rewrite: function (req){
+			/* rewrite: function (req){
 	        	req.url = req.url.replace(/^\/api(.+)$/,'$1');
-	        }
+	        } */
 		}
 	},
 	stats: {

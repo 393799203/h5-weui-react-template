@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import classnames from 'classnames';
+import BaseComponent from 'core/baseComponent'
 import Ajax from 'core/ajax';
 import Util from 'core/util';
 
-export default class ExpenseDetail extends Component {
+export default class ExpenseDetail extends BaseComponent {
 	
 	state = {
 		detailInfo: {

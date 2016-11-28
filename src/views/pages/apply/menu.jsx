@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import BaseComponent from 'core/baseComponent'
 import Grid from 'components/grid'
 
-export default class Menu extends Component {
+export default class Menu extends BaseComponent {
 	state = {
 		gridDataList : [
 			{link: "/expense/apply", title: "报销申请", icon: "waiting-circle"},

@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { browserHistory, Link } from  'react-router'
 import classnames from 'classnames';
 import ListView from 'components/listView';
+import BaseComponent from 'core/baseComponent'
 import Ajax from 'core/ajax';
 import Util from 'core/util';
 
-export default class Application extends Component {
+export default class Application extends BaseComponent {
 	state = {
 		params: {
 			"outlineType": 1

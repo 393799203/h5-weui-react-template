@@ -11,6 +11,7 @@ import Es6ObjectAssign from 'es6-object-assign';
 import 'core/polyfill';
 
 Es6Promise.polyfill();
+Es6ObjectAssign.polyfill();
 FastClick.attach(document.body)
 
 
@@ -33,6 +34,7 @@ import myList from 'views/pages/my/list';
 //报销
 import ExpenseApply from 'views/pages/expense/apply';
 import ExpenseDetailAudit from 'views/pages/expense/detailAudit';
+		
 
 //app 根组件
 class App extends Component {

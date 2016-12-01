@@ -7,6 +7,7 @@ import Ajax from 'core/ajax';
 import Util from 'core/util';
 
 export default class auditGrid extends BaseComponent {
+
 	state = {
 		gridDataList: [
 			{"title":"报销","link":"/audit/expense","icon":"custom-expense"},

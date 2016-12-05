@@ -3,23 +3,35 @@ import { browserHistory, Link } from  'react-router'
 import classNames from 'classnames'
 import Icon from 'components/icon'
 import Util from 'core/util';
-const ActiveArray = [];
 
 export default class Layout extends Component {
+	tabBarDataListHome = [
+		{link: "/", tabName: "类目", icon: "custom-audit", key: "category"},
+		{link: "/query", tabName: "查询", icon: "custom-audit", key: "query"}
+	]
+
+	tabBarDataListAudit = [
+		/* {link: "/", tabName: "申请", icon: "waiting-circle", key: "apply"}, */
+		{link: "/audit", tabName: "待审批", icon: "custom-audit", key: "audit"},
+		{link: "/audited", tabName: "已审批", icon: "custom-audited", key: "audited"},
+		{link: "/my", tabName: "我的", icon: "custom-my", key: "my"} 
+	]
+
 	state = {
-		tabBarDataList: [
-			/* {link: "/", tabName: "申请", icon: "waiting-circle", key: "apply"}, */
-			{link: "/audit", tabName: "待审批", icon: "custom-audit", key: "audit"},
-			{link: "/audited", tabName: "已审批", icon: "custom-audited", key: "audited"},
-			{link: "/my", tabName: "我的", icon: "custom-my", key: "my"} 
-		],
+		activeArray: [],
+		tabBarDataList: [],
 		activeMenu: ""
 	}
 
 	constructor(props){
 		super(props);
+		if(!props.location.pathname.split('/')[1] || props.location.pathname.split('/')[1] == 'query'){
+			this.state.tabBarDataList = this.tabBarDataListHome;
+		}else{
+			this.state.tabBarDataList = this.tabBarDataListAudit;
+		}
 		this.state.tabBarDataList.map((item, index)=>{
-			ActiveArray.push(item.key);
+			this.state.activeArray.push(item.key);
 		});
 		this.selectActiveMenu(props);
 	}
@@ -43,17 +55,27 @@ export default class Layout extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		this.state.activeArray = [];
+		if(!nextProps.location.pathname.split('/')[1] || nextProps.location.pathname.split('/')[1] == 'query'){
+			this.state.tabBarDataList = this.tabBarDataListHome;
+		}else{
+			this.state.tabBarDataList = this.tabBarDataListAudit;
+		}
+		this.state.tabBarDataList.map((item, index)=>{
+			this.state.activeArray.push(item.key);
+		});
 	    this.selectActiveMenu(nextProps);
 	}
 
 	selectActiveMenu = (props) => {
-		this.state.activeMenu = props.location.pathname.split('/')[1] || "apply";
+		this.state.activeMenu = props.location.pathname.split('/')[1] || 'category';
 	}
 
 	render() {
 		let { children } = this.props;
 		let tabBarDataList = this.state.tabBarDataList;
-		if(ActiveArray.includes(this.state.activeMenu)){
+		console.log(this.state.activeArray, this.state.activeMenu)
+		if(this.state.activeArray.includes(this.state.activeMenu)){
 			return (
 				<div className="weui-tab">
 					<div className="weui-tab__panel">

@@ -23,6 +23,7 @@ import 'style/app.scss';//样式引入
 //*************页面引入**************
 import Layout from 'views/layout/Layout';
 
+import Category from 'views/pages/home';
 import ApplyMenu from 'views/pages/apply/menu';
 import auditGrid from 'views/pages/audit';
 import AuditList from 'views/pages/audit/list';
@@ -52,17 +53,16 @@ render((
 	<Router history={ browserHistory }>
 		<Route path="/" component={App}>
 			<Route component={Layout}>
-				<IndexRedirect to="audit"/>
+				<IndexRoute component={ Category }/>
+				<Route path="query">
+				</Route>
 				<Route path="audit">
-					<IndexRoute component={auditGrid} />
 					<Route path="expense" component={ AuditList } />
 				</Route>
 				<Route path="audited">
-					<IndexRoute component={auditedGrid} />
 					<Route path="expense" component={ AuditedList } />
 				</Route>
 				<Route path="my">
-					<IndexRoute component={myGrid} />
 					<Route path="expense" component={ myList } />
 				</Route>
 				<Route path="expense">

@@ -6,8 +6,8 @@ import Util from 'core/util';
 
 export default class Layout extends Component {
 	tabBarDataListHome = [
-		{link: "/", tabName: "类目", icon: "custom-audit", key: "category"},
-		{link: "/query", tabName: "查询", icon: "custom-audit", key: "query"}
+		{link: "/", tabName: "类目", icon: "custom-category", key: "category"},
+		{link: "/query", tabName: "查询", icon: "custom-query", key: "query"}
 	]
 
 	tabBarDataListAudit = [

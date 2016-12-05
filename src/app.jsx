@@ -58,6 +58,14 @@ render((
 					<Route path="detail/:id" component={ ExpenseDetailAudit } />
 					<Route path="audit/:id" component={ ExpenseDetailAudit } />
 				</Route>
+				<Route path="fund">
+					<Route path="apply" component={ ExpenseApply } />
+					<Route path="audit" component={ AuditList } />
+					<Route path="audited" component={ AuditedList } />
+					<Route path="my" component={ myList } />
+					<Route path="detail/:id" component={ ExpenseDetailAudit } />
+					<Route path="audit/:id" component={ ExpenseDetailAudit } />
+				</Route>
 			</Route>
 		</Route>
 	</Router>

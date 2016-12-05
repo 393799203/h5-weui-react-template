@@ -22,17 +22,12 @@ import 'style/app.scss';//样式引入
 
 //*************页面引入**************
 import Layout from 'views/layout/Layout';
-
 import Category from 'views/pages/home';
-import ApplyMenu from 'views/pages/apply/menu';
-import auditGrid from 'views/pages/audit';
-import AuditList from 'views/pages/audit/list';
-import auditedGrid from 'views/pages/audited';
-import AuditedList from 'views/pages/audited/list';
-import myGrid from 'views/pages/my';
-import myList from 'views/pages/my/list';
 
 //报销
+import AuditList from 'views/pages/expense/auditList';
+import AuditedList from 'views/pages/expense/auditedList';
+import myList from 'views/pages/expense/myList';
 import ExpenseApply from 'views/pages/expense/apply';
 import ExpenseDetailAudit from 'views/pages/expense/detailAudit';
 		
@@ -54,23 +49,15 @@ render((
 		<Route path="/" component={App}>
 			<Route component={Layout}>
 				<IndexRoute component={ Category }/>
-				<Route path="query">
-				</Route>
-				<Route path="audit">
-					<Route path="expense" component={ AuditList } />
-				</Route>
-				<Route path="audited">
-					<Route path="expense" component={ AuditedList } />
-				</Route>
-				<Route path="my">
-					<Route path="expense" component={ myList } />
-				</Route>
+				<Route path="query" />
 				<Route path="expense">
 					<Route path="apply" component={ ExpenseApply } />
-					<Route path="detail(/:id)" component={ ExpenseDetailAudit } />
-					<Route path="audit(/:id)" component={ ExpenseDetailAudit } />
+					<Route path="audit" component={ AuditList } />
+					<Route path="audited" component={ AuditedList } />
+					<Route path="my" component={ myList } />
+					<Route path="detail/:id" component={ ExpenseDetailAudit } />
+					<Route path="audit/:id" component={ ExpenseDetailAudit } />
 				</Route>
-				<Redirect from="*" to="/audit" />
 			</Route>
 		</Route>
 	</Router>

@@ -12,9 +12,9 @@ export default class Layout extends Component {
 
 	tabBarDataListAudit = [
 		/* {link: "/", tabName: "申请", icon: "waiting-circle", key: "apply"}, */
-		{link: "/audit", tabName: "待审批", icon: "custom-audit", key: "audit"},
-		{link: "/audited", tabName: "已审批", icon: "custom-audited", key: "audited"},
-		{link: "/my", tabName: "我的", icon: "custom-my", key: "my"} 
+		{link: "audit", tabName: "待审批", icon: "custom-audit", key: "audit"},
+		{link: "audited", tabName: "已审批", icon: "custom-audited", key: "audited"},
+		{link: "my", tabName: "我的", icon: "custom-my", key: "my"} 
 	]
 
 	state = {
@@ -55,6 +55,7 @@ export default class Layout extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		console.log(nextProps);
 		this.state.activeArray = [];
 		if(!nextProps.location.pathname.split('/')[1] || nextProps.location.pathname.split('/')[1] == 'query'){
 			this.state.tabBarDataList = this.tabBarDataListHome;
@@ -68,11 +69,13 @@ export default class Layout extends Component {
 	}
 
 	selectActiveMenu = (props) => {
-		this.state.activeMenu = props.location.pathname.split('/')[1] || 'category';
+		let pathArr = props.location.pathname.split('/');
+		this.state.activeMenu = pathArr[pathArr.length - 1] || 'category';
 	}
 
 	render() {
 		let { children } = this.props;
+		console.log(this.props)
 		let tabBarDataList = this.state.tabBarDataList;
 		console.log(this.state.activeArray, this.state.activeMenu)
 		if(this.state.activeArray.includes(this.state.activeMenu)){
@@ -83,7 +86,7 @@ export default class Layout extends Component {
 		            </div>
 		            <div className="weui-tabbar">
 		            	<For each = "item" of = { tabBarDataList } index = "index">
-			                <Link to={item.link} className={classNames({"weui-bar__item_on":this.state.activeMenu==item.key},"weui-tabbar__item replaceHistory")} key={item.key}>
+			                <Link to={ Util.absoluteUrl(item.link) } className={classNames({"weui-bar__item_on":this.state.activeMenu==item.key},"weui-tabbar__item replaceHistory")} key={item.key}>
 			                	<Icon name={item.icon} className="weui-tabbar__icon"/>
 			                    <p className="weui-tabbar__label">{item.tabName}</p>
 			                </Link>

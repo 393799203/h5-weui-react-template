@@ -85,6 +85,16 @@ class UtilBase{
 		return styArr.join(";");
 	}
 
+	absoluteUrl = ( url ) => {
+		if( url.indexOf('/') == -1 || url.indexOf('/') > 0 ){
+			let pathArr = document.location.pathname.split('/');
+			pathArr[pathArr.length - 1] = url;
+			return pathArr.join('/')
+		}else{
+			return url;
+		}
+	}
+
 	money = (s, n) => {
 		n = n > 0 && n <= 20 ? n : 2;
 	    s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";  

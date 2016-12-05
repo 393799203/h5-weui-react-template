@@ -7,7 +7,9 @@ import Util from 'core/util';
 export default class Layout extends Component {
 	tabBarDataListHome = [
 		{link: "/", tabName: "类目", icon: "custom-category", key: "category"},
+		/*
 		{link: "/query", tabName: "查询", icon: "custom-query", key: "query"}
+		*/
 	]
 
 	tabBarDataListAudit = [
@@ -77,7 +79,7 @@ export default class Layout extends Component {
 		let { children } = this.props;
 		let tabBarDataList = this.state.tabBarDataList;
 		console.log(this.state.activeArray, this.state.activeMenu)
-		if(this.state.activeArray.includes(this.state.activeMenu)){
+		if(this.state.activeArray.includes(this.state.activeMenu) && this.state.activeArray.length > 1){
 			return (
 				<div className="weui-tab">
 					<div className="weui-tab__panel">

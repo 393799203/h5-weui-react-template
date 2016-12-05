@@ -25,7 +25,7 @@ export default class Grid extends Component {
 				            </If>
 				        </a>
 					<Else />
-						<Link className="weui-grid bg-white" to={item.link} key = {index}>
+						<Link className="weui-grid bg-white pushWindow" to={item.link} key = {index}>
 				            <div className="weui-grid__icon">
 				            	<Icon name={item.icon}/>
 				            </div>

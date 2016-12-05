@@ -35,9 +35,9 @@ export default class ExpenseDetail extends BaseComponent {
 		}, (err) => {
 			setTimeout(()=>{
 				if(this.props.route.path.indexOf('audit') != -1){
-					Util.popWindow("/audit/expense");
+					Util.popWindow("/expense/audit");
 				}else{
-					Util.popWindow("/audited/expense");
+					Util.popWindow("/expense/audited");
 				}
 			}, 2000)
 		});     
@@ -61,7 +61,7 @@ export default class ExpenseDetail extends BaseComponent {
 		Ajax.post("/api/expense/request/audit",postData).then((res)=>{
 			Util.sendNotification("reload");
 			Util.success("操作成功", 1500, ()=>{
-				Util.popWindow("/audit");
+				Util.popWindow("/expense/audit");
 			});
 		}, (err) => {
 			this.state.disabled = false;

@@ -34,7 +34,7 @@ export default class Application extends BaseComponent {
 			this.state.isEnd = true;
 			this.setState(this.state);
 			setTimeout(() => {
-				browserHistory.goBack();
+				Util.popWindow('/');
 			}, 2000);
 		});
 	}

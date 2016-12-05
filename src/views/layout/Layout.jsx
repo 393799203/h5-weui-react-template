@@ -75,7 +75,6 @@ export default class Layout extends Component {
 
 	render() {
 		let { children } = this.props;
-		console.log(this.props)
 		let tabBarDataList = this.state.tabBarDataList;
 		console.log(this.state.activeArray, this.state.activeMenu)
 		if(this.state.activeArray.includes(this.state.activeMenu)){

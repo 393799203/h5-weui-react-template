@@ -23,13 +23,17 @@ import 'style/app.scss';//样式引入
 //*************页面引入**************
 import Layout from 'views/layout/Layout';
 import Category from 'views/pages/home';
-
 //报销
-import AuditList from 'views/pages/expense/auditList';
-import AuditedList from 'views/pages/expense/auditedList';
-import myList from 'views/pages/expense/myList';
+import ExpenseAuditList from 'views/pages/expense/auditList';
+import ExpenseAuditedList from 'views/pages/expense/auditedList';
+import ExpenseMyList from 'views/pages/expense/myList';
 import ExpenseApply from 'views/pages/expense/apply';
 import ExpenseDetailAudit from 'views/pages/expense/detailAudit';
+//资金
+import FundAuditList from 'views/pages/fund/auditList';
+import FundAuditedList from 'views/pages/fund/auditedList';
+import FundMyList from 'views/pages/fund/myList';
+import FundDetailAudit from 'views/pages/fund/detailAudit';
 		
 
 //app 根组件
@@ -52,19 +56,18 @@ render((
 				<Route path="query" />
 				<Route path="expense">
 					<Route path="apply" component={ ExpenseApply } />
-					<Route path="audit" component={ AuditList } />
-					<Route path="audited" component={ AuditedList } />
-					<Route path="my" component={ myList } />
+					<Route path="audit" component={ ExpenseAuditList } />
+					<Route path="audited" component={ ExpenseAuditedList } />
+					<Route path="my" component={ ExpenseMyList } />
 					<Route path="detail/:id" component={ ExpenseDetailAudit } />
 					<Route path="audit/:id" component={ ExpenseDetailAudit } />
 				</Route>
 				<Route path="fund">
-					<Route path="apply" component={ ExpenseApply } />
-					<Route path="audit" component={ AuditList } />
-					<Route path="audited" component={ AuditedList } />
-					<Route path="my" component={ myList } />
-					<Route path="detail/:id" component={ ExpenseDetailAudit } />
-					<Route path="audit/:id" component={ ExpenseDetailAudit } />
+					<Route path="audit" component={ FundAuditList } />
+					<Route path="audited" component={ FundAuditedList } />
+					<Route path="my" component={ FundMyList } />
+					<Route path="detail/:id" component={ FundDetailAudit } />
+					<Route path="audit/:id" component={ FundDetailAudit } />
 				</Route>
 			</Route>
 		</Route>

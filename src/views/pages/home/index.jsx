@@ -19,7 +19,7 @@ export default class Category extends BaseComponent {
 			{"title":"合同","link":"https://erp.meili-inc.com/#/app/contract/audits","icon":"custom-contract"},
 			{"title":"资产","link":"https://erp.meili-inc.com/#/app/asset/audits","icon":"custom-assets"},
 			{"title":"花钱调整","link":"https://erp.meili-inc.com/#/app/feePreApply/myMoneyAjustAudit","icon":"custom-adjust"},
-			{"title":"资金","link":"/fund/audit","icon":"custom-fund"}
+			{"title":"资金调拨","link":"/fund/audit","icon":"custom-fund"}
 		]
 	}
 
@@ -40,7 +40,7 @@ export default class Category extends BaseComponent {
 			this.state.gridDataList[6].number = res.data.contractNum;
 			this.state.gridDataList[7].number = res.data.assetNum;
 			this.state.gridDataList[8].number = res.data.amtAdjustNum;
-			this.state.gridDataList[9].number = 0;
+			this.state.gridDataList[9].number = res.data.allocationNum;
 			this.setState(this.state);
 		});
 		document.addEventListener("reload", function(data){

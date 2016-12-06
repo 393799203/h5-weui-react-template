@@ -11,7 +11,7 @@ export default class Application extends BaseComponent {
 		params: {
 			"outlineType": 1
 		},
-		ajaxUrl: "/api/expense/request/getMyOutlineList",
+		ajaxUrl: "/api/fund/transfer/getMyOutlineList",
 		isEnd: false,
 		list: [],
 		currentIndex: 1
@@ -19,7 +19,7 @@ export default class Application extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("我的待审批报销");
+		Util.setTitle("我的资金申请");
 		this.onRefresh();
 	}
 
@@ -59,29 +59,30 @@ export default class Application extends BaseComponent {
 					<div className={ classnames("weui-form-preview", {"m-b-n": index == list.length - 1 })} key = {index}>
 			            <div className="weui-form-preview__hd">
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">报销金额</label>
-			                    <em className="weui-form-preview__value">¥{Util.money(item.amt)}</em>
+			                    <label className="weui-form-preview__label">申请金额</label>
+			                    <em className="weui-form-preview__value">¥{Util.money(item.transferAmount)}</em>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__bd">
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">状态</label>
-			                    <span className="weui-form-preview__value">{item.currTask.assigneeNickName? `${item.statusName}(${item.currTask.assigneeNickName})`: `${item.statusName}`}</span>
+			                    <label className="weui-form-preview__label">申请人</label>
+			                    <span className="weui-form-preview__value">{ item.applyNickname }</span>
 			                </div>
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">类型</label>
-			                    <span className="weui-form-preview__value">{item.typeName}</span>
+			                    <label className="weui-form-preview__label">申请类型</label>
+			                    <span className="weui-form-preview__value">{item.transferTypeDesc}</span>
+			                </div>
+			                <div className="weui-form-preview__item">
+			                    <label className="weui-form-preview__label">申请公司</label>
+			                    <span className="weui-form-preview__value">{item.companyName}</span>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">
-			            <If condition={item.viewerOperateItems.indexOf(20)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" onClick={this.claim.bind(this, item)}>认领</Link>
-			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(21)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/audit/${item.id}` , query: { "updated": item.updated}}}>审核</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/fund/audit/${item.id}` , query: { "updated": item.updated}}}>审核</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(10)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/detail/${item.id}` , query: { "updated": item.updated}}}>查看</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/fund/detail/${item.id}` , query: { "updated": item.updated}}}>查看</Link>
 			            </If>
 			            </div>
 			        </div>

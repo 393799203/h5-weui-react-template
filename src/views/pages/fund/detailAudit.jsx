@@ -45,17 +45,18 @@ export default class ExpenseDetail extends BaseComponent {
 		let currTask = Object.assign({},this.state.detailInfo.currTask, {action: status, comment: this.refs.auditTextarea.value})
 		let postData = {
 			id: this.state.detailInfo.id,
-			applyWorkId: this.state.detailInfo.applyWorkId,
-			type: this.state.detailInfo.type,
+			updated: this.state.detailInfo.updated,
+			status: this.state.detailInfo.status,
+			applyType: this.state.detailInfo.applyType,
 			currTask: currTask
 		}
 		Util.startLoading();
 		this.state.disabled = true;
 		this.setState(this.state);
-		Ajax.post("/api/expense/request/audit",postData).then((res)=>{
+		Ajax.post("/api/fund/transfer/audit",postData).then((res)=>{
 			Util.sendNotification("reload");
 			Util.success("操作成功", 1500, ()=>{
-				Util.popWindow("/expense/audit");
+				Util.popWindow("/fund/audit");
 			});
 		}, (err) => {
 			this.state.disabled = false;

@@ -90,13 +90,13 @@ export default class ExpenseDetail extends BaseComponent {
 		                <div className="weui-cell__bd">
 		                    <p>申请金额</p>
 		                </div>
-		                <div className="weui-cell__ft">{Util.money(detailInfo.transferAmount)}</div>
+		                <div className="weui-cell__ft">{Util.money(detailInfo.transferAmount || 0)}</div>
 		            </div>
 		            <div className="weui-cell">
 		                <div className="weui-cell__bd">
 		                    <p>目前剩余额度</p>
 		                </div>
-		                <div className="weui-cell__ft">{Util.money(detailInfo.residualAmount)}</div>
+		                <div className="weui-cell__ft">{Util.money(detailInfo.residualAmount || 0)}</div>
 		            </div>
 		            <div className="weui-cell">
 		                <div className="weui-cell__bd">
@@ -142,7 +142,7 @@ export default class ExpenseDetail extends BaseComponent {
 			                </div>
 			            <Else />
 			                <div className="weui-cell__bd">
-			                    <p>报销说明</p>
+			                    <p>背景说明</p>
 			                </div>
 			                <div className="weui-cell__ft">{detailInfo.backgroundDesc}</div>
 			            </If>
@@ -155,7 +155,7 @@ export default class ExpenseDetail extends BaseComponent {
 			                </div>
 			            <Else />
 			                <div className="weui-cell__bd">
-			                    <p>报销说明</p>
+			                    <p>使用计划/投资评估</p>
 			                </div>
 			                <div className="weui-cell__ft">{detailInfo.assessmentDesc}</div>
 			            </If>

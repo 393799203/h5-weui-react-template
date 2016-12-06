@@ -47,7 +47,6 @@ export default class ExpenseDetail extends BaseComponent {
 			id: this.state.detailInfo.id,
 			updated: this.state.detailInfo.updated,
 			status: this.state.detailInfo.status,
-			applyType: this.state.detailInfo.applyType,
 			currTask: currTask
 		}
 		Util.startLoading();

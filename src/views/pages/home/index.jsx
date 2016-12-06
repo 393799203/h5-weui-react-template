@@ -11,7 +11,6 @@ export default class Category extends BaseComponent {
 	state = {
 		gridDataList: [
 			{"title":"报销","link":"/expense/audit","icon":"custom-expense"},
-			{"title":"资金","link":"/fund/audit","icon":"custom-fund"},
 			{"title":"差旅","link":"https://erp.meili-inc.com/h5/index.html?_TTtoolbar=0#!/","icon":"custom-travel"},
 			{"title":"借还款","link":"https://erp.meili-inc.com/#/app/loan/audits","icon":"custom-lend"},
 			{"title":"付款","link":"https://erp.meili-inc.com/#/app/payment/audits","icon":"custom-payment"},
@@ -19,7 +18,8 @@ export default class Category extends BaseComponent {
 			{"title":"活动花钱","link":"https://erp.meili-inc.com/#/app/feePreApply/activityFeeAudits","icon":"custom-activity"},
 			{"title":"合同","link":"https://erp.meili-inc.com/#/app/contract/audits","icon":"custom-contract"},
 			{"title":"资产","link":"https://erp.meili-inc.com/#/app/asset/audits","icon":"custom-assets"},
-			{"title":"花钱调整","link":"https://erp.meili-inc.com/#/app/feePreApply/myMoneyAjustAudit","icon":"custom-adjust"}
+			{"title":"花钱调整","link":"https://erp.meili-inc.com/#/app/feePreApply/myMoneyAjustAudit","icon":"custom-adjust"},
+			{"title":"资金","link":"/fund/audit","icon":"custom-fund"}
 		]
 	}
 
@@ -32,15 +32,15 @@ export default class Category extends BaseComponent {
 		Ajax.get('api/workflow/getModuleAuditCount',{}).then(res => {
 			/* TODO 忍不下去的。。。 */
 			this.state.gridDataList[0].number = res.data.expenseNum;
-			this.state.gridDataList[1].number = 0;
-			this.state.gridDataList[2].number = res.data.tripNum;
-			this.state.gridDataList[3].number = res.data.loanRepayNum;
-			this.state.gridDataList[4].number = res.data.paymentNum;
-			this.state.gridDataList[5].number = res.data.purchaseNum;
-			this.state.gridDataList[6].number = res.data.activityNum;
-			this.state.gridDataList[7].number = res.data.contractNum;
-			this.state.gridDataList[8].number = res.data.assetNum;
-			this.state.gridDataList[9].number = res.data.amtAdjustNum;
+			this.state.gridDataList[1].number = res.data.tripNum;
+			this.state.gridDataList[2].number = res.data.loanRepayNum;
+			this.state.gridDataList[3].number = res.data.paymentNum;
+			this.state.gridDataList[4].number = res.data.purchaseNum;
+			this.state.gridDataList[5].number = res.data.activityNum;
+			this.state.gridDataList[6].number = res.data.contractNum;
+			this.state.gridDataList[7].number = res.data.assetNum;
+			this.state.gridDataList[8].number = res.data.amtAdjustNum;
+			this.state.gridDataList[9].number = 0;
 			this.setState(this.state);
 		});
 		document.addEventListener("reload", function(data){

@@ -69,6 +69,7 @@ render((
 					<Route path="detail/:id" component={ FundDetailAudit } />
 					<Route path="audit/:id" component={ FundDetailAudit } />
 				</Route>
+				<Redirect from="*" to="/" />
 			</Route>
 		</Route>
 	</Router>

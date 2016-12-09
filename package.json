@@ -66,6 +66,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "echarts": "^3.3.2",
     "es6-object-assign": "^1.0.3",
     "es6-promise": "^3.2.1",
     "fastclick": "^1.0.6",

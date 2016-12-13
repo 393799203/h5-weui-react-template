@@ -36,7 +36,11 @@ import FundAuditedList from 'views/pages/fund/auditedList';
 import FundMyList from 'views/pages/fund/myList';
 import FundDetailAudit from 'views/pages/fund/detailAudit';
 import FundDailyReport from 'views/pages/fund/dailyReport';
-		
+//预算
+import BudgetAuditList from 'views/pages/fund/auditList';
+import BudgetAuditedList from 'views/pages/fund/auditedList';
+import BudgetMyList from 'views/pages/fund/myList';
+import BudgetDetailAudit from 'views/pages/fund/detailAudit';
 
 //app 根组件
 class App extends Component {
@@ -71,6 +75,13 @@ render((
 					<Route path="detail/:id" component={ FundDetailAudit } />
 					<Route path="audit/:id" component={ FundDetailAudit } />
 					<Route path="dailyReport" component={ FundDailyReport } />
+				</Route>
+				<Route path="budget">
+					<Route path="audit" component={ BudgetAuditList } />
+					<Route path="audited" component={ BudgetAuditedList } />
+					<Route path="my" component={ BudgetMyList } />
+					<Route path="detail/:id" component={ BudgetDetailAudit } />
+					<Route path="audit/:id" component={ BudgetDetailAudit } />
 				</Route>
 				<Redirect from="*" to="/" />
 			</Route>

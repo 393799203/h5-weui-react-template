@@ -37,10 +37,10 @@ import FundMyList from 'views/pages/fund/myList';
 import FundDetailAudit from 'views/pages/fund/detailAudit';
 import FundDailyReport from 'views/pages/fund/dailyReport';
 //预算
-import BudgetAuditList from 'views/pages/fund/auditList';
-import BudgetAuditedList from 'views/pages/fund/auditedList';
-import BudgetMyList from 'views/pages/fund/myList';
-import BudgetDetailAudit from 'views/pages/fund/detailAudit';
+import BudgetAuditList from 'views/pages/budget/auditList';
+import BudgetAuditedList from 'views/pages/budget/auditedList';
+import BudgetMyList from 'views/pages/budget/myList';
+import BudgetDetailAudit from 'views/pages/budget/detailAudit';
 
 //app 根组件
 class App extends Component {

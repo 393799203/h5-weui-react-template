@@ -11,7 +11,7 @@ export default class Application extends BaseComponent {
 		params: {
 			"outlineType": 1
 		},
-		ajaxUrl: "/api/fund/transfer/getMyOutlineList",
+		ajaxUrl: "/api/budget/budgetrequest/getMyOutlineList",
 		isEnd: false,
 		list: [],
 		currentIndex: 1
@@ -19,7 +19,7 @@ export default class Application extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("我的资金申请");
+		Util.setTitle("我的预算申请");
 		this.onRefresh();
 	}
 

@@ -11,7 +11,7 @@ export default class auditList extends BaseComponent {
 		params: {
 			"outlineType": 3
 		},
-		ajaxUrl: "/api/fund/transfer/getMyOutlineList",
+		ajaxUrl: "/api/budget/budgetrequest/getMyOutlineList",
 		isEnd: false,
 		list: [],
 		currentIndex: 1
@@ -19,7 +19,7 @@ export default class auditList extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("资金审批");
+		Util.setTitle("预算审批");
 		this.onRefresh();
 	}
 

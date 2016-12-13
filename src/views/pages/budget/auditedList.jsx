@@ -11,7 +11,7 @@ export default class auditList extends BaseComponent {
 		params: {
 			"outlineType": 4
 		},
-		ajaxUrl: "/api/fund/transfer/getMyOutlineList",
+		ajaxUrl: "/api/budget/budgetrequest/getMyOutlineList",
 		isEnd: false,
 		list: [],
 		currentIndex: 1

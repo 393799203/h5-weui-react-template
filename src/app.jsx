@@ -23,6 +23,7 @@ import 'style/app.scss';//样式引入
 //*************页面引入**************
 import Layout from 'views/layout/Layout';
 import Category from 'views/pages/home';
+import QueryCategory from 'views/pages/home/queryCategory';
 //报销
 import ExpenseAuditList from 'views/pages/expense/auditList';
 import ExpenseAuditedList from 'views/pages/expense/auditedList';
@@ -34,6 +35,7 @@ import FundAuditList from 'views/pages/fund/auditList';
 import FundAuditedList from 'views/pages/fund/auditedList';
 import FundMyList from 'views/pages/fund/myList';
 import FundDetailAudit from 'views/pages/fund/detailAudit';
+import FundDailyReport from 'views/pages/fund/dailyReport';
 		
 
 //app 根组件
@@ -53,7 +55,7 @@ render((
 		<Route path="/" component={App}>
 			<Route component={Layout}>
 				<IndexRoute component={ Category }/>
-				<Route path="query" />
+				<Route path="query" component={ QueryCategory }/>
 				<Route path="expense">
 					<Route path="apply" component={ ExpenseApply } />
 					<Route path="audit" component={ ExpenseAuditList } />
@@ -68,6 +70,7 @@ render((
 					<Route path="my" component={ FundMyList } />
 					<Route path="detail/:id" component={ FundDetailAudit } />
 					<Route path="audit/:id" component={ FundDetailAudit } />
+					<Route path="dailyReport" component={ FundDailyReport } />
 				</Route>
 				<Redirect from="*" to="/" />
 			</Route>

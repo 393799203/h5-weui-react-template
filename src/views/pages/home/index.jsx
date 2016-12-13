@@ -42,6 +42,7 @@ export default class Category extends BaseComponent {
 			this.state.gridDataList[7].number = res.data.assetNum;
 			this.state.gridDataList[8].number = res.data.amtAdjustNum;
 			this.state.gridDataList[9].number = res.data.allocationNum;
+			this.state.gridDataList[10].number = res.data.budgetNum;
 			this.setState(this.state);
 		});
 		document.addEventListener("reload", function(data){

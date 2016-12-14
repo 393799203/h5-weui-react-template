@@ -43,12 +43,7 @@ export default class ExpenseDetail extends BaseComponent {
 			return;
 		}
 		let currTask = Object.assign({},this.state.detailInfo.currTask, {action: status, comment: this.refs.auditTextarea.value})
-		let postData = {
-			id: this.state.detailInfo.id,
-			updated: this.state.detailInfo.updated,
-			status: this.state.detailInfo.status,
-			currTask: currTask
-		}
+		let postData = Object.assign({}, this.state.detailInfo, {currTask: currTask});
 		Util.startLoading();
 		this.state.disabled = true;
 		this.setState(this.state);

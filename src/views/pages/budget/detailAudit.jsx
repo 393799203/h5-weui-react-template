@@ -107,7 +107,7 @@ export default class ExpenseDetail extends BaseComponent {
 				                </div>
 				                <div className="weui-cell__bd">
 				                    <div className="pull-left m-l-sm">费用合计</div>
-				                    <div className="pull-right text-light">￥{Util.money(item.totalSum)}</div>
+				                    <div className="pull-right text-light">￥{Util.money(item.q1Sum + item.q2Sum + item.q3Sum + item.q4Sum)}</div>
 				                </div>
 				            </div>
 				            <div className="weui-cell">
@@ -129,6 +129,19 @@ export default class ExpenseDetail extends BaseComponent {
 				                    <div className="pull-left m-l-sm">Q4</div>
 				                    <div className="pull-right text-light">￥{Util.money(item.q4Sum)}</div>
 				                </div>
+				            </div>
+				            <div className="weui-cell">
+				            	<If condition={ item.comments && item.comments.length > 15 }>
+					            	<div className="weui-media-box_text">
+					                    <h4 className="weui-media-box__title">备注</h4>
+					                    <p className="weui-media-box__desc text-normal">{item.remark}</p>
+					                </div>
+					            <Else />
+					                <div className="weui-cell__bd">
+					                    <p>备注</p>
+					                </div>
+					                <div className="weui-cell__ft">{item.remark}</div>
+					            </If>
 				            </div>
 			        	</div>
 		            </For>

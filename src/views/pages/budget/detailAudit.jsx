@@ -14,12 +14,12 @@ export default class ExpenseDetail extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("资金申请详情");
+		Util.setTitle("预算详情");
 	}
 
 	componentDidMount() {
 	 	Util.startLoading();
-		Ajax.get("/api/fund/transfer/detail", {id: this.props.params.id, updated: this.props.location.query.updated}).then((res)=>{
+		Ajax.get("/api/budget/budgetrequest/detail", {id: this.props.params.id, updated: this.props.location.query.updated}).then((res)=>{
 			this.state.detailInfo = res.data;
 			if(this.props.route.path.indexOf('audit') != -1){
 				this.state.showAudit = true;
@@ -29,9 +29,9 @@ export default class ExpenseDetail extends BaseComponent {
 		}, (err) => {
 			setTimeout(()=>{
 				if(this.props.route.path.indexOf('audit') != -1){
-					Util.popWindow("/fund/audit");
+					Util.popWindow("/budget/audit");
 				}else{
-					Util.popWindow("/fund/audited");
+					Util.popWindow("/budget/audited");
 				}
 			}, 2000)
 		});     
@@ -55,7 +55,7 @@ export default class ExpenseDetail extends BaseComponent {
 		Ajax.post("/api/fund/transfer/audit",postData).then((res)=>{
 			Util.sendNotification("reload");
 			Util.success("操作成功", 1500, ()=>{
-				Util.popWindow("/fund/audit");
+				Util.popWindow("/budget/audit");
 			});
 		}, (err) => {
 			this.state.disabled = false;

@@ -65,8 +65,8 @@ export default class auditList extends BaseComponent {
 					<div className={ classnames("weui-form-preview", {"m-b-n": index == list.length - 1 })} key = {index}>
 			            <div className="weui-form-preview__hd">
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">申请金额</label>
-			                    <em className="weui-form-preview__value">¥{Util.money(item.transferAmount)}</em>
+			                    <label className="weui-form-preview__label">编制时间</label>
+			                    <em className="weui-form-preview__value">{item.budgetYear}-{item.budgetQuarter}</em>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__bd">
@@ -76,11 +76,11 @@ export default class auditList extends BaseComponent {
 			                </div>
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">申请类型</label>
-			                    <span className="weui-form-preview__value">{item.transferTypeDesc}</span>
+			                    <span className="weui-form-preview__value">{item.isChangedDesc}</span>
 			                </div>
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">申请公司</label>
-			                    <span className="weui-form-preview__value">{item.companyName}</span>
+			                    <label className="weui-form-preview__label">预算部门</label>
+			                    <span className="weui-form-preview__value">{item.deptName}</span>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">

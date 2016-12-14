@@ -79,61 +79,25 @@ export default class ExpenseDetail extends BaseComponent {
 		            </div>
 		            <div className="weui-cell">
 		                <div className="weui-cell__bd">
+		                    <p>申请部门</p>
+		                </div>
+		                <div className="weui-cell__ft">{detailInfo.deptName}</div>
+		            </div>
+		            <div className="weui-cell">
+		                <div className="weui-cell__bd">
+		                    <p>编制时间</p>
+		                </div>
+		                <div className="weui-cell__ft">{detailInfo.budgetYear}-{detailInfo.budgetQuarter}</div>
+		            </div>
+		            <div className="weui-cell">
+		                <div className="weui-cell__bd">
 		                    <p>申请时间</p>
 		                </div>
 		                <div className="weui-cell__ft">{detailInfo.applyDate}</div>
 		            </div>
 		        </div>
-	        	<div className="weui-cells__title">资金调拨信息</div>
+	        	<div className="weui-cells__title">详细预算信息</div>
 	        	<div className="weui-cells m-t-n bg-white">
-			        <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>申请金额</p>
-		                </div>
-		                <div className="weui-cell__ft">{Util.money(detailInfo.transferAmount || 0)}</div>
-		            </div>
-		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>目前剩余额度</p>
-		                </div>
-		                <div className="weui-cell__ft">{Util.money(detailInfo.residualAmount || 0)}</div>
-		            </div>
-		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>币种</p>
-		                </div>
-		                <div className="weui-cell__ft">{detailInfo.currencyDesc}</div>
-		            </div>
-		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>费用归属公司</p>
-		                </div>
-		                <div className="weui-cell__ft">{detailInfo.companyName}</div>
-		            </div>
-		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>申请类型</p>
-		                </div>
-		                <div className="weui-cell__ft">{detailInfo.transferTypeDesc}</div>
-		            </div>
-		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>期望到位日期</p>
-		                </div>
-		                <div className="weui-cell__ft">{detailInfo.expectDueDate}</div>
-		            </div>
-		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>预计还款日期</p>
-		                </div>
-		                <div className="weui-cell__ft">{detailInfo.estReturnDate}</div>
-		            </div>
-		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>贷款期限(月)</p>
-		                </div>
-		                <div className="weui-cell__ft">{detailInfo.loanPeriod}</div>
-		            </div>
 		            <div className="weui-cell">
 			            <If condition={ detailInfo.backgroundDesc && detailInfo.backgroundDesc.length > 15 }>
 			            	<div className="weui-media-box_text">

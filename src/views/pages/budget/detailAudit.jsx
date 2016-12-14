@@ -97,33 +97,41 @@ export default class ExpenseDetail extends BaseComponent {
 		            </div>
 		        </div>
 	        	<div className="weui-cells__title">详细预算信息</div>
-	        	<div className="weui-cells m-t-n bg-white">
-		            <div className="weui-cell">
-			            <If condition={ detailInfo.backgroundDesc && detailInfo.backgroundDesc.length > 15 }>
-			            	<div className="weui-media-box_text">
-			                    <h4 className="weui-media-box__title">背景说明</h4>
-			                    <p className="weui-media-box__desc text-normal">{detailInfo.backgroundDesc}</p>
-			                </div>
-			            <Else />
-			                <div className="weui-cell__bd">
-			                    <p>背景说明</p>
-			                </div>
-			                <div className="weui-cell__ft">{detailInfo.backgroundDesc}</div>
-			            </If>
-		            </div>
-		            <div className="weui-cell">
-			            <If condition={ detailInfo.assessmentDesc && detailInfo.assessmentDesc.length > 15 }>
-			            	<div className="weui-media-box_text">
-			                    <h4 className="weui-media-box__title">使用计划/投资评估</h4>
-			                    <p className="weui-media-box__desc text-normal">{detailInfo.assessmentDesc}</p>
-			                </div>
-			            <Else />
-			                <div className="weui-cell__bd">
-			                    <p>使用计划/投资评估</p>
-			                </div>
-			                <div className="weui-cell__ft">{detailInfo.assessmentDesc}</div>
-			            </If>
-		            </div>	
+	        	<div className="weui-cells m-t-n">
+		        	<For each = "item" of = { detailInfo.budgetRequestItemFormList || [] } index = "index">
+			        	<div className={classnames("bg-white", {"m-b": index != detailInfo.budgetRequestItemFormList.length -1})} key={ index }>
+			        		<div className="weui-cell">
+				                <div className="weui-cell__bd">
+				                    <div className="pull-left">预算类目</div>
+				                    <div className="pull-right m-r-sm text-light">{item.budgetCategoryName}</div>
+				                </div>
+				                <div className="weui-cell__bd">
+				                    <div className="pull-left m-l-sm">费用合计</div>
+				                    <div className="pull-right text-light">￥{Util.money(item.totalSum)}</div>
+				                </div>
+				            </div>
+				            <div className="weui-cell">
+				            	<div className="weui-cell__bd">
+				                    <div className="pull-left">Q1</div>
+				                    <div className="pull-right m-r-sm text-light">￥{Util.money(item.q1Sum)}</div>
+				                </div>
+				                <div className="weui-cell__bd">
+				                    <div className="pull-left m-l-sm">Q2</div>
+				                    <div className="pull-right text-light">￥{Util.money(item.q2Sum)}</div>
+				                </div>
+				            </div>
+				            <div className="weui-cell">
+				            	<div className="weui-cell__bd">
+				                    <div className="pull-left">Q3</div>
+				                    <div className="pull-right m-r-sm text-light">￥{Util.money(item.q3Sum)}</div>
+				                </div>
+				                <div className="weui-cell__bd">
+				                    <div className="pull-left m-l-sm">Q4</div>
+				                    <div className="pull-right text-light">￥{Util.money(item.q4Sum)}</div>
+				                </div>
+				            </div>
+			        	</div>
+		            </For>
 		        </div>
 		        <If condition = {showAudit}>
 			        <div className="auditArea">

@@ -52,7 +52,7 @@ export default class ExpenseDetail extends BaseComponent {
 		Util.startLoading();
 		this.state.disabled = true;
 		this.setState(this.state);
-		Ajax.post("/api/fund/transfer/audit",postData).then((res)=>{
+		Ajax.post("/api/budget/budgetrequest/audit",postData).then((res)=>{
 			Util.sendNotification("reload");
 			Util.success("操作成功", 1500, ()=>{
 				Util.popWindow("/budget/audit");

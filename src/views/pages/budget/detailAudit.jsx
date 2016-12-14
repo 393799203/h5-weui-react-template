@@ -162,7 +162,7 @@ export default class ExpenseDetail extends BaseComponent {
 					                </div>
 					            </div>
 					            <div className="weui-cell">
-					            	<If condition={ detailInfo.budgetYear > currentYear ||(detailInfo.budgetYear == currentYear && detailInfo.budgetQuarter <= "Q1") }>
+					            	<If condition={ detailInfo.budgetQuarter <= "Q1" }>
 						            	<div className="weui-cell__bd">
 						                    <div className="pull-left">Q1调整前</div>
 						                    <div className="pull-right m-r-sm text-light">￥{Util.money(item.q1Sum)}</div>
@@ -179,7 +179,7 @@ export default class ExpenseDetail extends BaseComponent {
 						            </If>
 					            </div>
 					            <div className="weui-cell">
-					            	<If condition={ detailInfo.budgetYear > currentYear || ( detailInfo.budgetYear == currentYear && detailInfo.budgetQuarter <= "Q2") }>
+					            	<If condition={ detailInfo.budgetQuarter <= "Q2" }>
 						            	<div className="weui-cell__bd">
 						                    <div className="pull-left">Q2调整前</div>
 						                    <div className="pull-right m-r-sm text-light">￥{Util.money(item.q2Sum)}</div>
@@ -196,7 +196,7 @@ export default class ExpenseDetail extends BaseComponent {
 						            </If>
 					            </div>
 					            <div className="weui-cell">
-					            	<If condition={ detailInfo.budgetYear > currentYear || ( detailInfo.budgetYear == currentYear && detailInfo.budgetQuarter <= "Q3") }>
+					            	<If condition={ detailInfo.budgetQuarter <= "Q3" }>
 						            	<div className="weui-cell__bd">
 						                    <div className="pull-left">Q3调整前</div>
 						                    <div className="pull-right m-r-sm text-light">￥{Util.money(item.q3Sum)}</div>
@@ -213,7 +213,7 @@ export default class ExpenseDetail extends BaseComponent {
 						            </If>
 					            </div>
 					            <div className="weui-cell">
-					            	<If condition={ detailInfo.budgetYear > currentYear || ( detailInfo.budgetYear == currentYear && detailInfo.budgetQuarter <= "Q4") }>
+					            	<If condition={ detailInfo.budgetQuarter <= "Q4" }>
 						            	<div className="weui-cell__bd">
 						                    <div className="pull-left">Q4调整前</div>
 						                    <div className="pull-right m-r-sm text-light">￥{Util.money(item.q4Sum)}</div>

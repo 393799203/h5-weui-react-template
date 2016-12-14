@@ -7,7 +7,6 @@ import Util from 'core/util';
 export default class ExpenseDetail extends BaseComponent {
 	
 	state = {
-		currentYear: parseInt(moment().format('YYYY')),
 		detailInfo: {},
 		showAudit: false,
 		disabled: false

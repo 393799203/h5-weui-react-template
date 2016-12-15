@@ -9,7 +9,7 @@ import Util from 'core/util';
 export default class Application extends BaseComponent {
 	state = {
 		params: {
-			"outlineType": 1
+			"outlineType": 12
 		},
 		ajaxUrl: "/api/expense/request/getMyOutlineList",
 		isEnd: false,
@@ -19,7 +19,7 @@ export default class Application extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("我的待审批报销");
+		Util.setTitle("我的报销");
 		this.onRefresh();
 	}
 

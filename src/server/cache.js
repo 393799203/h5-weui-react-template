@@ -13,7 +13,7 @@ import BaseServer from 'core/baseServer';
 let cacheList = {a:1};
 class CacheServer extends BaseServer{
 	//缓存请求Promise
-	update(name, promise, expire){
+	update = (name, promise, expire) => {
 		let cached = this.get(name);
 		let cache = {
 			name: name,
@@ -35,16 +35,15 @@ class CacheServer extends BaseServer{
 		cacheList[name] = cache;
 	}
 	//获得请求的promise
-	get(name){
-		return cacheList[name]? cacheList[name].promise : null;
-	}
+	get = (name) => cacheList[name]? cacheList[name].promise : null
+	
 	//删除缓存的promise
-	del(name){
+	del = (name) => {
 		clearTimeout(cacheList[name].timeout)
 		delete(cacheList[name])
 	}
 	//清空缓存队列
-	clean(){
+	clean = () => {
 		Object.keys(cacheList).forEach((i)=>{
 			this.del(i)
 		})

@@ -3,17 +3,11 @@ import Toast from 'components/toast';
 //基础工具
 class UtilBase{
 
-	static isTT = () => {
-		return UtilBase.inUserAgent(/tt4ios|tt4android/);
-	}
+	static isTT = () => UtilBase.inUserAgent(/tt4ios|tt4android/)
 
-	static inUserAgent = (val) => {
-        return val.test(navigator.userAgent.toLowerCase());
-    }
-
-    trim = (str) => {
-		return str.replace(/(^\s*)|(\s*$)/g,"");
-	}
+	static inUserAgent = (val) => val.test(navigator.userAgent.toLowerCase())
+    
+    trim = (str) => str.replace(/(^\s*)|(\s*$)/g,"")
 
 	param = (data, key, encode) => {
 	  if( data == null ) return '';
@@ -107,9 +101,7 @@ class UtilBase{
 	    return t.split("").reverse().join("") + "." + r;
 	}
 
-	rmoney = (s) => {   
-	   return parseFloat(s.replace(/[^\d\.-]/g, ""));   
-	} 
+	rmoney = (s) => parseFloat(s.replace(/[^\d\.-]/g, ""))
 
 	toast = (type, msg, duration, callback) => {
 		Toast.open({
@@ -166,33 +158,20 @@ class H5Util extends UtilBase{
 //容器部分
 class Hybrid extends UtilBase{
 
-	setTitle = (title, color) => {
-        return hdp.do('tt.navigation.setTitle', title, color)
-    }
+	setTitle = (title, color) => hdp.do('tt.navigation.setTitle', title, color)
+  
+    setRightItemTitle = (title, color) => hdp.do('tt.navigation.rightitem.setTitle', title, color)
+    
+	pushWindow = (url) => hdp.do('tt.navigation.pushWindow', url)
 
-    setRightItemTitle = (title, color) => {
-        return hdp.do('tt.navigation.rightitem.setTitle', title, color)
-    }
+	popWindow = (url) => hdp.do('tt.navigation.popWindow')
 
-	pushWindow = (url) => {
-		return hdp.do('tt.navigation.pushWindow', url);
-	}
+	removeNotification = (name) => hdp.do('tt.notification.removeNotification', name)
 
-	popWindow = (url) => {
-		return hdp.do('tt.navigation.popWindow');
-	}
+    sendNotification = (name, data) => hdp.do('tt.notification.sendNotification', name, data)
 
-	removeNotification = (name) => {
-        return hdp.do('tt.notification.removeNotification', name)
-    }
-
-    sendNotification = (name, data) => {
-        return hdp.do('tt.notification.sendNotification', name, data)
-    }
-
-    registerNotification = (name) => {
-        return hdp.do('tt.notification.registerNotification', name)
-    }
+    registerNotification = (name) => hdp.do('tt.notification.registerNotification', name)
+    
 }
 
 let isTT = window.hasOwnProperty("hdp") && UtilBase.isTT();

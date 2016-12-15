@@ -6,9 +6,8 @@ const noop = () => {}
 
 class Ajax{
 
-	reject = (response) => {
-		return Promise.reject(response);
-	}
+	reject = (response) => Promise.reject(response)
+	
 
 	statusVerify = (response) => {
 		if(response.status >= 200 && response.status < 300 ){

@@ -60,7 +60,7 @@ export default class Application extends BaseComponent {
 			            <div className="weui-form-preview__hd">
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">编制时间</label>
-			                    <em className="weui-form-preview__value">{item.budgetYear}-{item.budgetQuarter}</em>
+			                    <em className="weui-form-preview__value">{item.budgetYear}{item.budgetQuarter}</em>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__bd">

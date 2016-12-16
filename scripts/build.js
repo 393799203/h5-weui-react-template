@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 
 var exists = require('fs').existsSync;
-var gulp = require('gulp')
 var gutil = require('gulp-util')
-var open = require('gulp-open')
 var path = require('path');
 var webpack = require('webpack');
 

@@ -36,7 +36,6 @@
     "file-loader": "^0.8.4",
     "fs-extra": "^0.30.0",
     "gulp": "^3.9.0",
-    "gulp-open": "^1.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-svg-symbols": "^2.0.0",
     "gulp-util": "^3.0.7",

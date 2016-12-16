@@ -94,6 +94,10 @@ a{
   .weui-form-preview__hd, .weui-form-preview__bd{
     padding: 5px 15px;
   }
+  .weui-form-preview__value{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
   .weui-form-preview__ft{
     line-height: 3em;
   }

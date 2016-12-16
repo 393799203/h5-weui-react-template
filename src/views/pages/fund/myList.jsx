@@ -65,16 +65,16 @@ export default class Application extends BaseComponent {
 			            </div>
 			            <div className="weui-form-preview__bd">
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">申请人</label>
-			                    <span className="weui-form-preview__value">{ item.applyNickname }</span>
-			                </div>
-			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">申请类型</label>
 			                    <span className="weui-form-preview__value">{item.transferTypeDesc}</span>
 			                </div>
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">申请公司</label>
 			                    <span className="weui-form-preview__value">{item.companyName}</span>
+			                </div>
+			                <div className="weui-form-preview__item">
+			                    <label className="weui-form-preview__label">状态</label>
+			                    <span className="weui-form-preview__value">{item.currTask.assigneeNickName? `${item.statusName}(${item.currTask.assigneeNickName})`: `${item.statusName}`}</span>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">

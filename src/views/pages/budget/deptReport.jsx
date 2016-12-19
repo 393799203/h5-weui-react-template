@@ -61,7 +61,7 @@ export default class DeptReport extends BaseComponent {
 		                    <label htmlFor="dept" className="weui-label">部门</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="dept" value={params.deptId}>
+		                    <select className="weui-select" name="dept" value={params.deptId} onChange={ (e) => { params.deptId = e.target.value; this.getDetailList() }}>
 		                    	<For each = "item" of = { deptList } index = "index">
 		                    		<option value={ item.deptId } key={index}>{ item.deptName }</option>
 		                    	</For>
@@ -73,7 +73,7 @@ export default class DeptReport extends BaseComponent {
 		                    <label htmlFor="year" className="weui-label">年度</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="year" value={params.budgetYear}>
+		                    <select className="weui-select" name="year" value={params.budgetYear} onChange={ (e) => { params.budgetYear = e.target.value; this.getDetailList() }}>
 		                    	<For each = "item" of = { budgetYearList } index = "index">
 		                    		<option value={ item.itemKey } key={index}>{ item.itemValue }</option>
 		                    	</For>
@@ -85,7 +85,7 @@ export default class DeptReport extends BaseComponent {
 		                    <label htmlFor="quarter" className="weui-label">季度</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="quarter" value={params.budgetQuarter}>
+		                    <select className="weui-select" name="quarter" value={params.budgetQuarter} onChange={ (e) => { params.budgetQuarter = e.target.value; this.getDetailList() }}>
 		                    	<For each = "item" of = { budgetQuarterList } index = "index">
 		                    		<option value={ item.itemKey } key={index}>{ item.itemValue }</option>
 		                    	</For>

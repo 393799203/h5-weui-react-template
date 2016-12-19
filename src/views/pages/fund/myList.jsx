@@ -74,7 +74,7 @@ export default class Application extends BaseComponent {
 			                </div>
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">状态</label>
-			                    <span className="weui-form-preview__value">{item.currTask.assigneeNickName? `${item.statusName}(${item.currTask.assigneeNickName})`: `${item.statusName}`}</span>
+			                    <span className="weui-form-preview__value">{(item.currTask && item.currTask.assigneeNickName)? `${item.statusName}(${item.currTask.assigneeNickName})`: `${item.statusName}`}</span>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">

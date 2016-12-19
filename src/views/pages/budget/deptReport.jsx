@@ -10,7 +10,12 @@ export default class DeptReport extends BaseComponent {
 	state = {
 		deptList : [],
 		budgetYear: [],
-		budgetQuarter: []
+		budgetQuarter: [],
+		params: {
+			biz1thDeptId: "",
+			year: "",
+			quarter: ""
+		}
 	}
 
 	constructor(props){
@@ -21,10 +26,14 @@ export default class DeptReport extends BaseComponent {
 	componentDidMount() {
 		let allEnumMapsPromise = Global.getAllEnumData();
 		let deptListPromise = Global.getDept();
-		Promise.all([allEnumMapsPromise, deptListPromise]).then(res => {
+		let getCurrentUserPromise = Global.getCurrentUser();
+		Promise.all([allEnumMapsPromise, deptListPromise, getCurrentUserPromise]).then(res => {
 			this.state.budgetYear = res[0].data.map.budgetYear || [];
 			this.state.budgetQuarter = res[0].data.map.budgetQuarter || [];
 			this.state.deptList = res[1].data.list || [];
+			this.state.params.biz1thDeptId = res[2].data.biz1thDeptId;
+			this.state.params.year = moment().format('YYYY');
+			this.state.params.quarter = 'Q' + moment().quarter();
 			this.setState(this.state);
 		})
 		document.addEventListener("reload", function(data){
@@ -33,7 +42,7 @@ export default class DeptReport extends BaseComponent {
 	}
 
 	render() {
-		let { budgetYear, budgetQuarter, deptList } = this.state;
+		let { budgetYear, budgetQuarter, deptList, params } = this.state;
 		let budgetRequestItemShipDtoList = [];
 		return (
 			<div className="report">
@@ -44,7 +53,7 @@ export default class DeptReport extends BaseComponent {
 		                    <label htmlFor="dept" className="weui-label">部门</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="dept">
+		                    <select className="weui-select" name="dept" value={params.biz1thDeptId}>
 		                    	<For each = "item" of = { deptList } index = "index">
 		                    		<option value={ item.deptId } key={index}>{ item.deptName }</option>
 		                    	</For>
@@ -56,7 +65,7 @@ export default class DeptReport extends BaseComponent {
 		                    <label htmlFor="year" className="weui-label">年度</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="year">
+		                    <select className="weui-select" name="year" value={params.year}>
 		                    	<For each = "item" of = { budgetYear } index = "index">
 		                    		<option value={ item.itemKey } key={index}>{ item.itemValue }</option>
 		                    	</For>
@@ -68,7 +77,7 @@ export default class DeptReport extends BaseComponent {
 		                    <label htmlFor="quarter" className="weui-label">季度</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="quarter">
+		                    <select className="weui-select" name="quarter" value={params.quarter}>
 		                    	<For each = "item" of = { budgetQuarter } index = "index">
 		                    		<option value={ item.itemKey } key={index}>{ item.itemValue }</option>
 		                    	</For>

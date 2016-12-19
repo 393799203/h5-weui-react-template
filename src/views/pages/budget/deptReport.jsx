@@ -7,7 +7,9 @@ import Util from 'core/util';
 
 export default class DeptReport extends BaseComponent {
 	state = {
-		deptList : []
+		deptList : [],
+		budgetYear: [],
+		budgetQuarter: []
 	}
 
 	constructor(props){
@@ -16,9 +18,13 @@ export default class DeptReport extends BaseComponent {
 	}
 
 	componentDidMount() {
-		Ajax.get('/api/dept/getBiz1thDept',{}).then(res => {
-			this.state.deptList = res.data.list || [];
-			this.setState(this.state.deptList);
+		let deptListPromise = Ajax.get('/api/dept/getBiz1thDept',{});
+		let allEnumMapsPromise = Ajax.get('/api/enum/getAllEnumMaps',{});
+		Promise.all([allEnumMapsPromise, deptListPromise]).then(res => {
+			this.state.budgetYear = res[0].data.map.budgetYear || [];
+			this.state.budgetQuarter = res[0].data.map.budgetQuarter || [];
+			this.state.deptList = res[1].data.list || [];
+			this.setState(this.state);
 		})
 		document.addEventListener("reload", function(data){
 			window.location.reload();
@@ -26,7 +32,7 @@ export default class DeptReport extends BaseComponent {
 	}
 
 	render() {
-		let deptList = this.state.deptList;
+		let { budgetYear, budgetQuarter, deptList } = this.state;
 		let budgetRequestItemShipDtoList = [];
 		return (
 			<div className="report">
@@ -38,7 +44,6 @@ export default class DeptReport extends BaseComponent {
 		                </div>
 		                <div className="weui-cell__bd">
 		                    <select className="weui-select" name="dept">
-		                    	<option value="" key="">请选择</option>
 		                    	<For each = "item" of = { deptList } index = "index">
 		                    		<option value={ item.deptId } key={index}>{ item.deptName }</option>
 		                    	</For>
@@ -51,7 +56,9 @@ export default class DeptReport extends BaseComponent {
 		                </div>
 		                <div className="weui-cell__bd">
 		                    <select className="weui-select" name="year">
-		                    	<option value="" key="">请选择</option>
+		                    	<For each = "item" of = { budgetYear } index = "index">
+		                    		<option value={ item.itemKey } key={index}>{ item.itemValue }</option>
+		                    	</For>
 		                    </select>
 		                </div>
 		            </div>
@@ -61,7 +68,9 @@ export default class DeptReport extends BaseComponent {
 		                </div>
 		                <div className="weui-cell__bd">
 		                    <select className="weui-select" name="quarter">
-		                    	<option value="" key="">请选择</option>
+		                    	<For each = "item" of = { budgetQuarter } index = "index">
+		                    		<option value={ item.itemKey } key={index}>{ item.itemValue }</option>
+		                    	</For>
 		                    </select>
 		                </div>
 		            </div>

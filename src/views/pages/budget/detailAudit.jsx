@@ -83,7 +83,7 @@ export default class ExpenseDetail extends BaseComponent {
 		                <div className="weui-cell__bd">
 		                    <p>编制时间</p>
 		                </div>
-		                <div className="weui-cell__ft">{detailInfo.budgetYear}-{detailInfo.budgetQuarter}</div>
+		                <div className="weui-cell__ft">{detailInfo.budgetYear}{detailInfo.budgetQuarter}</div>
 		            </div>
 		            <div className="weui-cell">
 		                <div className="weui-cell__bd">

@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import BaseComponent from 'core/baseComponent'
 import Ajax from 'core/ajax';
 import Util from 'core/util';
+import Global from 'server/global';
 
 export default class DeptReport extends BaseComponent {
 	state = {
@@ -18,8 +19,8 @@ export default class DeptReport extends BaseComponent {
 	}
 
 	componentDidMount() {
-		let deptListPromise = Ajax.get('/api/dept/getBiz1thDept',{});
-		let allEnumMapsPromise = Ajax.get('/api/enum/getAllEnumMaps',{});
+		let allEnumMapsPromise = Global.getAllEnumData();
+		let deptListPromise = Global.getDept();
 		Promise.all([allEnumMapsPromise, deptListPromise]).then(res => {
 			this.state.budgetYear = res[0].data.map.budgetYear || [];
 			this.state.budgetQuarter = res[0].data.map.budgetQuarter || [];

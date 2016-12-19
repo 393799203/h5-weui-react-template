@@ -14,8 +14,10 @@ class Global extends BaseServer{
 	getAllRole = (data) => Ajax.getCache("/api/role/getAllRoles",data ,-1)
 
 	getAllLocation = (data) => Ajax.getCache("/api/location/getAllLoactions",data ,-1)
-
+	//含事业群和集团
 	getAllDept = (data) => Ajax.getCache("/api/dept/getAllBiz1thDept",data ,-1)
+	//不含事业群和集团
+	getDept = (data) => Ajax.getCache('/api/dept/getBiz1thDept', data, -1) 
 
 }
 export default new Global

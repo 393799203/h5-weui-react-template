@@ -45,6 +45,26 @@ export default class DeptReport extends BaseComponent {
 		                    </select>
 		                </div>
 		            </div>
+		            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
+		                <div className="weui-cell__hd">
+		                    <label htmlFor="year" className="weui-label">年度</label>
+		                </div>
+		                <div className="weui-cell__bd">
+		                    <select className="weui-select" name="year">
+		                    	<option value="" key="">请选择</option>
+		                    </select>
+		                </div>
+		            </div>
+		            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
+		            	<div className="weui-cell__hd">
+		                    <label htmlFor="quarter" className="weui-label">季度</label>
+		                </div>
+		                <div className="weui-cell__bd">
+		                    <select className="weui-select" name="quarter">
+		                    	<option value="" key="">请选择</option>
+		                    </select>
+		                </div>
+		            </div>
 				</div>
 				<div className="weui-cells__title">预算明细</div>
 				<div className="weui-cells m-t-n">

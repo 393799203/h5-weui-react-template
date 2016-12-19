@@ -64,7 +64,7 @@ export default class ExpenseDetail extends BaseComponent {
 		let showAudit = this.state.showAudit;
 		let disabled = this.state.disabled;
 		return (
-			<div className="expense-detail">
+			<div className="detail">
 				<div className="weui-cells__title">基本信息</div>
 				<div className="weui-cells m-t-n bg-white">
 		            <div className="weui-cell">

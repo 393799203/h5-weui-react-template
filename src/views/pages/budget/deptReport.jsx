@@ -15,7 +15,8 @@ export default class DeptReport extends BaseComponent {
 			deptId: "",
 			budgetYear: "",
 			budgetQuarter: ""
-		}
+		},
+		detailList : []
 	}
 
 	constructor(props){
@@ -35,7 +36,6 @@ export default class DeptReport extends BaseComponent {
 			this.state.params.budgetYear = moment().format('YYYY');
 			this.state.params.budgetQuarter = 'Q' + moment().quarter();
 			this.getDetailList();
-			this.setState(this.state);
 		})
 		document.addEventListener("reload", function(data){
 			window.location.reload();
@@ -45,12 +45,13 @@ export default class DeptReport extends BaseComponent {
 	getDetailList = () => {
 		Ajax.get('/api/budget/budgetrequest/getDeptBudgetDetail',{...this.state.params}).then(res => {
 			console.log(res);
+			this.state.detailList = res.data.list || [];
+			this.setState(this.state);
 		})
 	}
 
 	render() {
-		let { budgetYearList, budgetQuarterList, deptList, params } = this.state;
-		let budgetRequestItemShipDtoList = [];
+		let { budgetYearList, budgetQuarterList, deptList, params, detailList } = this.state;
 		return (
 			<div className="report">
 				<div className="weui-cells__title">查询条件</div>
@@ -94,8 +95,8 @@ export default class DeptReport extends BaseComponent {
 				</div>
 				<div className="weui-cells__title">预算明细</div>
 				<div className="weui-cells m-t-n">
-					<For each = "item" of = { budgetRequestItemShipDtoList || [] } index = "index">
-						<div className={classnames("bg-white", {"m-b": index != budgetRequestItemShipDtoList.length -1})} key={ index }>
+					<For each = "item" of = { detailList || [] } index = "index">
+						<div className={classnames("bg-white", {"m-b": index != detailList.length -1})} key={ index }>
 			        		<div className="weui-cell">
 				                <div className="weui-cell__bd">
 				                    <div className="pull-left">预算类目</div>

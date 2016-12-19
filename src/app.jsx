@@ -41,6 +41,7 @@ import BudgetAuditList from 'views/pages/budget/auditList';
 import BudgetAuditedList from 'views/pages/budget/auditedList';
 import BudgetMyList from 'views/pages/budget/myList';
 import BudgetDetailAudit from 'views/pages/budget/detailAudit';
+import BudgetDeptReport from 'views/pages/budget/deptReport';
 
 //app 根组件
 class App extends Component {
@@ -82,6 +83,7 @@ render((
 					<Route path="my" component={ BudgetMyList } />
 					<Route path="detail/:id" component={ BudgetDetailAudit } />
 					<Route path="audit/:id" component={ BudgetDetailAudit } />
+					<Route path="deptReport" component={ BudgetDeptReport } />
 				</Route>
 				<Redirect from="*" to="/" />
 			</Route>

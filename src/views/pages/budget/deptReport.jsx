@@ -46,7 +46,7 @@ export default class DeptReport extends BaseComponent {
 		                </div>
 		            </div>
 				</div>
-				<div className="weui-cells__title">查询结果</div>
+				<div className="weui-cells__title">预算明细</div>
 				<div className="weui-cells m-t-n">
 					<For each = "item" of = { budgetRequestItemShipDtoList || [] } index = "index">
 						<div className={classnames("bg-white", {"m-b": index != budgetRequestItemShipDtoList.length -1})} key={ index }>

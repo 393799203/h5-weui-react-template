@@ -36,6 +36,8 @@ export default class DeptReport extends BaseComponent {
 			this.state.params.budgetYear = moment().format('YYYY');
 			this.state.params.budgetQuarter = 'Q' + moment().quarter();
 			this.getDetailList();
+		}, (err) => {
+			Util.popWindow("/query");
 		})
 		document.addEventListener("reload", function(data){
 			window.location.reload();
@@ -44,9 +46,10 @@ export default class DeptReport extends BaseComponent {
 
 	getDetailList = () => {
 		Ajax.get('/api/budget/budgetrequest/getDeptBudgetDetail',{...this.state.params}).then(res => {
-			console.log(res);
 			this.state.detailList = res.data || [];
 			this.setState(this.state);
+		}, (err) => {
+			Util.popWindow("/query");
 		})
 	}
 

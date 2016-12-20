@@ -22,7 +22,11 @@ export default class DailyReport extends BaseComponent {
 
 	render() {
 		return (
-			<div>111</div>
+			<div className="report">
+				<div className="weui-cells__title">查询条件</div>
+				<div className="weui-cells m-t-n "></div>
+				<div className="weui-cells__title">查询结果</div>
+			</div>
 		)
 	}
 }

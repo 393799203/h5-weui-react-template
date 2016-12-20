@@ -17,7 +17,7 @@ export default class QueryCategory extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("类目查询");
+		Util.setTitle("查询");
 	}
 
 	componentDidMount() {

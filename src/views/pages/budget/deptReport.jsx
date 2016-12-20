@@ -5,6 +5,7 @@ import BaseComponent from 'core/baseComponent'
 import Ajax from 'core/ajax';
 import Util from 'core/util';
 import Global from 'server/global';
+import BackTop from 'components/backtop';
 
 export default class DeptReport extends BaseComponent {
 	state = {
@@ -150,6 +151,7 @@ export default class DeptReport extends BaseComponent {
 						</div>
 					</For>
 				</If>
+				<BackTop/>
 			</div>
 		)
 	}

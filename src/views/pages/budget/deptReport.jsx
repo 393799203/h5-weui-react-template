@@ -104,7 +104,7 @@ export default class DeptReport extends BaseComponent {
 					                    <div className="pull-right m-r-sm text-light">{item.budgetCategoryName}</div>
 					                </div>
 					                <div className="weui-cell__bd">
-					                    <div className="pull-left">合计</div>
+					                    <div className="pull-left">整年合计</div>
 					                    <div className="pull-right text-light">
 					                    ￥{Util.money((params.budgetQuarter>'Q1'? item.actualQ1Sum: item.q1Sum) + 
 					                    			 (params.budgetQuarter>'Q2'? item.actualQ2Sum: item.q2Sum) + 

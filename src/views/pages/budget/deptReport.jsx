@@ -96,7 +96,7 @@ export default class DeptReport extends BaseComponent {
 				<For each = "detail" of = { detailList || [] } index = "index">
 					<div className="weui-cells__title">{detail.budgetCategoryName}</div>
 					<div className="weui-cells m-t-n">
-						<For each = "item" of = {detail.itemList}>
+						<For each = "item" of = {detail.itemList || []}>
 							<div className={classnames("bg-white", {"m-b": index != detail.itemList.length -1})} key={ index }>
 				        		<div className="weui-cell">
 					                <div className="weui-cell__bd">

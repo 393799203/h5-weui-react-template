@@ -83,7 +83,7 @@ export default class DeptReport extends BaseComponent {
 		                    <label htmlFor="quarter" className="weui-label">公司</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="quarter" value={ params.companyIds[0]||'' } onChange={ (e) => { params.companyIds[0] = e.target.value; this.getDetailList() }}>
+		                    <select className="weui-select" name="quarter" value={ params.companyIds[0]||'' } onChange={ (e) => { params.companyIds = e.target.value? [ e.target.value ]: []; this.getDetailList() }}>
 		                    	<option value="" key="">不限</option>
 		                    	<For each = "item" of = { companyList } index = "index">
 		                    		<option value={ item.id } key={ index }>{ item.companyName }</option>
@@ -112,26 +112,6 @@ export default class DeptReport extends BaseComponent {
 						                    <div className="pull-left">年度合计</div>
 						                    <div className="pull-right text-light">
 						                    </div>
-						                </div>
-						            </div>
-						            <div className="weui-cell">
-						            	<div className="weui-cell__bd">
-						                    <div className="pull-left">Q1{params.budgetQuarter>'Q1'?'实际': '预算'}</div>
-						                    <div className="pull-right m-r-sm text-light">￥{params.budgetQuarter>'Q1'? Util.money(item.actualQ1Sum): Util.money(item.q1Sum)}</div>
-						                </div>
-						                <div className="weui-cell__bd">
-						                    <div className="pull-left m-l-sm">Q2{params.budgetQuarter>'Q2'?'实际': '预算'}</div>
-						                    <div className="pull-right text-light">￥{params.budgetQuarter>'Q2'? Util.money(item.actualQ2Sum): Util.money(item.q2Sum)}</div>
-						                </div>
-						            </div>
-						            <div className="weui-cell">
-						                <div className="weui-cell__bd">
-						                    <div className="pull-left">Q3{params.budgetQuarter>'Q3'?'实际': '预算'}</div>
-						                    <div className="pull-right m-r-sm text-light">￥{params.budgetQuarter>'Q3'? Util.money(item.actualQ3Sum): Util.money(item.q3Sum)}</div>
-						                </div>
-						                <div className="weui-cell__bd">
-						                    <div className="pull-left m-l-sm">Q4{params.budgetQuarter>'Q4'?'实际': '预算'}</div>
-						                    <div className="pull-right text-light">￥{params.budgetQuarter>'Q4'? Util.money(item.actualQ4Sum): Util.money(item.q4Sum)}</div>
 						                </div>
 						            </div>
 					        	</div>

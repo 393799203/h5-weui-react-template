@@ -9,6 +9,7 @@ import BackTop from 'components/backtop';
 
 export default class DeptReport extends BaseComponent {
 	state = {
+		allCompanyList : [],
 		companyList : [],
 		params: {
 			outlineType: "5",
@@ -30,7 +31,7 @@ export default class DeptReport extends BaseComponent {
 		let companyPromise = Ajax.get("/api/company/statisticalReportCompany");
 		Promise.all([allEnumMapsPromise, companyPromise]).then(res => {
 			this.state.currencyList = res[0].data.map.currency;
-			this.state.companyList = res[1].data.list || [];
+			this.state.companyList = this.state.allCompanyList = res[1].data.list || [];
 			this.getDetailList(); 
 		}, (err) => {
 			Util.popWindow("/query");
@@ -38,6 +39,13 @@ export default class DeptReport extends BaseComponent {
 	}
 
 	getDetailList = () => {
+		if(this.state.params.regionCode){
+			this.state.companyList = this.state.allCompanyList.filter((item) => {
+				return item.regionCode == this.state.params.regionCode
+			});
+		}else{
+			this.state.companyList = this.state.allCompanyList;
+		}
 		Util.startLoading();
 		let postData = Object.assign({}, this.state.params, {balanceDate: moment(this.state.params.balanceDate, 'YYYY-MM-DD').format('YYYYMMDD')});
 		Ajax.post('/api/fund/fundDailyBalance/statisticalReport', postData).then(res => {

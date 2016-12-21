@@ -15,7 +15,7 @@ export default class DeptReport extends BaseComponent {
 			outlineType: "5",
 			balanceDate: moment().add(-1,'days').format("YYYY-MM-DD"),
 			regionCode: "",
-			companyIds: []
+			companyId: ""
 		},
 		detailList : [],
 		firstLoaded : false
@@ -91,7 +91,7 @@ export default class DeptReport extends BaseComponent {
 		                    <label htmlFor="quarter" className="weui-label">公司</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="quarter" value={ params.companyIds[0]||'' } onChange={ (e) => { params.companyIds = e.target.value? [ e.target.value ]: []; this.getDetailList() }}>
+		                    <select className="weui-select" name="quarter" value={ params.companyId } onChange={ (e) => { params.companyId = e.target.value; this.getDetailList() }}>
 		                    	<option value="" key="">不限</option>
 		                    	<For each = "item" of = { companyList } index = "index">
 		                    		<option value={ item.id } key={ index }>{ item.companyName }</option>

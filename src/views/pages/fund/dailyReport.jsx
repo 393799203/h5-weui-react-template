@@ -40,14 +40,15 @@ export default class DeptReport extends BaseComponent {
 	getDetailList = () => {
 		Util.startLoading();
 		let postData = Object.assign({}, this.state.params, {balanceDate: moment(this.state.params.balanceDate, 'YYYY-MM-DD').format('YYYYMMDD')});
-		console.log(postData);
 		Ajax.post('/api/fund/fundDailyBalance/statisticalReport', postData).then(res => {
 			Util.closeLoading();
 			this.state.firstLoaded = true;
-			this.state.detailList = res.data || [];
+			this.state.detailList = res.data.list || [];
 			this.setState(this.state);
 		}, (err) => {
-			
+			setTimeout(() => {
+				Util.popWindow("/query");
+			}, 2000)
 		})
 	}
 

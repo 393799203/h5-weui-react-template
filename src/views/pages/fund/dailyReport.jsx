@@ -13,9 +13,9 @@ export default class DeptReport extends BaseComponent {
 		companyList : [],
 		params: {
 			outlineType: "5",
-			balanceDate: moment().add(-1,'days').format("YYYY-MM-DD"),
+			balanceDate: "",
 			regionCode: "",
-			companyIdString: ""
+			companyId: ""
 		},
 		detailList : [],
 		firstLoaded : false
@@ -47,10 +47,11 @@ export default class DeptReport extends BaseComponent {
 			this.state.companyList = this.state.allCompanyList;
 		}
 		Util.startLoading();
-		let postData = Object.assign({}, this.state.params, {balanceDate: moment(this.state.params.balanceDate, 'YYYY-MM-DD').format('YYYYMMDD')});
+		let postData = this.state.firstLoaded? Object.assign({}, this.state.params, {balanceDate: moment(this.state.params.balanceDate, 'YYYY-MM-DD').format('YYYYMMDD')}) : Object.assign({}, this.state.params);
 		Ajax.post('/api/fund/fundDailyBalance/statisticalReportMobile', postData).then(res => {
 			Util.closeLoading();
 			this.state.firstLoaded = true;
+			this.state.params.balanceDate = res.data.object? moment(res.data.object, "YYYYMMDD").format("YYYY-MM-DD") : this.state.params.balanceDate,
 			this.state.detailList = res.data.list || [];
 			this.setState(this.state);
 		}, (err) => {
@@ -91,7 +92,7 @@ export default class DeptReport extends BaseComponent {
 		                    <label htmlFor="quarter" className="weui-label">公司</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="quarter" value={ params.companyIdString } onChange={ (e) => { params.companyIdString = e.target.value; this.getDetailList() }}>
+		                    <select className="weui-select" name="quarter" value={ params.companyId } onChange={ (e) => { params.companyId = e.target.value; this.getDetailList() }}>
 		                    	<option value="" key="">不限</option>
 		                    	<For each = "item" of = { companyList } index = "index">
 		                    		<option value={ item.id } key={ index }>{ item.companyName }</option>

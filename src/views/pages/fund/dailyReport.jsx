@@ -15,7 +15,7 @@ export default class DeptReport extends BaseComponent {
 			outlineType: "5",
 			balanceDate: moment().add(-1,'days').format("YYYY-MM-DD"),
 			regionCode: "",
-			companyId: ""
+			companyIdString: ""
 		},
 		detailList : [],
 		firstLoaded : false
@@ -48,7 +48,7 @@ export default class DeptReport extends BaseComponent {
 		}
 		Util.startLoading();
 		let postData = Object.assign({}, this.state.params, {balanceDate: moment(this.state.params.balanceDate, 'YYYY-MM-DD').format('YYYYMMDD')});
-		Ajax.post('/api/fund/fundDailyBalance/statisticalReport', postData).then(res => {
+		Ajax.post('/api/fund/fundDailyBalance/statisticalReportMobile', postData).then(res => {
 			Util.closeLoading();
 			this.state.firstLoaded = true;
 			this.state.detailList = res.data.list || [];
@@ -91,7 +91,7 @@ export default class DeptReport extends BaseComponent {
 		                    <label htmlFor="quarter" className="weui-label">公司</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="quarter" value={ params.companyId } onChange={ (e) => { params.companyId = e.target.value; this.getDetailList() }}>
+		                    <select className="weui-select" name="quarter" value={ params.companyIdString } onChange={ (e) => { params.companyIdString = e.target.value; this.getDetailList() }}>
 		                    	<option value="" key="">不限</option>
 		                    	<For each = "item" of = { companyList } index = "index">
 		                    		<option value={ item.id } key={ index }>{ item.companyName }</option>
@@ -107,23 +107,20 @@ export default class DeptReport extends BaseComponent {
 			        </div>
 		        <Else />
 					<For each = "detail" of = { detailList } index = "index">
-						<div className="weui-cells__title">{detail.budgetCategoryName}</div>
+						<div className="weui-cells__title">{detail.companyName}</div>
 						<div className="weui-cells m-t-n">
-							<For each = "item" of = {detail.itemList || []}>
-								<div className={classnames("bg-white", {"m-b": index != detail.itemList.length -1})} key={ index }>
-					        		<div className="weui-cell">
-						                <div className="weui-cell__bd">
-						                    <div className="pull-left">预算类目</div>
-						                    <div className="pull-right m-r-sm text-light">{item.budgetCategoryName}</div>
-						                </div>
-						                <div className="weui-cell__bd">
-						                    <div className="pull-left">年度合计</div>
-						                    <div className="pull-right text-light">
-						                    </div>
-						                </div>
-						            </div>
-					        	</div>
-				        	</For>
+							<div className={classnames("bg-white", {"m-b": index != detailList.length -1})} key={ index }>
+				        		<div className="weui-cell">
+					                <div className="weui-cell__bd">
+					                    <div className="pull-left">美元</div>
+					                    <div className="pull-right m-r-sm text-light">{Util.money(detail.dollar4USD)}</div>
+					                </div>
+					                <div className="weui-cell__bd">
+					                    <div className="pull-left">人民币</div>
+					                    <div className="pull-right text-light">{Util.money(detail.renMinBi4CNY)}</div>
+					                </div>
+					            </div>
+				        	</div>
 						</div>
 					</For>
 				</If>

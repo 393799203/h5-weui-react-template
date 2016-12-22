@@ -113,7 +113,7 @@ export default class DeptReport extends BaseComponent {
 								<div className={classnames("bg-white", {"m-b": index != detail.itemList.length -1})} key={ index }>
 					        		<div className="weui-cell">
 						                <div className="weui-cell__bd">
-						                    <div className="pull-left">预算类目</div>
+						                    <div className="pull-left">预算类</div>
 						                    <div className="pull-right m-r-sm text-light">{item.budgetCategoryName}</div>
 						                </div>
 						                <div className="weui-cell__bd">

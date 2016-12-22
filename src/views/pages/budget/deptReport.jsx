@@ -30,6 +30,7 @@ export default class DeptReport extends BaseComponent {
 		let allEnumMapsPromise = Global.getAllEnumData();
 		let deptListPromise = Global.getDept();
 		let getCurrentUserPromise = Global.getCurrentUser();
+		Util.startLoading();
 		Promise.all([allEnumMapsPromise, deptListPromise, getCurrentUserPromise]).then(res => {
 			this.state.budgetYearList = res[0].data.map.budgetYear || [];
 			this.state.budgetQuarterList = res[0].data.map.budgetQuarter || [];

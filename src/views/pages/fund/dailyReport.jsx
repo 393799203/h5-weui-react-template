@@ -29,6 +29,7 @@ export default class DeptReport extends BaseComponent {
 	componentDidMount() {
 		let allEnumMapsPromise = Global.getAllEnumData();
 		let companyPromise = Ajax.get("/api/company/statisticalReportCompany");
+		Util.startLoading();
 		Promise.all([allEnumMapsPromise, companyPromise]).then(res => {
 			this.state.currencyList = res[0].data.map.currency;
 			this.state.companyList = this.state.allCompanyList = res[1].data.list || [];

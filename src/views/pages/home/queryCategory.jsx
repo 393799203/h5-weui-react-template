@@ -10,7 +10,7 @@ export default class QueryCategory extends BaseComponent {
 
 	state = {
 		gridDataList: [
-			/* {"title":"资金日报","link":"/fund/dailyReport","icon":"custom-dailyReport"}, */
+			{"title":"资金日报","link":"/fund/dailyReport","icon":"custom-dailyReport"},
 			{"title":"部门预算","link":"/budget/deptReport","icon":"custom-deptBudget"}
 		]
 	}

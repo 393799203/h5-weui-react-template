@@ -15,7 +15,8 @@ export default class DeptReport extends BaseComponent {
 		params: {
 			deptId: "",
 			budgetYear: "",
-			budgetQuarter: ""
+			budgetQuarter: "",
+			isContainWaitingDocument: false
 		},
 		detailList : [],
 		firstLoaded : false

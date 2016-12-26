@@ -18,6 +18,8 @@ class Global extends BaseServer{
 	getAllDept = (data) => Ajax.getCache("/api/dept/getAllBiz1thDept",data ,-1)
 	//不含事业群和集团
 	getDept = (data) => Ajax.getCache('/api/dept/getBiz1thDept', data, -1) 
+	//预算部门接口
+	getBudgetDept = (data) => Ajax.getCache('/api/dept/getBudgetBiz1thDept', data, -1)
 
 }
 export default new Global

@@ -29,7 +29,7 @@ export default class DeptReport extends BaseComponent {
 
 	componentDidMount() {
 		let allEnumMapsPromise = Global.getAllEnumData();
-		let deptListPromise = Global.getDept();
+		let deptListPromise = Global.getBudgetDept();
 		let getCurrentUserPromise = Global.getCurrentUser();
 		Util.startLoading();
 		Promise.all([allEnumMapsPromise, deptListPromise, getCurrentUserPromise]).then(res => {
@@ -41,7 +41,9 @@ export default class DeptReport extends BaseComponent {
 			this.state.params.budgetQuarter = 'Q' + moment().quarter();
 			this.getDetailList();
 		}, (err) => {
-			Util.popWindow("/query");
+			setTimeout(()=>{
+				Util.popWindow("/query");
+			}, 2000);
 		})
 	}
 

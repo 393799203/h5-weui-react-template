@@ -118,7 +118,7 @@ export default class DeptReport extends BaseComponent {
 					        		<div className="weui-cell">
 						                <div className="weui-cell__bd">
 						                    <div className="pull-left">{item.budgetCategoryName}</div>
-						                    <div className="pull-right text-light">
+						                    <div className="pull-right text-light text-primary">
 						                    ￥{Util.money((params.budgetQuarter>'Q1'? item.actualQ1Sum: item.q1Sum) + 
 						                    			 (params.budgetQuarter>'Q2'? item.actualQ2Sum: item.q2Sum) + 
 						                    			 (params.budgetQuarter>'Q3'? item.actualQ3Sum: item.q3Sum) + 

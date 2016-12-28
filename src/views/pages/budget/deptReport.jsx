@@ -112,16 +112,12 @@ export default class DeptReport extends BaseComponent {
 		        <Else />
 					<For each = "detail" of = { detailList } index = "index">
 						<div className="weui-cells__title">{detail.budgetCategoryName}</div>
-						<div className="weui-cells m-t-n">
+						<div className={classnames("weui-cells m-t-n", {"m-b-sm": index != detailList.length - 1})}>
 							<For each = "item" of = {detail.itemList || []}>
 								<div className={classnames("bg-white", {"m-b": index != detail.itemList.length -1})} key={ index }>
 					        		<div className="weui-cell">
 						                <div className="weui-cell__bd">
-						                    <div className="pull-left">预算类</div>
-						                    <div className="pull-right m-r-sm text-light">{item.budgetCategoryName}</div>
-						                </div>
-						                <div className="weui-cell__bd">
-						                    <div className="pull-left">年度合计</div>
+						                    <div className="pull-left">{item.budgetCategoryName}</div>
 						                    <div className="pull-right text-light">
 						                    ￥{Util.money((params.budgetQuarter>'Q1'? item.actualQ1Sum: item.q1Sum) + 
 						                    			 (params.budgetQuarter>'Q2'? item.actualQ2Sum: item.q2Sum) + 

@@ -30,6 +30,12 @@ import ExpenseAuditedList from 'views/pages/expense/auditedList';
 import ExpenseMyList from 'views/pages/expense/myList';
 import ExpenseApply from 'views/pages/expense/apply';
 import ExpenseDetailAudit from 'views/pages/expense/detailAudit';
+//差旅
+import TravelAuditList from 'views/pages/travel/auditList';
+import TravelAuditedList from 'views/pages/travel/auditedList';
+import TravelMyList from 'views/pages/travel/myList';
+import TravelApply from 'views/pages/travel/apply';
+import TravelDetailAudit from 'views/pages/travel/detailAudit';
 //资金
 import FundAuditList from 'views/pages/fund/auditList';
 import FundAuditedList from 'views/pages/fund/auditedList';
@@ -68,6 +74,14 @@ render((
 					<Route path="my" component={ ExpenseMyList } />
 					<Route path="detail/:id" component={ ExpenseDetailAudit } />
 					<Route path="audit/:id" component={ ExpenseDetailAudit } />
+				</Route>
+				<Route path="travel">
+					<Route path="apply" component={ TravelApply } />
+					<Route path="audit" component={ TravelAuditList } />
+					<Route path="audited" component={ TravelAuditedList } />
+					<Route path="my" component={ TravelMyList } />
+					<Route path="detail/:id" component={ TravelDetailAudit } />
+					<Route path="audit/:id" component={ TravelDetailAudit } />
 				</Route>
 				<Route path="fund">
 					<Route path="audit" component={ FundAuditList } />

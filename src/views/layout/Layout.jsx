@@ -11,11 +11,13 @@ export default class Layout extends Component {
 	]
 
 	tabBarDataListAudit = [
-		/* {link: "/", tabName: "申请", icon: "waiting-circle", key: "apply"}, */
+		{link: "apply", tabName: "申请", icon: "waiting-circle", key: "apply"},
 		{link: "audit", tabName: "待审批", icon: "custom-audit", key: "audit"},
 		{link: "audited", tabName: "已审批", icon: "custom-audited", key: "audited"},
 		{link: "my", tabName: "我的", icon: "custom-my", key: "my"} 
 	]
+
+	applyCategory = ['travel'];
 
 	state = {
 		activeArray: [],
@@ -28,6 +30,10 @@ export default class Layout extends Component {
 		if(!props.location.pathname.split('/')[1] || props.location.pathname.split('/')[1] == 'query'){
 			this.state.tabBarDataList = this.tabBarDataListHome;
 		}else{
+			//为了区分是否需要申请按钮,以后统一有申请了就可以去掉
+			this.tabBarDataListAudit = this.applyCategory.some((category) => {
+				return props.location.pathname.indexOf(category) != -1
+			}) ? this.tabBarDataListAudit : this.tabBarDataListAudit.slice(1)
 			this.state.tabBarDataList = this.tabBarDataListAudit;
 		}
 		this.state.tabBarDataList.map((item, index)=>{

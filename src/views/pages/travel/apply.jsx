@@ -18,7 +18,7 @@ export default class TravelApply extends BaseComponent {
 		Promise.all([getCurrentUserPromise]).then(res => {
 			this.state.params.nickName = res[0].data.nickName;
 			this.state.params.deptName = res[0].data.biz1thDeptName;
-			this.state.params.travellers = [res[0].data];
+			this.state.params.travellers.push(this.simpleUser(res[0].data));
 			this.setState(this.state);
 		}, (err) => {
 			setTimeout(()=>{
@@ -29,12 +29,21 @@ export default class TravelApply extends BaseComponent {
 
 	addUser = () => {
 		Util.selectTTContact().then(res => {
-			alert(JSON.stringify(res));
-			this.state.params.travellers.concat(res);
+			let selectedUser = res.map((item, index) => this.simpleUser(item));
+			alert(JSON.stringify(selectedUser));
+			this.state.params.travellers.concat(selectedUser);
 			this.setState(this.state);
 		}, res => {
 			Util.error(res)
 		})
+	}
+
+	simpleUser = (user) => {
+		return {
+			avatar: user.avatar || user.avatar_url,
+			nickName: user.nickName || user.user_nick_name,
+			userId: user.userId || user.user_id
+		}
 	}
 
 	render() {
@@ -69,7 +78,7 @@ export default class TravelApply extends BaseComponent {
 		                <div className="weui-cell__bd">
 		                	<a href="javascript:;" className="addUser"  onClick={ this.addUser }>添加用户</a>
 		                	<For each = "item" of = { params.travellers } index = "index">
-		                		<a href="javascript:;" className="delUser">{item.nickName}</a>
+		                		<a href="javascript:;" className="delUser" key={item.userId}> {item.nickName} </a>
 		                	</For>
 		                </div>
 		            </div>

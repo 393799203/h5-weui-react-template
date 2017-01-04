@@ -147,13 +147,13 @@ class H5Util extends UtilBase{
         location.href = url;
     }
 
-    removeNotification = (name) => {}
+    removeNotification = (name) => { return Promise.reject("非TT环境不能注销通知~") }
 
-    sendNotification = (name, data) => {}
+    sendNotification = (name, data) => { return Promise.reject("非TT环境不能发送通知~") }
 
-    registerNotification = (name) => {}
+    registerNotification = (name) => { return Promise.reject("非TT环境不能注册通知~") }
 
-    selectTTContact = () => { return Promise.reject("非TT环境不能选取用户~")}
+    selectTTContact = () => { return Promise.reject("非TT环境不能选取用户~") }
 
 }
 

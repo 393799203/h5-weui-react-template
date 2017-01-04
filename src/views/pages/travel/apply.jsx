@@ -29,7 +29,7 @@ export default class TravelApply extends BaseComponent {
 		Util.selectTTContact().then(res => {
 			alert(res);
 		}, res => {
-			alert(res+'1');
+			Util.error(res)
 		})
 	}
 

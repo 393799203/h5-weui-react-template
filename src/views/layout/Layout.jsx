@@ -41,7 +41,11 @@ export default class Layout extends Component {
 	}
 
 	componentDidMount() {
-	    Util.registerNotification("reload");
+	    Util.registerNotification("reload").then(success => {
+	    	console.log("reload 注册成功");
+	    }, error => {
+	    	Util.error(error)
+	    });
 		document.getElementById("appWrapper").addEventListener("click", (e) => {
 			let target = e.target;
 			if( target && target.nodeName.toLocaleLowerCase() == "a" && target.className.indexOf('pushWindow') != -1 ) {

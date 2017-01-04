@@ -8,11 +8,7 @@ export default class TravelApply extends BaseComponent {
 	state = {
 		deptList: [],
 		params: {
-			nickName: "",
-			outlineType: "5",
-			balanceDate: "",
-			regionCode: "",
-			companyId: ""
+			nickName: ""
 		}
 	}
 

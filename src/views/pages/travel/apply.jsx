@@ -30,8 +30,7 @@ export default class TravelApply extends BaseComponent {
 	addUser = () => {
 		Util.selectTTContact().then(res => {
 			let selectedUser = res.map((item, index) => this.simpleUser(item));
-			alert(JSON.stringify(selectedUser));
-			this.state.params.travellers.concat(selectedUser);
+			this.state.params.travellers = this.state.params.travellers.concat(selectedUser);
 			this.setState(this.state);
 		}, res => {
 			Util.error(res)

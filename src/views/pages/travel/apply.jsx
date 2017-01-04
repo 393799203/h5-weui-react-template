@@ -6,19 +6,16 @@ import Global from 'server/global';
 
 export default class TravelApply extends BaseComponent {
 	state = {
-		deptList: [],
 		params: {
 			nickName: ""
 		}
 	}
 
 	componentDidMount() {
-		let deptListPromise = Global.getDept();
 		let getCurrentUserPromise = Global.getCurrentUser();
-		Promise.all([deptListPromise, getCurrentUserPromise]).then(res => {
-			this.state.deptList = res[0].data.list || [];
-			this.state.params.nickName = res[1].data.nickName;
-			this.state.params.deptId = res[1].data.biz1thDeptId;
+		Promise.all([getCurrentUserPromise]).then(res => {
+			this.state.params.nickName = res[0].data.nickName;
+			this.state.params.deptName = res[0].data.biz1thDeptName;
 			this.setState(this.state);
 		}, (err) => {
 			setTimeout(()=>{
@@ -38,19 +35,15 @@ export default class TravelApply extends BaseComponent {
 		                    <label htmlFor="date" className="weui-label">申请人</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <input className="weui-input" type="text" value={ params.nickName } disabled onChange={(e) => { params.nickName = e.target.value; this.setState(this.state);}}/>
+		                    <input className="weui-input" type="text" value={ params.nickName } disabled/>
 		                </div>
 		            </div>
-		            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
+		            <div className="weui-cell bg-white">
 		                <div className="weui-cell__hd">
-		                    <label htmlFor="dept" className="weui-label">部门</label>
+		                    <label htmlFor="date" className="weui-label">部门</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="dept" value={params.deptId} disabled onChange={ (e) => { params.deptId = e.target.value; this.setState(this.state);}}>
-		                    	<For each = "item" of = { deptList } index = "index">
-		                    		<option value={ item.deptId } key={index}>{ item.deptName }</option>
-		                    	</For>
-		                    </select>
+		                    <input className="weui-input" type="text" value={ params.deptName } disabled/>
 		                </div>
 		            </div>
 		        </div>

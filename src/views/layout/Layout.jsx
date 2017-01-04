@@ -42,9 +42,9 @@ export default class Layout extends Component {
 
 	componentDidMount() {
 	    Util.registerNotification("reload").then(success => {
-	    	console.log("reload 注册成功");
+	    	console.log("reload注册成功");
 	    }, error => {
-	    	Util.error(error)
+	    	console.log("reload注册失败," + error)
 	    });
 		document.getElementById("appWrapper").addEventListener("click", (e) => {
 			let target = e.target;

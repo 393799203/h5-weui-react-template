@@ -153,6 +153,8 @@ class H5Util extends UtilBase{
 
     registerNotification = (name) => {}
 
+    selectTTContact = () => { return Promise.reject("非TT环境不能选取用户~")}
+
 }
 
 //容器部分
@@ -171,6 +173,8 @@ class Hybrid extends UtilBase{
     sendNotification = (name, data) => hdp.do('tt.notification.sendNotification', name, data)
 
     registerNotification = (name) => hdp.do('tt.notification.registerNotification', name)
+
+    selectTTContact = () => hdp.do('tt.ttcontact.selectMultiContact')
     
 }
 

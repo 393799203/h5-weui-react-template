@@ -25,6 +25,14 @@ export default class TravelApply extends BaseComponent {
 		})
 	}
 
+	test = () => {
+		Util.selectTTContact().then(res => {
+			alert(res);
+		}, res => {
+			alert(res+'1');
+		})
+	}
+
 	render() {
 		let { deptList, params } = this.state;
 		return (
@@ -50,7 +58,14 @@ export default class TravelApply extends BaseComponent {
 		        </div>
 		        <div className="weui-cells__title">出行信息</div>
 		        <div className="weui-cells m-t-n">
-		        	
+		        	<div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
+		                <div className="weui-cell__hd">
+		                    <label htmlFor="traveller" className="weui-label">出行人</label>
+		                </div>
+		                <div className="weui-cell__bd">
+		                	<a href="javascript:;" className="weui-btn weui-btn_mini weui-btn_default"  onClick={ this.test }>按钮</a>
+		                </div>
+		            </div>
 		        </div>
 			</div>
 		)

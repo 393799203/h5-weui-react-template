@@ -42,7 +42,7 @@ export default class TravelApply extends BaseComponent {
 		                    <label htmlFor="date" className="weui-label">申请人</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <input className="weui-input" type="string" value={ params.nickName } onChange={(e) => { params.nickName = e.target.value; this.setState(this.state);}}/>
+		                    <input className="weui-input" type="text" value={ params.nickName } disabled onChange={(e) => { params.nickName = e.target.value; this.setState(this.state);}}/>
 		                </div>
 		            </div>
 		            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
@@ -50,7 +50,7 @@ export default class TravelApply extends BaseComponent {
 		                    <label htmlFor="dept" className="weui-label">部门</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <select className="weui-select" name="dept" value={params.deptId} onChange={ (e) => { params.deptId = e.target.value; this.setState(this.state);}}>
+		                    <select className="weui-select" name="dept" value={params.deptId} disabled onChange={ (e) => { params.deptId = e.target.value; this.setState(this.state);}}>
 		                    	<For each = "item" of = { deptList } index = "index">
 		                    		<option value={ item.deptId } key={index}>{ item.deptName }</option>
 		                    	</For>

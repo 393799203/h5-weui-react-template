@@ -8,7 +8,8 @@ export default class TravelApply extends BaseComponent {
 	state = {
 		params: {
 			nickName: "",
-			deptName: ""
+			deptName: "",
+			travellers: []
 		}
 	}
 
@@ -17,6 +18,7 @@ export default class TravelApply extends BaseComponent {
 		Promise.all([getCurrentUserPromise]).then(res => {
 			this.state.params.nickName = res[0].data.nickName;
 			this.state.params.deptName = res[0].data.biz1thDeptName;
+			this.state.params.travellers = [res[0].data];
 			this.setState(this.state);
 		}, (err) => {
 			setTimeout(()=>{
@@ -25,9 +27,10 @@ export default class TravelApply extends BaseComponent {
 		})
 	}
 
-	test = () => {
+	addUser = () => {
 		Util.selectTTContact().then(res => {
-			alert(res);
+			this.state.params.travellers.concat(res);
+			this.setState(this.state);
 		}, res => {
 			Util.error(res)
 		})
@@ -58,12 +61,15 @@ export default class TravelApply extends BaseComponent {
 		        </div>
 		        <div className="weui-cells__title">出行信息</div>
 		        <div className="weui-cells m-t-n">
-		        	<div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
+		        	<div className="weui-cell bg-white">
 		                <div className="weui-cell__hd">
 		                    <label htmlFor="traveller" className="weui-label">出行人</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                	<a href="javascript:;" className="weui-btn weui-btn_mini weui-btn_default"  onClick={ this.test }>按钮</a>
+		                	<a href="javascript:;" className="addUser"  onClick={ this.addUser }>添加用户</a>
+		                	<For each = "item" of = { params.travellers } index = "index">
+		                		<a href="javascript:;" className="delUser">{item.nickName}</a>
+		                	</For>
 		                </div>
 		            </div>
 		        </div>

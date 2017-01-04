@@ -26,7 +26,7 @@ export default class Category extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("类目");
+		Util.setTitle("审批");
 	}
 
 	componentDidMount() {

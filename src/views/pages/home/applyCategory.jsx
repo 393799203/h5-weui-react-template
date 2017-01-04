@@ -16,7 +16,7 @@ export default class ApplyCategory extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("类目");
+		Util.setTitle("申请");
 	}
 
 	componentDidMount() {

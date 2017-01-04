@@ -23,6 +23,7 @@ import 'style/app.scss';//样式引入
 //*************页面引入**************
 import Layout from 'views/layout/Layout';
 import Category from 'views/pages/home';
+import ApplyCategory from 'views/pages/home/applyCategory';
 import QueryCategory from 'views/pages/home/queryCategory';
 //报销
 import ExpenseAuditList from 'views/pages/expense/auditList';
@@ -66,6 +67,7 @@ render((
 		<Route path="/" component={App}>
 			<Route component={Layout}>
 				<IndexRoute component={ Category }/>
+				<Route path="apply" component={ ApplyCategory }/>
 				<Route path="query" component={ QueryCategory }/>
 				<Route path="expense">
 					<Route path="apply" component={ ExpenseApply } />

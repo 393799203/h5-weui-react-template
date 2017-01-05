@@ -22,33 +22,12 @@ import 'style/app.scss';//样式引入
 
 //*************页面引入**************
 import Layout from 'views/layout/Layout';
-import Category from 'views/pages/home';
-import ApplyCategory from 'views/pages/home/applyCategory';
-import QueryCategory from 'views/pages/home/queryCategory';
-//报销
-import ExpenseAuditList from 'views/pages/expense/auditList';
-import ExpenseAuditedList from 'views/pages/expense/auditedList';
-import ExpenseMyList from 'views/pages/expense/myList';
-import ExpenseApply from 'views/pages/expense/apply';
-import ExpenseDetailAudit from 'views/pages/expense/detailAudit';
 //差旅
-import TravelAuditList from 'views/pages/travel/auditList';
-import TravelAuditedList from 'views/pages/travel/auditedList';
-import TravelMyList from 'views/pages/travel/myList';
-import TravelApply from 'views/pages/travel/apply';
-import TravelDetailAudit from 'views/pages/travel/detailAudit';
-//资金
-import FundAuditList from 'views/pages/fund/auditList';
-import FundAuditedList from 'views/pages/fund/auditedList';
-import FundMyList from 'views/pages/fund/myList';
-import FundDetailAudit from 'views/pages/fund/detailAudit';
-import FundDailyReport from 'views/pages/fund/dailyReport';
-//预算
-import BudgetAuditList from 'views/pages/budget/auditList';
-import BudgetAuditedList from 'views/pages/budget/auditedList';
-import BudgetMyList from 'views/pages/budget/myList';
-import BudgetDetailAudit from 'views/pages/budget/detailAudit';
-import BudgetDeptReport from 'views/pages/budget/deptReport';
+import TravelAuditList from 'views/pages/auditList';
+import TravelAuditedList from 'views/pages/auditedList';
+import TravelMyList from 'views/pages/myList';
+import TravelApply from 'views/pages/apply';
+import TravelDetailAudit from 'views/pages/detailAudit';
 
 //app 根组件
 class App extends Component {
@@ -66,42 +45,14 @@ render((
 	<Router history={ browserHistory }>
 		<Route path="/" component={App}>
 			<Route component={Layout}>
-				<IndexRoute component={ Category }/>
-				<Route path="apply" component={ ApplyCategory }/>
-				<Route path="query" component={ QueryCategory }/>
-				<Route path="expense">
-					<Route path="apply" component={ ExpenseApply } />
-					<Route path="audit" component={ ExpenseAuditList } />
-					<Route path="audited" component={ ExpenseAuditedList } />
-					<Route path="my" component={ ExpenseMyList } />
-					<Route path="detail/:id" component={ ExpenseDetailAudit } />
-					<Route path="audit/:id" component={ ExpenseDetailAudit } />
-				</Route>
-				<Route path="travel">
-					<Route path="apply" component={ TravelApply } />
-					<Route path="audit" component={ TravelAuditList } />
-					<Route path="audited" component={ TravelAuditedList } />
-					<Route path="my" component={ TravelMyList } />
-					<Route path="detail/:id" component={ TravelDetailAudit } />
-					<Route path="audit/:id" component={ TravelDetailAudit } />
-				</Route>
-				<Route path="fund">
-					<Route path="audit" component={ FundAuditList } />
-					<Route path="audited" component={ FundAuditedList } />
-					<Route path="my" component={ FundMyList } />
-					<Route path="detail/:id" component={ FundDetailAudit } />
-					<Route path="audit/:id" component={ FundDetailAudit } />
-					<Route path="dailyReport" component={ FundDailyReport } />
-				</Route>
-				<Route path="budget">
-					<Route path="audit" component={ BudgetAuditList } />
-					<Route path="audited" component={ BudgetAuditedList } />
-					<Route path="my" component={ BudgetMyList } />
-					<Route path="detail/:id" component={ BudgetDetailAudit } />
-					<Route path="audit/:id" component={ BudgetDetailAudit } />
-					<Route path="deptReport" component={ BudgetDeptReport } />
-				</Route>
-				<Redirect from="*" to="/" />
+				<IndexRedirect to="/apply"/>
+				<Route path="apply" component={ TravelApply } />
+				<Route path="audit" component={ TravelAuditList } />
+				<Route path="audited" component={ TravelAuditedList } />
+				<Route path="my" component={ TravelMyList } />
+				<Route path="detail/:id" component={ TravelDetailAudit } />
+				<Route path="audit/:id" component={ TravelDetailAudit } />
+				<Redirect from="*" to="/apply" />
 			</Route>
 		</Route>
 	</Router>

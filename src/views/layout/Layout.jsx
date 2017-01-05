@@ -5,13 +5,9 @@ import Icon from 'components/icon'
 import Util from 'core/util';
 
 export default class Layout extends Component {
-	tabBarDataListHome = [
-		{link: "/apply", tabName: "申请", icon: "waiting-circle", key: "apply"},
-		{link: "/", tabName: "审批", icon: "custom-category", key: "category"},
-		{link: "/query", tabName: "查询", icon: "custom-query", key: "query"}
-	]
 
 	tabBarDataListAudit = [
+		{link: "apply", tabName: "申请", icon: "custom-audit", key: "apply"},
 		{link: "audit", tabName: "待审批", icon: "custom-audit", key: "audit"},
 		{link: "audited", tabName: "已审批", icon: "custom-audited", key: "audited"},
 		{link: "my", tabName: "我的", icon: "custom-my", key: "my"} 
@@ -25,15 +21,7 @@ export default class Layout extends Component {
 
 	constructor(props){
 		super(props);
-		if(!props.location.pathname.split('/')[1] || props.location.pathname.split('/')[1] == 'apply' || props.location.pathname.split('/')[1] == 'query'){
-			this.state.tabBarDataList = this.tabBarDataListHome;
-		}else{
-			/* 为了区分是否需要申请按钮,以后统一有申请了就可以去掉
-			this.tabBarDataListAudit = this.applyCategory.some((category) => {
-				return props.location.pathname.indexOf(category) != -1
-			}) ? this.tabBarDataListAudit : this.tabBarDataListAudit.slice(1) */
-			this.state.tabBarDataList = this.tabBarDataListAudit;
-		}
+		this.state.tabBarDataList = this.tabBarDataListAudit;
 		this.state.tabBarDataList.map((item, index)=>{
 			this.state.activeArray.push(item.key);
 		});
@@ -65,11 +53,7 @@ export default class Layout extends Component {
 	componentWillReceiveProps(nextProps) {
 		console.log(nextProps);
 		this.state.activeArray = [];
-		if(!nextProps.location.pathname.split('/')[1] || nextProps.location.pathname.split('/')[1] == 'apply' || nextProps.location.pathname.split('/')[1] == 'query'){
-			this.state.tabBarDataList = this.tabBarDataListHome;
-		}else{
-			this.state.tabBarDataList = this.tabBarDataListAudit;
-		}
+		this.state.tabBarDataList = this.tabBarDataListAudit;
 		this.state.tabBarDataList.map((item, index)=>{
 			this.state.activeArray.push(item.key);
 		});
@@ -78,13 +62,12 @@ export default class Layout extends Component {
 
 	selectActiveMenu = (props) => {
 		let pathArr = props.location.pathname.split('/');
-		this.state.activeMenu = pathArr[pathArr.length - 1] || 'category';
+		this.state.activeMenu = pathArr[pathArr.length - 1];
 	}
 
 	render() {
 		let { children } = this.props;
 		let tabBarDataList = this.state.tabBarDataList;
-		console.log(this.state.activeArray, this.state.activeMenu)
 		if(this.state.activeArray.includes(this.state.activeMenu) && this.state.activeArray.length > 1){
 			return (
 				<div className="weui-tab">

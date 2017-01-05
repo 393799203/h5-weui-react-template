@@ -28,7 +28,8 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	addUser = () => {
-		Util.selectTTContact().then(res => {
+		let userIds = this.state.params.travellers.map((item, index) => item.userId);
+		Util.selectTTContact(userIds).then(res => {
 			let selectedUser = res.map((item, index) => this.simpleUser(item));
 			this.state.params.travellers = this.state.params.travellers.concat(selectedUser);
 			this.setState(this.state);
@@ -41,7 +42,7 @@ export default class TravelApply extends BaseComponent {
 		return {
 			avatar: user.avatar || user.avatar_url,
 			nickName: user.nickName || user.user_nick_name,
-			userId: user.userId || user.user_id
+			userId: parseInt(user.userId || user.user_id)
 		}
 	}
 

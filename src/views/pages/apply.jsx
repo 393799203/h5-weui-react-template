@@ -71,10 +71,10 @@ export default class TravelApply extends BaseComponent {
 		ev.preventDefault();
 		Util.fuzzySelect(null, this.state.params.travellers, (data) => {
 			//TODO 去重并设置
-			let sameTraveller = item.innTravellers.find((traveller) => {
-				return traveller.id == data.id
+			let sameTraveller = item.innTravellers.filter((traveller) => {
+				return traveller.userId == data.userId
 			});
-			if(!sameTraveller){
+			if(!sameTraveller.length){
 				item.innTravellers = item.innTravellers.concat(data);
 				this.setState(this.state);
 			}

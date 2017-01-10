@@ -21,45 +21,25 @@ export default class FuzzySelect extends Component {
 	}
 
 	static defaultProps = {
-		defaulyFocus: false,
 		url: "",
 		callback : (data) => {}
 	}
 
 	state = {
-		focus: false,
 		hideResult: true
 	}
 	
 	constructor(props){
 		super(props);
-		this.state.focus = props.defaulyFocus;
 	}
 
 	componentDidMount() {
-		if(this.state.focus){
-			this.onFocus();
-		}
-	}
-
-	onFocus = () => {
-		this.state.focus = true;
 		this.refs.serchInput.focus();
-		this.setState(this.state);
-	}
-
-	onBlur = () => {
-		if(!this.refs.serchInput.value.length){
-			this.state.hideResult = true;
-        	this.state.focus = false;
-			this.setState(this.state);
-		}
 	}
 
 	searchClear = () => {
 		this.refs.serchInput.value = "";
 		this.state.hideResult = true;
-        this.state.focus = false;
 		this.setState(this.state);
 	}
 
@@ -82,17 +62,17 @@ export default class FuzzySelect extends Component {
 	}
 
 	render() {
-		let { focus, hideResult } = this.state;
+		let { hideResult } = this.state;
 		return (
-			<div className="fuzzySelect" onTouchMove = { () => {console.log(1)}}>
-				<div className={classnames("weui-search-bar", {"weui-search-bar_focusing": focus})}>
+			<div className="fuzzySelect">
+				<div className="weui-search-bar weui-search-bar_focusing">
 		            <form className="weui-search-bar__form">
 		                <div className="weui-search-bar__box">
 		                    <i className="weui-icon-search"></i>
-		                    <input type="search" className="weui-search-bar__input" placeholder="搜索" required onBlur = { this.onBlur } onChange = { this.search } ref="serchInput"/>
+		                    <input type="search" className="weui-search-bar__input" placeholder="搜索" required onChange = { this.search } ref="serchInput"/>
 		                    <a href="javascript:" className="weui-icon-clear" onClick = { this.searchClear }></a>
 		                </div>
-		                <label className="weui-search-bar__label" onClick = { this.onFocus }>
+		                <label className="weui-search-bar__label">
 		                    <i className="weui-icon-search"></i>
 		                    <span>搜索</span>
 		                </label>

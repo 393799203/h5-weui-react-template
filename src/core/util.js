@@ -116,8 +116,7 @@ class UtilBase{
 	fuzzySelect = (url, callback) => {
 		FuzzySelect.open({
 			url: url,
-			callback: callback,
-			defaulyFocus: true
+			callback: callback
 		})
 	}
 

@@ -14,13 +14,14 @@ export default class TravelApply extends BaseComponent {
 			deptId: "",
 			travellers: [],
 			reason: "",
-			march: [{
+			marches: [{
 				from: "",
 				to: "",
 				time: moment().format('YYYY-MM-DD'),
 				traffic: ""
 			}],
-			inn: [{
+			inns: [{
+				innCity: "",
 				beginTime: moment().format('YYYY-MM-DD'),
 				endTime: moment().format('YYYY-MM-DD')
 			}]
@@ -73,7 +74,7 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	addMarch = () => {
-		this.state.params.march.push({
+		this.state.params.marches.push({
 			from: "",
 			to: "",
 			time: moment().format('YYYY-MM-DD'),
@@ -83,12 +84,12 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	minuseMarch = () => {
-		this.state.params.march.splice(this.state.params.march.length -1 ,1);
+		this.state.params.marches.splice(this.state.params.march.length -1 ,1);
 		this.setState(this.state);
 	}
 
 	addInn = () => {
-		this.state.params.inn.push({
+		this.state.params.inns.push({
 			beginTime: moment().format('YYYY-MM-DD'),
 			endTime: moment().format('YYYY-MM-DD')
 		});
@@ -96,7 +97,7 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	minuseInn = () => {
-		this.state.params.inn.splice(this.state.params.inn.length -1 ,1);
+		this.state.params.inns.splice(this.state.params.inn.length -1 ,1);
 		this.setState(this.state);
 	}
 
@@ -110,7 +111,7 @@ export default class TravelApply extends BaseComponent {
 		Util.fuzzySelect("/api/base/city/getTripHotelList", (data) => {
 			item[key] = data;
 			if(key == 'to'){
-				this.state.innCityList[index] = data
+				this.state.innCityList[index] = data;
 			}
 			this.setState(this.state);
 		});
@@ -159,14 +160,14 @@ export default class TravelApply extends BaseComponent {
 		        </div>
 		        <div className="weui-cells__title">出行信息</div>
 		        <div className="weui-cells m-t-n">
-		        	<For each = "item" of = { params.march } index = "index">
-			        	<div className={classnames("m-b-sm", {"m-b-n" : index == params.march.length - 1})} key={index}>
+		        	<For each = "march" of = { params.marches } index = "index">
+			        	<div className={classnames("m-b-sm", {"m-b-n" : index == params.marches.length - 1})} key={index}>
 			        		<div className="weui-cell bg-white">
 			        			<div className="weui-cell__hd">
 				                    <label htmlFor="traveller" className="weui-label">出发</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-input" type="text" placeholder="请输入出发城市" value={item.from} onClick = { this.selectCity.bind(this, item, 'from', index) }/>
+				                    <input className="weui-input" type="text" placeholder="请输入出发城市" value={march.from} onClick = { this.selectCity.bind(this, march, 'from', index) }/>
 				                </div>
 				            </div>
 				            <div className="weui-cell bg-white">
@@ -174,7 +175,7 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="traveller" className="weui-label">抵达</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-input" type="text" placeholder="请输入抵达城市" value={item.to} onClick = { this.selectCity.bind(this, item, 'to', index) }/>
+				                    <input className="weui-input" type="text" placeholder="请输入抵达城市" value={march.to} onClick = { this.selectCity.bind(this, march, 'to', index) }/>
 				                </div>
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
@@ -182,16 +183,17 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="date" className="weui-label">日期</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-select" name="date" type="date" value={ item.time } onChange={(e) => { item.time = e.target.value; this.setState(this.state) }}/>
+				                    <input className="weui-select" name="date" type="date" value={ march.time } onChange={(e) => { march.time = e.target.value; this.setState(this.state) }}/>
 				                </div>
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
 				                <div className="weui-cell__hd">
-				                    <label htmlFor="date" className="weui-label">交通</label>
+				                    <label htmlFor="traffic" className="weui-label">交通</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                	<select className="weui-select" name="year" value={item.traffic} onChange={ (e) => { item.traffic = e.target.value; this.setState(this.state) }}>
+				                	<select className="weui-select" name="traffic" value={ march.traffic } onChange={ (e) => { march.traffic = e.target.value; this.setState(this.state) }}>
 				                		<option key="" value = "">请选择交通工具</option>
+				                		<option key = "03" value = "03">汽车</option>
 								    	<option key = "02" value = "02">火车</option>
 								    	<option key = "01" value = "01">飞机</option>
 				                    </select>
@@ -201,15 +203,15 @@ export default class TravelApply extends BaseComponent {
 			        </For>
 		        	<a href="javascript:;" className="text-center block m-t-xs">
 		            	<Icon name="custom-add-circle" className="text-primary" style={{"fontSize":"30px"}} onClick={ this.addMarch }/>
-		            	<If condition={params.march.length > 1}>
+		            	<If condition={params.marches.length > 1}>
 		            		<Icon name="custom-minuse-circle" className="text-danger m-l-xs" style={{"fontSize":"30px"}} onClick={ this.minuseMarch }/>
 		            	</If>
                 	</a>
 		        </div>
 		        <div className="weui-cells__title">住宿信息</div>
 		        <div className="weui-cells m-t-n">
-		        	<For each = "item" of = { params.inn } index = "index">
-			        	<div className={classnames("m-b-sm", {"m-b-n" : index == params.inn.length - 1})} key={index}>
+		        	<For each = "inn" of = { params.inns } index = "index">
+			        	<div className={classnames("m-b-sm", {"m-b-n" : index == params.inns.length - 1})} key={index}>
 				        	<div className="weui-cell bg-white p-v-xs">
 				                <div className="weui-cell__hd">
 				                    <label htmlFor="traveller" className="weui-label">住宿人</label>
@@ -228,12 +230,13 @@ export default class TravelApply extends BaseComponent {
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
 				                <div className="weui-cell__hd">
-				                    <label htmlFor="date" className="weui-label">入住城市</label>
+				                    <label htmlFor="innCity" className="weui-label">入住城市</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <select className="weui-select" name="innCity" value={ item.innCity } onChange={ (e) => { item.innCity = e.target.value; this.setState(this.state);}}>
+				                    <select className="weui-select" name="innCity" value={ inn.innCity } onChange = { (e)=>{ inn.innCity = e.target.value; this.setState(this.state) }}>
+				                    	<option value="" key="">请选择入住城市</option>
 				                    	<For each = "city" of = { innCityList } index = "index">
-				                    		<option value={ city } key={index}>{ city }</option>
+				                    		<option value={ city } key={ index }>{ city }</option>
 				                    	</For>
 				                    </select>
 				                </div>
@@ -243,7 +246,7 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="date" className="weui-label">入住日期</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-select" name="beginTime" type="date" value={ item.beginTime } onChange={(e) => { item.beginTime = e.target.value; this.setState(this.state) }}/>
+				                    <input className="weui-select" name="beginTime" type="date" value={ inn.beginTime } onChange={(e) => { inn.beginTime = e.target.value; this.setState(this.state) }}/>
 				                </div>
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
@@ -251,14 +254,14 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="date" className="weui-label">离开日期</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-select" name="endTime" type="date" value={ item.endTime } onChange={(e) => { item.endTime = e.target.value; this.setState(this.state) }}/>
+				                    <input className="weui-select" name="endTime" type="date" value={ inn.endTime } onChange={(e) => { inn.endTime = e.target.value; this.setState(this.state) }}/>
 				                </div>
 				            </div>
 			            </div>
 		            </For>
 		            <a href="javascript:;" className="text-center block m-t-xs">
 		            	<Icon name="custom-add-circle" className="text-primary" style={{"fontSize":"30px"}} onClick={ this.addInn }/>
-		            	<If condition={params.inn.length > 1}>
+		            	<If condition={params.inns.length > 1}>
 		            		<Icon name="custom-minuse-circle" className="text-danger m-l-xs" style={{"fontSize":"30px"}} onClick={ this.minuseInn }/>
 		            	</If>
                 	</a>

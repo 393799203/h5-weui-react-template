@@ -5,7 +5,6 @@ html, body {
     height: 100%;
     -webkit-tap-highlight-color: transparent;
     font-size:$text-normal;
-    line-height:1.2;
 }
 body{
     font-family: -apple-system-font, "Helvetica Neue", Helvetica, sans-serif;
@@ -73,6 +72,10 @@ a{
   &:after{
     border-bottom: none;
   }
+}
+.weui-select{
+  height: 40px;
+  line-height: 40px;
 }
 .weui-cell{
   font-size: 14px;

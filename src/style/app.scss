@@ -17,6 +17,44 @@
 	background: $body-background;
 }
 
+.noscroll{
+	height: 100%;
+	overflow: hidden;
+}
+
+.user{
+	width: 34px;
+	height:34px;
+	display: block;
+	position: relative;
+	float: left;
+	margin: 4px 5px;
+	overflow: hidden;
+	.user_avatar{
+		width: 100%;
+	}
+	.user_name{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 16px;
+		line-height: 16px;
+		color: #fff;
+		background: #333;
+		opacity: 0.8;
+		font-size: 12px;
+		text-align: center;
+	}
+	.user_delete{
+		position: absolute;
+		font-size: 20px;
+	    top: -8px;
+	    color: red;
+	    right: -1px;
+	}
+}
+
 
 
 

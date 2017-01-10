@@ -1,4 +1,5 @@
 import Toast from 'components/toast';
+import FuzzySelect from 'components/fuzzySelect';
 
 //基础工具
 class UtilBase{
@@ -109,6 +110,14 @@ class UtilBase{
 			msg: msg,
 			duration: duration,
 			callback: callback
+		})
+	}
+
+	fuzzySelect = (url, callback) => {
+		FuzzySelect.open({
+			url: url,
+			callback: callback,
+			defaulyFocus: true
 		})
 	}
 

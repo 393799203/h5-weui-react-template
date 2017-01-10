@@ -542,6 +542,9 @@
 .text-primary{
     color: $color-primary;
 }
+.text-danger {
+    color: red;
+}
 .svg-light{
     fill: $color-light;
 }
@@ -826,4 +829,6 @@
 .white{
 	color:#fff;
 }
+
+
 

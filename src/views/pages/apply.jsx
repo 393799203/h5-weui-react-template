@@ -22,6 +22,7 @@ export default class TravelApply extends BaseComponent {
 			}],
 			inns: [{
 				innCity: "",
+				innTravellers: [],
 				beginTime: moment().format('YYYY-MM-DD'),
 				endTime: moment().format('YYYY-MM-DD')
 			}]
@@ -41,6 +42,7 @@ export default class TravelApply extends BaseComponent {
 			this.state.params.nickName = res[0].data.nickName;
 			this.state.params.deptName = res[0].data.biz1thDeptName;
 			this.state.params.travellers.push(this.simpleUser(res[0].data));
+
 			this.setState(this.state);
 		}, (err) => {
 			setTimeout(()=>{
@@ -62,6 +64,25 @@ export default class TravelApply extends BaseComponent {
 
 	deleteUser = (index) => {
 		this.state.params.travellers.splice(index, 1);
+		this.setState(this.state);
+	}
+
+	addInnTravellers = (item, ev) => {
+		ev.preventDefault();
+		Util.fuzzySelect(null, this.state.params.travellers, (data) => {
+			//TODO 去重并设置
+			let sameTraveller = item.innTravellers.find((traveller) => {
+				return traveller.id == data.id
+			});
+			if(!sameTraveller){
+				item.innTravellers = item.innTravellers.concat(data);
+				this.setState(this.state);
+			}
+		}, 'nickName');
+	}
+
+	deleteInnTraveller = (item, index) => {
+		item.innTravellers.splice(index, 1);
 		this.setState(this.state);
 	}
 
@@ -90,6 +111,8 @@ export default class TravelApply extends BaseComponent {
 
 	addInn = () => {
 		this.state.params.inns.push({
+			innCity: "",
+			innTravellers: [],
 			beginTime: moment().format('YYYY-MM-DD'),
 			endTime: moment().format('YYYY-MM-DD')
 		});
@@ -108,13 +131,13 @@ export default class TravelApply extends BaseComponent {
 
 	selectCity = (item, key, index, ev) => {
 		ev.preventDefault();
-		Util.fuzzySelect("/api/base/city/getTripHotelList", (data) => {
-			item[key] = data;
+		Util.fuzzySelect("/api/base/city/getTripHotelList", null, (data) => {
+			item[key] = data['cityName'];
 			if(key == 'to'){
 				this.state.innCityList[index] = data;
 			}
 			this.setState(this.state);
-		});
+		}, 'cityName');
 	}
 
 	render() {
@@ -217,13 +240,13 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="traveller" className="weui-label">住宿人</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                	<a href="javascript:;" className="user addUser"  onClick={ this.addUser }>
+				                	<a href="javascript:;" className="user addUser"  onClick={ this.addInnTravellers.bind(this, inn) }>
 						            	<Icon name="custom-add" className="text-primary" style={{"fontSize":"34px"}}/>
 				                	</a>
-				                	<For each = "item" of = { params.travellers } index = "index">
-				                		<a href="javascript:;" className="user delUser" key={item.userId} onClick={ this.deleteUser.bind(this, index) }> 
-				                			<img className="user_avatar" src={item.avatar} />
-				                			<div className="user_name">{item.nickName}</div>
+				                	<For each = "innTraveller" of = { inn.innTravellers } index = "index">
+				                		<a href="javascript:;" className="user delUser" key={innTraveller.userId} onClick={ this.deleteInnTraveller.bind(this, inn, index) }> 
+				                			<img className="user_avatar" src={innTraveller.avatar} />
+				                			<div className="user_name">{innTraveller.nickName}</div>
 				                		</a>
 				                	</For>
 				                </div>
@@ -236,7 +259,7 @@ export default class TravelApply extends BaseComponent {
 				                    <select className="weui-select" name="innCity" value={ inn.innCity } onChange = { (e)=>{ inn.innCity = e.target.value; this.setState(this.state) }}>
 				                    	<option value="" key="">请选择入住城市</option>
 				                    	<For each = "city" of = { innCityList } index = "index">
-				                    		<option value={ city } key={ index }>{ city }</option>
+				                    		<option value={ city.id } key={ index }>{ city.cityName }</option>
 				                    	</For>
 				                    </select>
 				                </div>

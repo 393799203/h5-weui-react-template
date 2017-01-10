@@ -113,10 +113,12 @@ class UtilBase{
 		})
 	}
 
-	fuzzySelect = (url, callback) => {
+	fuzzySelect = (url, dataSource, callback, key) => {
 		FuzzySelect.open({
 			url: url,
-			callback: callback
+			dataSource: dataSource,
+			callback: callback,
+			indexKey: key
 		})
 	}
 

@@ -22,7 +22,9 @@ export default class FuzzySelect extends Component {
 
 	static defaultProps = {
 		url: "",
-		callback : (data) => {}
+		dataSource: [],
+		callback : (data) => {},
+		indexKey: ""
 	}
 
 	state = {
@@ -35,8 +37,13 @@ export default class FuzzySelect extends Component {
 	}
 
 	componentDidMount() {
-		this.refs.serchInput.focus();
-		this.search();
+		if(this.props.url){
+			this.refs.serchInput.focus();
+			this.search();
+		}else if(this.props.dataSource.length){
+			this.state.list = this.props.dataSource;
+			this.setState(this.state);
+		}
 	}
 
 	searchClear = () => {
@@ -63,6 +70,7 @@ export default class FuzzySelect extends Component {
 	}
 
 	render() {
+		let indexKey = this.props.indexKey;
 		let { hideResult, alwaysList, list } = this.state;
 		return (
 			<div className="fuzzySelect">
@@ -85,10 +93,10 @@ export default class FuzzySelect extends Component {
 		            <div className="always-tags flexbox flex-wrap">
 		            	<If condition = { alwaysList.length }>
 			            	<For each = "item" of = { alwaysList } index = "index">
-			            		<a className="tag flex-1 text-center" href="javascript:;" key={index} onClick = {this.selected.bind(this, item)}>{item}</a>
+			            		<a className="tag flex-1 text-center" href="javascript:;" key={index} onClick = {this.selected.bind(this, item)}>{item[indexKey]}</a>
 			            	</For>
 			            <Else/>
-			            	<div className="text-center text-light">暂无数据~</div>
+			            	<div className="text-center text-light flex-1">暂无数据~</div>
 			            </If>
 		            </div>
 		            <div className="weui-cells__title">查询</div>
@@ -97,7 +105,7 @@ export default class FuzzySelect extends Component {
 			            	<For each = "item" of = { list } index = "index">
 			            		<div className="weui-cell weui-cell_access" key={index} onClick = {this.selected.bind(this, item)}>
 					                <div className="weui-cell__bd weui-cell_primary">
-					                    <p>{item}</p>
+					                    <p>{item[indexKey]}</p>
 					                </div>
 					            </div>
 			            	</For>

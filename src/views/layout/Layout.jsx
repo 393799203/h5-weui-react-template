@@ -51,7 +51,6 @@ export default class Layout extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
 		this.state.activeArray = [];
 		this.state.tabBarDataList = this.tabBarDataListAudit;
 		this.state.tabBarDataList.map((item, index)=>{

@@ -26,7 +26,8 @@ export default class FuzzySelect extends Component {
 	}
 
 	state = {
-		hideResult: true
+		alwaysList: [],
+		list: []
 	}
 	
 	constructor(props){
@@ -35,21 +36,21 @@ export default class FuzzySelect extends Component {
 
 	componentDidMount() {
 		this.refs.serchInput.focus();
+		this.search();
 	}
 
 	searchClear = () => {
 		this.refs.serchInput.value = "";
-		this.state.hideResult = true;
-		this.setState(this.state);
+		this.search();
 	}
 
 	search = () => {
-		this.state.hideResult = !this.refs.serchInput.value.length ? true : false
 		//ajax
-		Ajax.post(this.props.url, {key: this.refs.serchInput.value}).then((res) => {
-
+		Ajax.get(this.props.url, {key: this.refs.serchInput.value}).then((res) => {
+			this.state.alwaysList = res.data.commonList || [];
+			this.state.list = res.data.indistinctList || [];
+			this.setState(this.state);
 		})
-		this.setState(this.state);
 	}
 
 	searchCancel = () => {
@@ -62,7 +63,7 @@ export default class FuzzySelect extends Component {
 	}
 
 	render() {
-		let { hideResult } = this.state;
+		let { hideResult, alwaysList, list } = this.state;
 		return (
 			<div className="fuzzySelect">
 				<div className="weui-search-bar weui-search-bar_focusing">
@@ -79,19 +80,31 @@ export default class FuzzySelect extends Component {
 		            </form>
 		            <a href="javascript:" className="weui-search-bar__cancel-btn" onClick = { this.searchCancel }>取消</a>
 		        </div>
-		        <div className={classnames("weui-cells searchbar-result", {"hide" : hideResult})}>
-		        	<div className="weui-cell weui-cell_access">
-		                <div className="weui-cell__bd weui-cell_primary">
-		                    <p>常用</p>
-		                </div>
+		        <div className="weui-cells searchbar-result">
+		        	<div className="weui-cells__title">常用</div>
+		            <div className="always-tags flexbox flex-wrap">
+		            	<If condition = { alwaysList.length }>
+			            	<For each = "item" of = { alwaysList } index = "index">
+			            		<a className="tag flex-1 text-center" href="javascript:;" key={index} onClick = {this.selected.bind(this, item)}>{item}</a>
+			            	</For>
+			            <Else/>
+			            	<div className="text-center text-light">暂无数据~</div>
+			            </If>
 		            </div>
-		            <div className="always-tags"></div>
-		            <div className="weui-cell weui-cell_access">
-		                <div className="weui-cell__bd weui-cell_primary">
-		                    <p>结果</p>
-		                </div>
+		            <div className="weui-cells__title">查询</div>
+		            <div className="result-tags">
+		            	<If condition = { list.length }>
+			            	<For each = "item" of = { list } index = "index">
+			            		<div className="weui-cell weui-cell_access" key={index} onClick = {this.selected.bind(this, item)}>
+					                <div className="weui-cell__bd weui-cell_primary">
+					                    <p>{item}</p>
+					                </div>
+					            </div>
+			            	</For>
+			            <Else/>
+			            	<div className="text-center text-light">暂无数据~</div>
+			            </If>
 		            </div>
-		            <div className="result-tags"></div>
 		        </div>
 		    </div>
 		)

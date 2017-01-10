@@ -8,5 +8,14 @@
 	bottom: 0;
 	right: 0;
 	z-index: 501;
-	opacity: 0.9;
+}
+.always-tags{
+	padding: 0 10px;
+}
+.tag{
+	padding: 3px 15px;
+	border: 1px solid #aaa;
+	margin: 3px 5px;
+	color: #888;
+	border-radius: 2px;
 }

@@ -105,14 +105,18 @@ export default class TravelApply extends BaseComponent {
 		this.setState(this.state);
 	}
 
-	selectCity = () => {
-		Util.fuzzySelect("cccc", (data) => {
-			console.log(data)
-		})
+	selectCity = (item, key, index, ev) => {
+		ev.preventDefault();
+		Util.fuzzySelect("/api/base/city/getTripHotelList", (data) => {
+			item[key] = data;
+			if(key == 'to'){
+				this.state.innCityList[index] = data
+			}
+			this.setState(this.state);
+		});
 	}
 
 	render() {
-		console.log(this.props);
 		let { innCityList, params, disabled, showCitySelectModule } = this.state;
 		return (
 			<div className="apply">
@@ -162,7 +166,7 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="traveller" className="weui-label">出发</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-input" type="text" placeholder="请输入出发城市" value={item.from} onClick = { this.selectCity }/>
+				                    <input className="weui-input" type="text" placeholder="请输入出发城市" value={item.from} onClick = { this.selectCity.bind(this, item, 'from', index) }/>
 				                </div>
 				            </div>
 				            <div className="weui-cell bg-white">
@@ -170,7 +174,7 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="traveller" className="weui-label">抵达</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-input" type="text" placeholder="请输入抵达城市" value={item.to} onClick = { this.selectCity }/>
+				                    <input className="weui-input" type="text" placeholder="请输入抵达城市" value={item.to} onClick = { this.selectCity.bind(this, item, 'to', index) }/>
 				                </div>
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">

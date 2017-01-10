@@ -713,7 +713,7 @@
 .hide{
 	display:none;
 }
-.d-f{
+.flexbox{
 	display: flex;
 	@include flexbox;
 }
@@ -738,7 +738,6 @@
 	-moz-flex-grow: 1;
 	-ms-flex-positive: 1;
 	flex-grow: 1;
-	width:100px;
 }
 .flex-col{
 		@include flex-direction(column);
@@ -746,13 +745,13 @@
 .flex-row{
 		@include flex-direction(row);
 }
-.j-center{
-	@include justify-content(center);
+.flex-center{
+	@include justify-content(flex-center);
+}
+.flex-space-around{
+  @include justify-content(space-around);
 }
 
-.a-i-c{
-	@include align-items(center);
-}
 /**border*/
 .b{
 	border:1px solid $border-color;

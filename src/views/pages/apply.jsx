@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { browserHistory, Link } from  'react-router'
 import BaseComponent from 'core/baseComponent';
 import classnames from 'classnames';
 import Ajax from 'core/ajax';
@@ -10,15 +11,15 @@ export default class TravelApply extends BaseComponent {
 	state = {
 		params: {
 			nickName: "",
-			deptName: "",//也要ID
+			deptName: "",
 			deptId: "",
 			travellers: [],
 			reason: "",
 			marches: [{
-				from: "",
-				to: "",
-				time: moment().format('YYYY-MM-DD'),
-				traffic: ""
+				fromCity: "",
+				toCity: "",
+				departDate: moment().format('YYYY-MM-DD'),
+				trafficType: ""
 			}],
 			inns: [{
 				innCity: "",
@@ -41,6 +42,7 @@ export default class TravelApply extends BaseComponent {
 		Promise.all([getCurrentUserPromise]).then(res => {
 			this.state.params.nickName = res[0].data.nickName;
 			this.state.params.deptName = res[0].data.biz1thDeptName;
+			this.state.params.deptId = res[0].data.biz1thDeptId;
 			this.state.params.travellers.push(this.simpleUser(res[0].data));
 			this.setState(this.state);
 		}, (err) => {
@@ -105,10 +107,10 @@ export default class TravelApply extends BaseComponent {
 
 	addMarch = () => {
 		this.state.params.marches.push({
-			from: "",
-			to: "",
-			time: moment().format('YYYY-MM-DD'),
-			traffic: ""
+			fromCity: "",
+			toCity: "",
+			departDate: moment().format('YYYY-MM-DD'),
+			trafficType: ""
 		});
 		this.setState(this.state);
 	}
@@ -134,15 +136,45 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	submit = () => {
+		let postData = this.processData();
+		Util.startLoading("处理中~");
 		this.state.disabled = true;
 		this.setState(this.state);
+		Ajax.post('/api/trip/apply', postData).then(res => {
+			Util.success("操作成功", 1500, ()=>{
+				browserHistory.replace('/my');
+			});
+			this.state.disabled = false;
+			this.setState(this.state);
+		}, (err) => {
+			this.state.disabled = false;
+			this.setState(this.state);
+		})
+	}
+
+	processData = () => {
+		let params = JSON.parse(JSON.stringify(this.state.params));//深拷贝
+		params.travellers.forEach((item, index)=>{
+			params.travellers[index] = item.nickName;
+		})
+		//转出行时间格式
+		params.marches.forEach((item, index)=>{
+			item.departDate = moment(item.departDate, 'YYYY-MM-DD').format('YYYYMMDD')
+		})
+		//转人员数据格式
+		params.inns.forEach((item, index)=>{
+			item.innTravellers.forEach((traveller, ii)=>{
+				params.inns[index].innTravellers[ii] = traveller.nickName;
+			})
+		})
+		return params
 	}
 
 	selectCity = (item, key, index, ev) => {
 		ev.preventDefault();
 		Util.fuzzySelect("/api/base/city/getTripHotelList", null, (data) => {
 			item[key] = data['cityName'];
-			if(key == 'to'){
+			if(key == 'toCity'){
 				this.state.innCityList[index] = data;
 			}
 			this.setState(this.state);
@@ -199,7 +231,7 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="traveller" className="weui-label">出发</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-input" type="text" placeholder="请输入出发城市" value={march.from} onClick = { this.selectCity.bind(this, march, 'from', index) }/>
+				                    <input className="weui-input" type="text" placeholder="请输入出发城市" value={march.fromCity} onClick = { this.selectCity.bind(this, march, 'fromCity', index) }/>
 				                </div>
 				            </div>
 				            <div className="weui-cell bg-white">
@@ -207,7 +239,7 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="traveller" className="weui-label">抵达</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-input" type="text" placeholder="请输入抵达城市" value={march.to} onClick = { this.selectCity.bind(this, march, 'to', index) }/>
+				                    <input className="weui-input" type="text" placeholder="请输入抵达城市" value={march.toCity} onClick = { this.selectCity.bind(this, march, 'toCity', index) }/>
 				                </div>
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
@@ -215,7 +247,7 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="date" className="weui-label">日期</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-select" name="date" type="date" value={ march.time } onChange={(e) => { march.time = e.target.value; this.setState(this.state) }}/>
+				                    <input className="weui-select" name="date" type="date" value={ march.departDate } onChange={(e) => { march.departDate = e.target.value; this.setState(this.state) }}/>
 				                </div>
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
@@ -223,11 +255,11 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="traffic" className="weui-label">交通</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                	<select className="weui-select" name="traffic" value={ march.traffic } onChange={ (e) => { march.traffic = e.target.value; this.setState(this.state) }}>
+				                	<select className="weui-select" name="traffic" value={ march.trafficType } onChange={ (e) => { march.trafficType = e.target.value; this.setState(this.state) }}>
 				                		<option key="" value = "">请选择交通工具</option>
-				                		<option key = "03" value = "03">汽车</option>
-								    	<option key = "02" value = "02">火车</option>
-								    	<option key = "01" value = "01">飞机</option>
+				                		<option key = "2" value = "2">汽车</option>
+								    	<option key = "0" value = "0">火车</option>
+								    	<option key = "1" value = "1">飞机</option>
 				                    </select>
 				                </div>
 				            </div>
@@ -268,7 +300,7 @@ export default class TravelApply extends BaseComponent {
 				                    <select className="weui-select" name="innCity" value={ inn.innCity } onChange = { (e)=>{ inn.innCity = e.target.value; this.setState(this.state) }}>
 				                    	<option value="" key="">请选择入住城市</option>
 				                    	<For each = "city" of = { innCityList } index = "index">
-				                    		<option value={ city.id } key={ index }>{ city.cityName }</option>
+				                    		<option value={ city.cityName } key={ index }>{ city.cityName }</option>
 				                    	</For>
 				                    </select>
 				                </div>

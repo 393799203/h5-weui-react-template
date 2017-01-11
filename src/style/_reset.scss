@@ -92,6 +92,11 @@ a{
     overflow: hidden;
   }
 }
+.weui-cells_checkbox{
+  .weui-cell__hd,.weui-cell__bd{
+    pointer-events: none;
+  }
+}
 .weui-form-preview{
   margin-bottom: 0.5em;
   .weui-form-preview__hd, .weui-form-preview__bd{

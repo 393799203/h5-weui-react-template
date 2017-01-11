@@ -1,5 +1,6 @@
 import Toast from 'components/toast';
 import FuzzySelect from 'components/fuzzySelect';
+import FuzzyUser from 'components/fuzzyUser';
 
 //基础工具
 class UtilBase{
@@ -119,6 +120,14 @@ class UtilBase{
 			dataSource: dataSource,
 			callback: callback,
 			indexKey: key
+		})
+	}
+
+	fuzzyUser = (selectedIds, dataSource, callback) => {
+		FuzzyUser.open({
+			selectedIds: selectedIds,
+			dataSource: dataSource,
+			callback: callback
 		})
 	}
 

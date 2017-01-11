@@ -66,8 +66,9 @@ export default class TravelApply extends BaseComponent {
 		this.setState(this.state);
 	}
 
-	addInnTravellers = (item, ev) => {
+	addInnTravellers = (item) => {
 		let userIds = item.innTravellers.map((innTraveller, index) => innTraveller.userId);
+		// console.log(this.state.params.travellers)
 		Util.fuzzyUser(userIds ,this.state.params.travellers, (data) => {
 			item.innTravellers = data;
 			this.setState(this.state);
@@ -113,7 +114,7 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	minuseInn = () => {
-		this.state.params.inns.splice(this.state.params.inn.length -1 ,1);
+		this.state.params.inns.splice(this.state.params.inns.length -1 ,1);
 		this.setState(this.state);
 	}
 

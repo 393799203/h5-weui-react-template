@@ -37,18 +37,17 @@ export default class FuzzyUser extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props.selectedIds)
 		if(this.props.dataSource.length){
 			this.state.disableSerach = true;
-			//设置默认
 			this.state.list = this.props.dataSource.map((user, index)=>{
+				let cpUser = Object.assign({}, user);
 				for(var i = 0; i < this.props.selectedIds.length; i++){
-					if(user.userId == this.props.selectedIds[i]){
-						user.checked = true;
-						this.state.batchSelectedList.push(user);
+					if(cpUser.userId == this.props.selectedIds[i]){
+						cpUser.checked = true;
+						this.state.batchSelectedList.push(cpUser);
 					}
 				}
-				return user
+				return cpUser
 			});
 			this.setState(this.state);
 		}else{
@@ -88,6 +87,7 @@ export default class FuzzyUser extends Component {
 			}
 		}
 		data.checked = ev.target.checked;
+		console.log(this.state.list, this.props.dataSource);
 		this.setState(this.state);
 	}
 

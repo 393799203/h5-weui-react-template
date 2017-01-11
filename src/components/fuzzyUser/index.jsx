@@ -43,8 +43,8 @@ export default class FuzzyUser extends Component {
 				let cpUser = Object.assign({}, user);
 				for(var i = 0; i < this.props.selectedIds.length; i++){
 					if(cpUser.userId == this.props.selectedIds[i]){
-						cpUser.checked = true;
 						this.state.batchSelectedList.push(cpUser);
+						cpUser.checked = true;
 					}
 				}
 				return cpUser
@@ -87,7 +87,6 @@ export default class FuzzyUser extends Component {
 			}
 		}
 		data.checked = ev.target.checked;
-		console.log(this.state.list, this.props.dataSource);
 		this.setState(this.state);
 	}
 

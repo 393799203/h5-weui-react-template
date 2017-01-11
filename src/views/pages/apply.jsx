@@ -62,7 +62,8 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	deleteUser = (index) => {
-		this.state.params.travellers.splice(index, 1);
+		let deletedUsers = this.state.params.travellers.splice(index, 1);
+		this.checkDeleteInnTraveller(deletedUsers[0]);
 		this.setState(this.state);
 	}
 
@@ -78,6 +79,20 @@ export default class TravelApply extends BaseComponent {
 	deleteInnTraveller = (item, index) => {
 		item.innTravellers.splice(index, 1);
 		this.setState(this.state);
+	}
+
+	checkDeleteInnTraveller = (user) => {
+		this.state.params.inns.forEach((inn) => {
+			let index = -1;
+			for(var i = 0; i < inn.innTravellers.length; i++){
+				if(inn.innTravellers[i].userId == user.userId){
+					index = i;
+				}
+			}
+			if(index != -1){
+				inn.innTravellers.splice(index, 1);
+			}
+		})
 	}
 
 	simpleUser = (user) => {

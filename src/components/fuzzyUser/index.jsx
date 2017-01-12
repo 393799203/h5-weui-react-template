@@ -126,7 +126,9 @@ export default class FuzzyUser extends Component {
 						                    <i className="weui-icon-checked"></i>
 						                </div>
 						                <div className="weui-cell__bd">
-						                	<img className="avatar m-r-xs" src={item.avatar} />
+						                	<div className="avatar m-r-xs">
+						                		<img src={item.avatar} />
+						                	</div>
 						                	<span className="usernick">{item.nickName}</span>
 						                </div>
 						            </label>

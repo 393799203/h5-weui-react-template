@@ -1,8 +1,12 @@
 .avatar{
 	width: 26px;
-    margin-right: 5px;
+	height: 26px;
     display: inline-block;
     vertical-align: middle;
+    overflow: hidden;
+    img{
+    	width: 100%
+    }
 }
 .usernick{
 	display: inline-block;

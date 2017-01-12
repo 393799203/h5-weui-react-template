@@ -46,6 +46,21 @@ export default class Application extends BaseComponent {
 		return this.getList(this.state.currentIndex); 
 	}
 
+	cancel = (item, index) => {
+		let postData = {
+			id: item.applyId
+		}
+		Util.startLoading("撤销中");
+		Ajax.post("/api/trip/cancel", postData).then((res) => {
+			console.log(index);
+			Util.success("操作成功", 1500, ()=>{
+				this.state.list.splice(index, 1);
+				this.setState(this.state);
+			});
+		}, (err) => {
+		})
+	}
+
 	render() {
 		let params = this.state.params;
 		let ajaxUrl = this.state.ajaxUrl;
@@ -79,14 +94,11 @@ export default class Application extends BaseComponent {
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">
-			            <If condition={item.viewerOperateItems.indexOf(21)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/audit/${item.id}` , query: { "updated": item.updated}}}>审核</Link>
-			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(10)!=-1}>
 			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/detail/${item.id}` , query: { "updated": item.updated}}}>查看</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(90)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/detail/${item.id}` , query: { "updated": item.updated}}}>撤销</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" onClick={this.cancel.bind(this, item, index)}>撤销</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(100)!=-1}>
 			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/detail/${item.id}` , query: { "updated": item.updated}}}>预订</Link>

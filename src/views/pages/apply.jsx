@@ -116,7 +116,7 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	minuseMarch = () => {
-		this.state.params.marches.splice(this.state.params.march.length -1 ,1);
+		this.state.params.marches.splice(this.state.params.marches.length -1 ,1);
 		this.setState(this.state);
 	}
 
@@ -252,10 +252,10 @@ export default class TravelApply extends BaseComponent {
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
 				                <div className="weui-cell__hd">
-				                    <label htmlFor="traffic" className="weui-label">交通</label>
+				                    <label htmlFor={`traffoc${index}`} className="weui-label">交通</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                	<select className="weui-select" name="traffic" value={ march.trafficType } onChange={ (e) => { march.trafficType = e.target.value; this.setState(this.state) }}>
+				                	<select className="weui-select" id={`traffoc${index}`} value={ march.trafficType } onChange={ (e) => { march.trafficType = e.target.value; this.setState(this.state) }}>
 				                		<option key="" value = "">请选择交通工具</option>
 				                		<option key = "2" value = "2">汽车</option>
 								    	<option key = "0" value = "0">火车</option>
@@ -294,10 +294,10 @@ export default class TravelApply extends BaseComponent {
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
 				                <div className="weui-cell__hd">
-				                    <label htmlFor="innCity" className="weui-label">入住城市</label>
+				                    <label htmlFor={`innCity${index}`} className="weui-label">入住城市</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <select className="weui-select" name="innCity" value={ inn.innCity } onChange = { (e)=>{ inn.innCity = e.target.value; this.setState(this.state) }}>
+				                    <select className="weui-select" id={`innCity${index}`} value={ inn.innCity } onChange = { (e)=>{ inn.innCity = e.target.value; this.setState(this.state) }}>
 				                    	<option value="" key="">请选择入住城市</option>
 				                    	<For each = "city" of = { innCityList } index = "index">
 				                    		<option value={ city.cityName } key={ index }>{ city.cityName }</option>

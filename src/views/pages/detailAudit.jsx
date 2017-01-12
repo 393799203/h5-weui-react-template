@@ -25,7 +25,7 @@ export default class ExpenseDetail extends BaseComponent {
 
 	componentDidMount() {
 	 	Util.startLoading();
-		Ajax.get("/api/expense/request/detail", {id: this.props.params.id, updated: this.props.location.query.updated}).then((res)=>{
+		Ajax.get("/api/trip/detail", {id: this.props.params.id}).then((res)=>{
 			this.state.detailInfo = res.data;
 			if(this.props.route.path.indexOf('audit') != -1){
 				this.state.showAudit = true;
@@ -35,9 +35,9 @@ export default class ExpenseDetail extends BaseComponent {
 		}, (err) => {
 			setTimeout(()=>{
 				if(this.props.route.path.indexOf('audit') != -1){
-					Util.popWindow("/expense/audit");
+					Util.popWindow("/audit");
 				}else{
-					Util.popWindow("/expense/audited");
+					Util.popWindow("/audited");
 				}
 			}, 2000)
 		});     

@@ -95,13 +95,13 @@ export default class Application extends BaseComponent {
 			            </div>
 			            <div className="weui-form-preview__ft">
 			            <If condition={item.viewerOperateItems.indexOf(10)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/detail/${item.id}` , query: { "updated": item.updated}}}>查看</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/detail/${item.applyId}`}}>查看</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(90)!=-1}>
 			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" onClick={this.cancel.bind(this, item, index)}>撤销</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(100)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/detail/${item.id}` , query: { "updated": item.updated}}}>预订</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/detail/${item.applyId}` , query: { "updated": item.updated}}}>预订</Link>
 			            </If>
 			            </div>
 			        </div>

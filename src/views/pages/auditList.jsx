@@ -19,7 +19,7 @@ export default class auditList extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("报销审批");
+		Util.setTitle("差旅审批");
 		this.onRefresh();
 	}
 

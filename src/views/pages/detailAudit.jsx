@@ -20,7 +20,7 @@ export default class ExpenseDetail extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("报销详情");
+		Util.setTitle("差旅详情");
 	}
 
 	componentDidMount() {
@@ -77,47 +77,39 @@ export default class ExpenseDetail extends BaseComponent {
 			<div className="detail">
 				<div className="weui-cells__title">基本信息</div>
 				<div className="weui-cells m-t-n bg-white">
-		            <div className="weui-cell">
+					<div className="weui-cell bg-white">
 		                <div className="weui-cell__bd">
-		                    <p>申请人</p>
+		                    <div className="pull-left">申请人</div>
+		                    <div className="pull-right m-r-sm text-light">{ detailInfo.applyNickname }</div>
 		                </div>
-		                <div className="weui-cell__ft">{detailInfo.applyNickName}</div>
+		                <div className="weui-cell__bd">
+		                    <div className="pull-left m-l-sm">时间</div>
+		                    <div className="pull-right text-light">{ detailInfo.applyDateString }</div>
+		                </div>
 		            </div>
 		            <div className="weui-cell">
 		                <div className="weui-cell__bd">
-		                    <p>申请时间</p>
+		                    <p>部门</p>
 		                </div>
-		                <div className="weui-cell__ft">{detailInfo.applyDate}</div>
+		                <div className="weui-cell__ft">{detailInfo.departName}</div>
 		            </div>
 		            <div className="weui-cell">
 		                <div className="weui-cell__bd">
-		                    <p>费用归属部门</p>
+		                    <p>出行人</p>
 		                </div>
-		                <div className="weui-cell__ft">{detailInfo.deptName}</div>
+		                <div className="weui-cell__ft">{detailInfo.passengers}</div>
 		            </div>
 		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>费用归属公司</p>
-		                </div>
-		                <div className="weui-cell__ft">{detailInfo.companyName}</div>
-		            </div>
-		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>总计金额</p>
-		                </div>
-		                <div className="weui-cell__ft">{Util.money(detailInfo.amt || 0)}</div>
-		            </div>
-		            <div className="weui-cell">
-			            <If condition={ detailInfo.content && detailInfo.content.length > 15 }>
+			            <If condition={ detailInfo.reason && detailInfo.reason.length > 15 }>
 			            	<div className="weui-media-box_text">
-			                    <h4 className="weui-media-box__title">报销说明</h4>
-			                    <p className="weui-media-box__desc text-normal">{detailInfo.content}</p>
+			                    <h4 className="weui-media-box__title">出行事由</h4>
+			                    <p className="weui-media-box__desc text-normal">{detailInfo.reason}</p>
 			                </div>
 			            <Else />
 			                <div className="weui-cell__bd">
-			                    <p>报销说明</p>
+			                    <p>出行事由</p>
 			                </div>
-			                <div className="weui-cell__ft">{detailInfo.content}</div>
+			                <div className="weui-cell__ft">{detailInfo.reason}</div>
 			            </If>
 		            </div>
 		        </div>

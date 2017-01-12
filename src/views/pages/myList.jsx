@@ -57,7 +57,7 @@ export default class Application extends BaseComponent {
 			            <div className="weui-form-preview__hd">
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">行程</label>
-			                    <em className="weui-form-preview__value">{`${item.fromCity}-${item.toCity}`}</em>
+			                    <em className="weui-form-preview__value">{`${item.fromCity}-${item.toCities}`}</em>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__bd">
@@ -68,6 +68,14 @@ export default class Application extends BaseComponent {
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">出行人</label>
 			                    <span className="weui-form-preview__value">{item.passengers}</span>
+			                </div>
+			                <div className="weui-form-preview__item">
+			                    <label className="weui-form-preview__label">时间</label>
+			                    <span className="weui-form-preview__value">{item.departDateString}</span>
+			                </div>
+			                <div className="weui-form-preview__item">
+			                    <label className="weui-form-preview__label">状态</label>
+			                    <span className="weui-form-preview__value">{item.assigneeNickname?`${item.statusName}(${item.assigneeNickname})`: `${item.statusName}`}</span>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">

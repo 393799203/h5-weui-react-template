@@ -11,7 +11,7 @@ export default class auditList extends BaseComponent {
 		params: {
 			"outlineType": 3
 		},
-		ajaxUrl: "/api/expense/request/getMyOutlineList",
+		ajaxUrl: "/api/trip/getMyOutlineList",
 		isEnd: false,
 		list: [],
 		currentIndex: 1
@@ -76,29 +76,27 @@ export default class auditList extends BaseComponent {
 					<div className={ classnames("weui-form-preview", {"m-b-n": index == list.length - 1 })} key = {index}>
 			            <div className="weui-form-preview__hd">
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">报销金额</label>
-			                    <em className="weui-form-preview__value">¥{Util.money(item.amt)}</em>
+			                    <label className="weui-form-preview__label">行程</label>
+			                    <em className="weui-form-preview__value">{`${item.fromCity}-${item.toCities}`}</em>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__bd">
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">申请人</label>
-			                    <span className="weui-form-preview__value">{ !item.agentNickName ? item.applyNickName: `${item.applyNickName}(${item.agentNickName}代申请)`}</span>
+			                    <span className="weui-form-preview__value">{item.applyNickname}</span>
 			                </div>
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">类型</label>
-			                    <span className="weui-form-preview__value">{item.typeName}</span>
+			                    <label className="weui-form-preview__label">出行人</label>
+			                    <span className="weui-form-preview__value">{item.passengers}</span>
+			                </div>
+			                <div className="weui-form-preview__item">
+			                    <label className="weui-form-preview__label">时间</label>
+			                    <span className="weui-form-preview__value">{item.departDateString}</span>
 			                </div>
 			            </div>
 			            <div className="weui-form-preview__ft">
-			            <If condition={item.viewerOperateItems.indexOf(20)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" onClick={this.claim.bind(this, item)}>认领</Link>
-			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(21)!=-1}>
 			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/audit/${item.id}` , query: { "updated": item.updated}}}>审核</Link>
-			            </If>
-			            <If condition={item.viewerOperateItems.indexOf(10)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/detail/${item.id}` , query: { "updated": item.updated}}}>查看</Link>
 			            </If>
 			            </div>
 			        </div>

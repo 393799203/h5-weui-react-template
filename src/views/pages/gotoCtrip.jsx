@@ -12,6 +12,7 @@ export default class GoToCtrip extends BaseComponent {
 		super(props);
 		Ajax.get("/api/trip/getCtripTicket",{applyWorkId: this.props.location.query.applyWorkId}).then((res)=>{
 			this.state.token = res.data.map;
+			console.log(this.state.token)
 			this.setState(this.state);
 			setTimeout(()=>{
 				document.getElementById('button').click();

@@ -46,9 +46,9 @@ export default class TravelApply extends BaseComponent {
 			this.state.params.travellers.push(this.simpleUser(res[0].data));
 			this.setState(this.state);
 		}, (err) => {
-			setTimeout(()=>{
-				Util.popWindow("/apply");
-			}, 2000);
+			// setTimeout(()=>{
+			// 	Util.popWindow("/apply");
+			// }, 2000);
 		})
 	}
 

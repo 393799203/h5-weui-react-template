@@ -28,6 +28,7 @@ import TravelAuditedList from 'views/pages/auditedList';
 import TravelMyList from 'views/pages/myList';
 import TravelApply from 'views/pages/apply';
 import TravelDetailAudit from 'views/pages/detailAudit';
+import GoToCtrip from 'views/pages/gotoCtrip';
 
 //app 根组件
 class App extends Component {
@@ -52,6 +53,7 @@ render((
 				<Route path="my" component={ TravelMyList } />
 				<Route path="detail/:id" component={ TravelDetailAudit } />
 				<Route path="audit/:id" component={ TravelDetailAudit } />
+				<Route path="gotoCtrip" component={ GoToCtrip } />
 				<Redirect from="*" to="/apply" />
 			</Route>
 		</Route>

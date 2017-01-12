@@ -43,25 +43,39 @@ export default class DetailAudit extends BaseComponent {
 		});     
 	}
 
-	audit = (status) => {
-		if(status == "fail" && !this.refs.auditTextarea.value){
-			Util.error("驳回意见不能为空~", 1500);
-			return;
-		}
-		let currTask = Object.assign({},this.state.detailInfo.currTask, {action: status, comment: this.refs.auditTextarea.value})
+	selected = (item, ev) => {
+		item.checked = ev.target.checked;
+		this.setState(this.state);
+	}
+
+	audit = () => {
+		let taskIdAndActionsArr = [];
+		let failArr = [];
+		this.state.detailInfo.applyItems.forEach((item, index) => {
+			if(item.checked){
+				taskIdAndActionsArr.push(item.taskId+'_pass');
+			}else{
+				taskIdAndActionsArr.push(item.taskId+'_fail');
+				failArr.push(item.passengerNickname);
+			}
+		});
 		let postData = {
-			id: this.state.detailInfo.id,
-			applyWorkId: this.state.detailInfo.applyWorkId,
-			type: this.state.detailInfo.type,
-			currTask: currTask
+			id: this.state.detailInfo.applyId,
+			taskIdAndActions: taskIdAndActionsArr.join(','),
+			comment: this.refs.auditTextarea.value
+		}
+
+		if(failArr.length && !this.refs.auditTextarea.value){
+			Util.error("有人不通过需要填写驳回意见~", 1500);
+			return;
 		}
 		Util.startLoading();
 		this.state.disabled = true;
 		this.setState(this.state);
-		Ajax.post("/api/expense/request/audit",postData).then((res)=>{
+		Ajax.post("/api/trip/audit",postData).then((res)=>{
 			Util.sendNotification("reload");
 			Util.success("操作成功", 1500, ()=>{
-				Util.popWindow("/expense/audit");
+				Util.popWindow("/audit");
 			});
 		}, (err) => {
 			this.state.disabled = false;
@@ -175,7 +189,7 @@ export default class DetailAudit extends BaseComponent {
 			        	<div className="weui-cells weui-cells_checkbox bg-white" key={index}>
 				            <label className="weui-cell weui-check__label" htmlFor = {`checkbox${index}`}>
 				                <div className="weui-cell__hd">
-				                    <input type="checkbox" className="weui-check" name="checkbox" id={`checkbox${index}`} />
+				                    <input type="checkbox" className="weui-check" name="checkbox" id={`checkbox${index}`} onChange={this.selected.bind(this, item)} checked={item.checked? "checked":""}/>
 				                    <i className="weui-icon-checked"></i>
 				                </div>
 				                <div className="weui-cell__bd">
@@ -194,10 +208,7 @@ export default class DetailAudit extends BaseComponent {
 				        </div>
 				        <div className="weui-flex p-xs">
 				        	<div className="weui-flex__item">
-				        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_primary", "m-xs", {"weui-btn_disabled": disabled})} onClick={this.audit.bind(this, "pass")}>同意</a>
-				        	</div>
-				        	<div className="weui-flex__item">
-				        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_warn", "m-xs", {"weui-btn_disabled": disabled})} onClick={this.audit.bind(this, "fail")}>驳回</a>
+				        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_primary", "m-xs", {"weui-btn_disabled": disabled})} onClick={this.audit}>确定</a>
 				        	</div>
 				        </div>
 			        </div>

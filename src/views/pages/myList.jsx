@@ -61,6 +61,11 @@ export default class Application extends BaseComponent {
 		})
 	}
 
+	book = (item) => {
+
+		
+	}
+
 	render() {
 		let params = this.state.params;
 		let ajaxUrl = this.state.ajaxUrl;
@@ -101,7 +106,7 @@ export default class Application extends BaseComponent {
 			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" onClick={this.cancel.bind(this, item, index)}>撤销</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(100)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/expense/detail/${item.applyId}` , query: { "updated": item.updated}}}>预订</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/gotoCtrip`, query: { "applyWorkId": item.applyWorkId}}}>预订</Link>
 			            </If>
 			            </div>
 			        </div>

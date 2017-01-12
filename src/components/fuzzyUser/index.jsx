@@ -125,7 +125,10 @@ export default class FuzzyUser extends Component {
 						                    <input type="checkbox" className="weui-check" name="checkbox" id={`checkbox${index}`} onChange={this.selected.bind(this, item)} checked={item.checked? "checked":""}/>
 						                    <i className="weui-icon-checked"></i>
 						                </div>
-						                <div className="weui-cell__bd">{item.nickName}</div>
+						                <div className="weui-cell__bd">
+						                	<img className="avatar m-r-xs" src={item.avatar} />
+						                	<span className="usernick">{item.nickName}</span>
+						                </div>
 						            </label>
 					            </div>
 			            	</For>

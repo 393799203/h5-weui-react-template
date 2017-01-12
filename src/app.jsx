@@ -12,7 +12,7 @@ import 'core/polyfill';
 
 Es6Promise.polyfill();
 Es6ObjectAssign.polyfill();
-FastClick.attach(document.body)
+FastClick.attach(document.body);
 
 
 //*************样式加载**************

@@ -47,9 +47,6 @@ export default class auditList extends BaseComponent {
 		}, err => {
 			this.state.isEnd = true;
 			this.setState(this.state);
-			setTimeout(() => {
-				Util.popWindow('/');
-			}, 2000);
 		});
 	}
 

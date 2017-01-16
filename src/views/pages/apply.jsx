@@ -29,6 +29,7 @@ export default class TravelApply extends BaseComponent {
 			}]
 		},
 		disabled: false,
+		innType: "self",
 		innCityList: []
 	}
 
@@ -41,8 +42,8 @@ export default class TravelApply extends BaseComponent {
 		let getCurrentUserPromise = Global.getCurrentUser();
 		Promise.all([getCurrentUserPromise]).then(res => {
 			this.state.params.nickName = res[0].data.nickName;
-			this.state.params.deptName = res[0].data.biz1thDeptName;
-			this.state.params.deptId = res[0].data.biz1thDeptId;
+			this.state.params.deptName = res[0].data.directDeptName;
+			this.state.params.deptId = res[0].data.directDeptId;
 			this.state.params.travellers.push(this.simpleUser(res[0].data));
 			this.setState(this.state);
 		}, (err) => {
@@ -120,6 +121,11 @@ export default class TravelApply extends BaseComponent {
 		this.setState(this.state);
 	}
 
+	bookInn = (value) => {
+		this.state.innType = value;
+		this.setState(this.state);
+	}
+
 	addInn = () => {
 		this.state.params.inns.push({
 			innCity: "",
@@ -167,6 +173,9 @@ export default class TravelApply extends BaseComponent {
 				params.inns[index].innTravellers[ii] = traveller.nickName;
 			})
 		})
+		if(this.state.innType == "self"){
+			params.inns = null;
+		}
 		return params
 	}
 
@@ -182,7 +191,7 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	render() {
-		let { innCityList, params, disabled, showCitySelectModule } = this.state;
+		let { innCityList, params, disabled, showCitySelectModule, innType } = this.state;
 		return (
 			<div className="apply">
 				<div className="weui-cells__title">基本信息</div>
@@ -274,64 +283,86 @@ export default class TravelApply extends BaseComponent {
                 	</a>
 		        </div>
 		        <div className="weui-cells__title">住宿信息</div>
-		        <div className="weui-cells m-t-n">
-		        	<For each = "inn" of = { params.inns } index = "index">
-			        	<div className={classnames("m-b-sm", {"m-b-n" : index == params.inns.length - 1})} key={index}>
-				        	<div className="weui-cell bg-white p-v-xs">
-				                <div className="weui-cell__hd">
-				                    <label htmlFor="traveller" className="weui-label">住宿人</label>
-				                </div>
-				                <div className="weui-cell__bd">
-				                	<a href="javascript:;" className="user addUser"  onClick={ this.addInnTravellers.bind(this, inn) }>
-						            	<Icon name="custom-add" className="text-primary" style={{"fontSize":"34px"}}/>
-				                	</a>
-				                	<For each = "innTraveller" of = { inn.innTravellers } index = "index">
-				                		<a href="javascript:;" className="user delUser" key={innTraveller.userId} onClick={ this.deleteInnTraveller.bind(this, inn, index) }> 
-				                			<img className="user_avatar" src={innTraveller.avatar} />
-				                			<div className="user_name">{innTraveller.nickName}</div>
-				                			<Icon name="custom-minuse" className="user_delete"></Icon>
-				                		</a>
-				                	</For>
-				                </div>
-				            </div>
-				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
-				                <div className="weui-cell__hd">
-				                    <label htmlFor={`innCity${index}`} className="weui-label">入住城市</label>
-				                </div>
-				                <div className="weui-cell__bd">
-				                    <select className="weui-select" id={`innCity${index}`} name={`innCity${index}`} value={ inn.innCity } onChange = { (e)=>{ inn.innCity = e.target.value; this.setState(this.state) }}>
-				                    	<option value="" key="">请选择入住城市</option>
-				                    	<For each = "city" of = { innCityList } index = "index">
-				                    		<option value={ city.cityName } key={ index }>{ city.cityName }</option>
-				                    	</For>
-				                    </select>
-				                </div>
-				            </div>
-				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
-				                <div className="weui-cell__hd">
-				                    <label htmlFor="date" className="weui-label">入住日期</label>
-				                </div>
-				                <div className="weui-cell__bd">
-				                    <input className="weui-select" name="beginTime" type="date" value={ inn.beginTime } onChange={(e) => { inn.beginTime = e.target.value; this.setState(this.state) }}/>
-				                </div>
-				            </div>
-				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
-				                <div className="weui-cell__hd">
-				                    <label htmlFor="date" className="weui-label">离开日期</label>
-				                </div>
-				                <div className="weui-cell__bd">
-				                    <input className="weui-select" name="endTime" type="date" value={ inn.endTime } onChange={(e) => { inn.endTime = e.target.value; this.setState(this.state) }}/>
-				                </div>
-				            </div>
-			            </div>
-		            </For>
-		            <a href="javascript:;" className="text-center block m-t-xs">
-		            	<Icon name="custom-add-circle" className="text-primary" style={{"fontSize":"30px"}} onClick={ this.addInn }/>
-		            	<If condition={params.inns.length > 1}>
-		            		<Icon name="custom-minuse-circle" className="text-danger m-l-xs" style={{"fontSize":"30px"}} onClick={ this.minuseInn }/>
-		            	</If>
-                	</a>
+		        <div className="weui-cells weui-cells_radio bg-white" >
+		            <label className="weui-cell weui-check__label" htmlFor="self">
+		                <div className="weui-cell__bd">
+		                    <p>自行预订</p>
+		                </div>
+		                <div className="weui-cell__ft">
+		                    <input type="radio" className="weui-check" name="bookInn" id="self" onChange={ this.bookInn.bind(this, "self") } checked={ innType == "self" ? "checked":"" }/>
+		                    <span className="weui-icon-checked"></span>
+		                </div>
+		            </label>
+		            <label className="weui-cell weui-check__label" htmlFor="company">
+		                <div className="weui-cell__bd">
+		                    <p>公司预定</p>
+		                </div>
+		                <div className="weui-cell__ft">
+		                    <input type="radio" className="weui-check" name="bookInn" id="company" onChange={ this.bookInn.bind(this, "company") } checked={ innType == "company" ? "checked":"" }/>
+		                    <span className="weui-icon-checked"></span>
+		                </div>
+		            </label>
 		        </div>
+		        <If condition = { innType == "company" }>
+			        <div className="weui-cells m-t">
+			        	<For each = "inn" of = { params.inns } index = "index">
+				        	<div className={classnames("m-b-sm", {"m-b-n" : index == params.inns.length - 1})} key={index}>
+					        	<div className="weui-cell bg-white p-v-xs">
+					                <div className="weui-cell__hd">
+					                    <label htmlFor="traveller" className="weui-label">住宿人</label>
+					                </div>
+					                <div className="weui-cell__bd">
+					                	<a href="javascript:;" className="user addUser"  onClick={ this.addInnTravellers.bind(this, inn) }>
+							            	<Icon name="custom-add" className="text-primary" style={{"fontSize":"34px"}}/>
+					                	</a>
+					                	<For each = "innTraveller" of = { inn.innTravellers } index = "index">
+					                		<a href="javascript:;" className="user delUser" key={innTraveller.userId} onClick={ this.deleteInnTraveller.bind(this, inn, index) }> 
+					                			<img className="user_avatar" src={innTraveller.avatar} />
+					                			<div className="user_name">{innTraveller.nickName}</div>
+					                			<Icon name="custom-minuse" className="user_delete"></Icon>
+					                		</a>
+					                	</For>
+					                </div>
+					            </div>
+					            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
+					                <div className="weui-cell__hd">
+					                    <label htmlFor={`innCity${index}`} className="weui-label">入住城市</label>
+					                </div>
+					                <div className="weui-cell__bd">
+					                    <select className="weui-select" id={`innCity${index}`} name={`innCity${index}`} value={ inn.innCity } onChange = { (e)=>{ inn.innCity = e.target.value; this.setState(this.state) }}>
+					                    	<option value="" key="">请选择入住城市</option>
+					                    	<For each = "city" of = { innCityList } index = "index">
+					                    		<option value={ city.cityName } key={ index }>{ city.cityName }</option>
+					                    	</For>
+					                    </select>
+					                </div>
+					            </div>
+					            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
+					                <div className="weui-cell__hd">
+					                    <label htmlFor="date" className="weui-label">入住日期</label>
+					                </div>
+					                <div className="weui-cell__bd">
+					                    <input className="weui-select" name="beginTime" type="date" value={ inn.beginTime } onChange={(e) => { inn.beginTime = e.target.value; this.setState(this.state) }}/>
+					                </div>
+					            </div>
+					            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
+					                <div className="weui-cell__hd">
+					                    <label htmlFor="date" className="weui-label">离开日期</label>
+					                </div>
+					                <div className="weui-cell__bd">
+					                    <input className="weui-select" name="endTime" type="date" value={ inn.endTime } onChange={(e) => { inn.endTime = e.target.value; this.setState(this.state) }}/>
+					                </div>
+					            </div>
+				            </div>
+			            </For>
+			            <a href="javascript:;" className="text-center block m-t-xs">
+			            	<Icon name="custom-add-circle" className="text-primary" style={{"fontSize":"30px"}} onClick={ this.addInn }/>
+			            	<If condition={params.inns.length > 1}>
+			            		<Icon name="custom-minuse-circle" className="text-danger m-l-xs" style={{"fontSize":"30px"}} onClick={ this.minuseInn }/>
+			            	</If>
+	                	</a>
+			        </div>
+			   	</If>
 		        <div className="weui-flex p-xs">
 		        	<div className="weui-flex__item">
 		        		<a href="javascript:;" className={classnames("weui-btn", "weui-btn_primary", "m-xs", {"weui-btn_disabled": disabled})} onClick={ this.submit }>提交</a>

@@ -209,6 +209,7 @@ export default class TravelApply extends BaseComponent {
 		                		<a href="javascript:;" className="user delUser" key={item.userId} onClick={ this.deleteUser.bind(this, index) }> 
 		                			<img className="user_avatar" src={item.avatar} />
 		                			<div className="user_name">{item.nickName}</div>
+		                			<Icon name="custom-minuse" className="user_delete"></Icon>
 		                		</a>
 		                	</For>
 		                </div>
@@ -288,6 +289,7 @@ export default class TravelApply extends BaseComponent {
 				                		<a href="javascript:;" className="user delUser" key={innTraveller.userId} onClick={ this.deleteInnTraveller.bind(this, inn, index) }> 
 				                			<img className="user_avatar" src={innTraveller.avatar} />
 				                			<div className="user_name">{innTraveller.nickName}</div>
+				                			<Icon name="custom-minuse" className="user_delete"></Icon>
 				                		</a>
 				                	</For>
 				                </div>

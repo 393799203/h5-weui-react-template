@@ -61,11 +61,6 @@ export default class Application extends BaseComponent {
 		})
 	}
 
-	book = (item) => {
-
-		
-	}
-
 	render() {
 		let params = this.state.params;
 		let ajaxUrl = this.state.ajaxUrl;

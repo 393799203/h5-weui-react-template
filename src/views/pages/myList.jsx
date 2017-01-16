@@ -19,7 +19,7 @@ export default class Application extends BaseComponent {
 
 	constructor(props){
 		super(props);
-		Util.setTitle("我的报销");
+		Util.setTitle("我的申请");
 		this.onRefresh();
 	}
 

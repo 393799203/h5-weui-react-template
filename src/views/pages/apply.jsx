@@ -197,14 +197,10 @@ export default class TravelApply extends BaseComponent {
 				<div className="weui-cells__title">基本信息</div>
 				<div className="weui-cells m-t-n">
 					<div className="weui-cell bg-white">
-		                <div className="weui-cell__bd">
-		                    <div className="pull-left">申请人</div>
-		                    <div className="pull-right m-r-sm text-light">{ params.nickName }</div>
+						<div className="weui-cell__bd">
+		                    <p>申请人</p>
 		                </div>
-		                <div className="weui-cell__bd">
-		                    <div className="pull-left m-l-sm">部门</div>
-		                    <div className="pull-right text-light">{ params.deptName }</div>
-		                </div>
+		                <div className="weui-cell__ft">{`${params.nickName} - ${params.deptName}`}</div>
 		            </div>
 		            <div className="weui-cell bg-white p-v-xs">
 		                <div className="weui-cell__hd">

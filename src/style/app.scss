@@ -48,10 +48,12 @@
 	}
 	.user_delete{
 		position: absolute;
-		font-size: 16px;
-	    top: -1px;;
+		font-size: 14px;
+	    top: 0;
 	    color: red;
-	    right: -1px;
+	    right: 0;
+	    background: #fff;
+	    border-radius: 50%;
 	}
 }
 

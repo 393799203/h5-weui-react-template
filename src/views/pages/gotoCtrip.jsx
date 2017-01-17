@@ -23,10 +23,11 @@ export default class GoToCtrip extends BaseComponent {
 	render() {
 		let token = this.state.token;
 		return (
-			<form style={{"display":"none"}} action="https://ct.ctrip.com/m/SingleSignOn/H5SignInfo" id="H5SignInfo" method="post"> 
+			<form style={{"display":"none"}} action="https://ct.ctrip.com/m/SingleSignOn/H5SignInfo" id="H5SignInfo" method="post">
+				<input type="hidden" name="AppID" value={token.Appid}/> 
                 <input type="hidden" name="AppKey" value={token.AppKey}/>
                 <input type="hidden" name="AppSecurity" value={token.AppSecurity}/> 
-                <input type="hidden"  name="Ticket" value={token.Ticket}/> 
+                <input type="hidden" name="Ticket" value={token.Ticket}/> 
                 <input type="hidden" name="EmployeeID" value={token.EmployeeID}/>  
                 <input type="submit" value="机票预订" id="button"/> 
             </form>

@@ -344,7 +344,7 @@ export default class TravelApply extends BaseComponent {
 					            </div>
 					            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
 					                <div className="weui-cell__hd">
-					                    <label htmlFor="date" className="weui-label">离开日期</label>
+					                    <label htmlFor="date" className="weui-label">退房日期</label>
 					                </div>
 					                <div className="weui-cell__bd">
 					                    <input className="weui-select" name="endTime" type="date" value={ inn.endTime } onChange={(e) => { inn.endTime = e.target.value; this.setState(this.state) }}/>

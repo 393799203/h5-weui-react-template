@@ -30,7 +30,7 @@ export default class TravelApply extends BaseComponent {
 			}]
 		},
 		disabled: false,
-		innType: "company",
+		innType: "self",
 		innCityList: []
 	}
 
@@ -229,7 +229,7 @@ export default class TravelApply extends BaseComponent {
 		                </div>
 		            </div>
 		        </div>
-		        <div className="weui-cells__title">出行信息</div>
+		        <div className="weui-cells__title">出行信息<span className="text-primary m-l-sm">(手机暂不支持差旅补单)</span></div>
 		        <div className="weui-cells m-t-n">
 		        	<For each = "march" of = { params.marches } index = "index">
 			        	<div className={classnames("m-b-sm", {"m-b-n" : index == params.marches.length - 1})} key={index}>

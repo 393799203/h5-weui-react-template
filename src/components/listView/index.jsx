@@ -69,7 +69,7 @@ export default class ListView extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if(prevProps.children !== this.props.children){
-        	console.log("refreshfinshed")
+        	// console.log("refreshfinshed")
         	this.iScrollInstance.refresh();
         }
     }
@@ -150,7 +150,7 @@ export default class ListView extends Component {
 			children,
 			...props } = this.props
 
-			console.log("render")
+			// console.log("render")
 		let pullCls = this.state.waitingReleaseToRefresh||this.state.refreshing ? "waiting" : ""; 
 		return (
 			<div className={classnames("listView",className)} {...props} ref="listViewWrap">

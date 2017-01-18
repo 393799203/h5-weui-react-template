@@ -11,7 +11,7 @@
 #appWrapper, #container{
 	height:100%;
 	background: $body-background;
-	overflow: hidden;
+	-webkit-overflow-scrolling: auto;
 }
 .containerWrap {
 	height: auto;

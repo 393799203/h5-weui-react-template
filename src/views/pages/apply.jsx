@@ -6,6 +6,7 @@ import Ajax from 'core/ajax';
 import Util from 'core/util';
 import Global from 'server/global';
 import Icon from 'components/icon';
+import ListView from 'components/listView';
 
 export default class TravelApply extends BaseComponent {
 	state = {
@@ -29,7 +30,7 @@ export default class TravelApply extends BaseComponent {
 			}]
 		},
 		disabled: false,
-		innType: "self",
+		innType: "company",
 		innCityList: []
 	}
 
@@ -193,6 +194,7 @@ export default class TravelApply extends BaseComponent {
 	render() {
 		let { innCityList, params, disabled, showCitySelectModule, innType } = this.state;
 		return (
+			<ListView refreshable={false} loadable={false}>
 			<div className="apply">
 				<div className="weui-cells__title">基本信息</div>
 				<div className="weui-cells m-t-n">
@@ -221,7 +223,7 @@ export default class TravelApply extends BaseComponent {
 		            </div>
 		            <div className="weui-cell bg-white">
 		            	<div className="weui-cell__hd">
-		                    <label htmlFor="traveller" className="weui-label">出行事由</label>
+		                    <label htmlFor="traveller" className="weui-label">出差事由</label>
 		                </div>
 		                <div className="weui-cell__bd">
 		                    <textarea className="weui-textarea" placeholder="请输入出差事由" rows="2" value={params.reason} onChange={(e) => { params.reason = e.target.value; this.setState(this.state)}}></textarea>
@@ -242,10 +244,10 @@ export default class TravelApply extends BaseComponent {
 				            </div>
 				            <div className="weui-cell bg-white">
 			        			<div className="weui-cell__hd">
-				                    <label htmlFor="traveller" className="weui-label">抵达</label>
+				                    <label htmlFor="traveller" className="weui-label">到达</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input className="weui-input" type="text" placeholder="请输入抵达城市" value={march.toCity} onClick = { this.selectCity.bind(this, march, 'toCity', index) }/>
+				                    <input className="weui-input" type="text" placeholder="请输入到达城市" value={march.toCity} onClick = { this.selectCity.bind(this, march, 'toCity', index) }/>
 				                </div>
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
@@ -365,6 +367,7 @@ export default class TravelApply extends BaseComponent {
 		        	</div>
 		        </div>
 			</div>
+			</ListView>
 		)
 	}
 }

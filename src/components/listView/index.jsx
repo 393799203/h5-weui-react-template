@@ -48,7 +48,7 @@ export default class ListView extends Component {
             // iscroll会拦截元素的默认事件处理函数
             preventDefault: true,
             // iscroll不拦截的元素
-            preventDefaultException: { tagName: /^(BUTTON|A)$/ },
+            preventDefaultException: { tagName: /^(BUTTON|SELECT|TEXTAREA|A|I|INPUT|LABEL)$/ },
             // 禁止缩放
             zoom: false,
             // 支持鼠标事件，因为我开发是PC鼠标模拟的

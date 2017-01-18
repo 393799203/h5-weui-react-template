@@ -292,7 +292,7 @@ export default class TravelApply extends BaseComponent {
 		            </label>
 		            <label className="weui-cell weui-check__label" htmlFor="company">
 		                <div className="weui-cell__bd">
-		                    <p>公司预定</p>
+		                    <p>公司预订</p>
 		                </div>
 		                <div className="weui-cell__ft">
 		                    <input type="radio" className="weui-check" name="bookInn" id="company" onChange={ this.bookInn.bind(this, "company") } checked={ innType == "company" ? "checked":"" }/>

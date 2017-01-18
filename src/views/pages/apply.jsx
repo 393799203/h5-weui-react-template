@@ -222,7 +222,7 @@ export default class TravelApply extends BaseComponent {
 		            </div>
 		            <div className="weui-cell bg-white">
 		            	<div className="weui-cell__hd">
-		                    <label htmlFor="traveller" className="weui-label">出差事由</label>
+		                    <label htmlFor="traveller" className="weui-label">出行事由</label>
 		                </div>
 		                <div className="weui-cell__bd">
 		                    <textarea className="weui-textarea" placeholder="请输入出行事由" rows="2" value={params.reason} onChange={(e) => { params.reason = e.target.value; this.setState(this.state)}}></textarea>

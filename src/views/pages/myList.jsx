@@ -55,7 +55,7 @@ export default class Application extends BaseComponent {
 			console.log(index);
 			Util.success("操作成功", 1500, ()=>{
 				item.viewerOperateItems = item.viewerOperateItems.replace("90", "");
-				item.statusName = "撤销";
+				item.statusName = "已撤销";
 				item.assigneeNickname = "";
 				this.setState(this.state);
 			});

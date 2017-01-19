@@ -28,7 +28,9 @@ a{
 .iScrollVerticalScrollbar.iScrollLoneScrollbar{
   width: 4px!important;
 }
-
+.weui-tab{
+  min-height: 450px;
+}
 .weui-tabbar__icon,.weui-tabbar__label{
   pointer-events: none
 }

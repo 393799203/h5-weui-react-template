@@ -108,10 +108,17 @@ export default class DetailAudit extends BaseComponent {
 		                <div className="weui-cell__ft">{detailInfo.departName}</div>
 		            </div>
 		            <div className="weui-cell">
-		                <div className="weui-cell__bd">
-		                    <p>出行人</p>
-		                </div>
-		                <div className="weui-cell__ft">{detailInfo.passengers}</div>
+		            	<If condition={ detailInfo.passengers && detailInfo.passengers.length > 15 }>
+			                <div className="weui-media-box_text">
+			                    <h4 className="weui-media-box__title">出行人</h4>
+			                    <p className="weui-media-box__desc text-normal">{detailInfo.passengers}</p>
+			                </div>
+			            <Else />
+			            	<div className="weui-cell__bd">
+			                    <p>出行人</p>
+			                </div>
+			                <div className="weui-cell__ft">{detailInfo.passengers}</div>
+			            </If>
 		            </div>
 		            <div className="weui-cell">
 			            <If condition={ detailInfo.reason && detailInfo.reason.length > 15 }>
@@ -163,7 +170,7 @@ export default class DetailAudit extends BaseComponent {
 					                    <div className="pull-right m-r-sm text-light">{item.checkInDateString}</div>
 					                </div>
 					                <div className="weui-cell__bd">
-					                    <div className="pull-left m-l-sm">离开日期</div>
+					                    <div className="pull-left m-l-sm">退房日期</div>
 					                    <div className="pull-right text-light">{item.checkoutDateString}</div>
 					                </div>
 					            </div>
@@ -174,10 +181,17 @@ export default class DetailAudit extends BaseComponent {
 					                <div className="weui-cell__ft">{item.city}</div>
 					            </div>
 					            <div className="weui-cell">
-					                <div className="weui-cell__bd">
-					                    <p>入住人员</p>
-					                </div>
-					                <div className="weui-cell__ft">{item.passengers}</div>
+					            	<If condition={ item.passengers && item.passengers.length > 15 }>
+					            		<div className="weui-media-box_text">
+						                    <h4 className="weui-media-box__title">入住人员</h4>
+						                    <p className="weui-media-box__desc text-normal">{item.passengers}</p>
+						                </div>
+					            	<Else />
+						                <div className="weui-cell__bd">
+						                    <p>入住人员</p>
+						                </div>
+						                <div className="weui-cell__ft">{item.passengers}</div>
+					                </If>
 					            </div>
 				        	</div>
 			            </For>

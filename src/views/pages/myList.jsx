@@ -54,7 +54,9 @@ export default class Application extends BaseComponent {
 		Ajax.post("/api/trip/cancel", postData).then((res) => {
 			console.log(index);
 			Util.success("操作成功", 1500, ()=>{
-				this.state.list.splice(index, 1);
+				item.viewerOperateItems = item.viewerOperateItems.replace("90", "");
+				item.statusName = "撤销";
+				item.assigneeNickname = "";
 				this.setState(this.state);
 			});
 		}, (err) => {

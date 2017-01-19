@@ -59,6 +59,7 @@ a{
 }
 .weui-textarea{
   padding: 5px;
+  overflow-y: scroll;
 }
 .weui-cells__title{
   padding-top: 0.77em;
@@ -114,6 +115,9 @@ a{
 }
 .weui-media-box__title{
   font-size: 14px;
+}
+.weui-media-box__desc{
+  -webkit-line-clamp: inherit;
 }
 .weui-tips{
   position: fixed;

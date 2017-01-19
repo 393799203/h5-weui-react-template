@@ -48,7 +48,9 @@ export default class ListView extends Component {
             // iscroll会拦截元素的默认事件处理函数
             preventDefault: true,
             // iscroll不拦截的元素
-            preventDefaultException: { tagName: /^(BUTTON|SELECT|TEXTAREA|A|I|INPUT|LABEL)$/ },
+            preventDefaultException: { 
+            	tagName: /^(BUTTON|SELECT|TEXTAREA|A|I|INPUT|LABEL)$/i
+            },
             // 禁止缩放
             zoom: false,
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
@@ -58,7 +60,7 @@ export default class ListView extends Component {
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
-            scrollbars: true,
+            scrollbars: true
         };
         let listViewWrap = this.getScrollWrap();
         this.iScrollInstance = new iScroll(listViewWrap, options );

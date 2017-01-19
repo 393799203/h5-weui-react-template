@@ -207,7 +207,7 @@ export default class TravelApply extends BaseComponent {
 						<div className="weui-cell__bd">
 		                    <p>申请人</p>
 		                </div>
-		                <div className="weui-cell__ft">{`${params.nickName} - ${params.deptName}`}</div>
+		                <div className="weui-cell__ft text-dark">{`${params.nickName} - ${params.deptName}`}</div>
 		            </div>
 		            <div className="weui-cell bg-white p-v-xs">
 		                <div className="weui-cell__hd">

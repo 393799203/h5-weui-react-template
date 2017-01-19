@@ -192,15 +192,9 @@ export default class TravelApply extends BaseComponent {
 		}, 'cityName');
 	}
 
-	startTextarea = (ev) => {
-		var touch = ev.targetTouches[0];
-        this.startY = touch.pageY;
-	}
-
-	scrollTextarea = (ev) => {
-		var touch = ev.targetTouches[0];
-		this.scrollY = touch.pageY - this.startY;
-		ev.target.scrollY = ev.target.scrollTop - this.scrollY;
+	resizeTextarea = (ev) => {
+		ev.target.style.height = "auto";
+		ev.target.style.height = ev.target.scrollHeight + 'px';
 	}
 
 	render() {
@@ -237,7 +231,7 @@ export default class TravelApply extends BaseComponent {
 		                    <label htmlFor="traveller" className="weui-label">出行事由</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <textarea className="weui-textarea" placeholder="请输入出行事由" rows="2" value={params.reason} onChange={(e) => { params.reason = e.target.value; this.setState(this.state)}} onTouchStart={this.startTextarea} onTouchMove={this.scrollTextarea}></textarea>
+		                    <textarea className="weui-textarea" placeholder="请输入出行事由" value={params.reason} onChange={(e) => { this.resizeTextarea(e); params.reason = e.target.value; this.setState(this.state)}}></textarea>
 		                </div>
 		            </div>
 		        </div>

@@ -58,7 +58,11 @@ export default class TravelApply extends BaseComponent {
 		let userIds = this.state.params.travellers.map((item, index) => item.userId);
 		Util.selectTTContact(userIds).then(res => {
 			let selectedUser = res.map((item, index) => this.simpleUser(item));
-			this.state.params.travellers = this.state.params.travellers.concat(selectedUser);
+			if(/iphone/.test(navigator.userAgent.toLowerCase())){
+				this.state.params.travellers = this.state.params.travellers.concat(selectedUser);
+			}else{
+				this.state.params.travellers = selectedUser;
+			}
 			this.setState(this.state);
 		}, res => {
 			Util.error(res)

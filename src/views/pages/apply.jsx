@@ -100,8 +100,9 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	simpleUser = (user) => {
+		let defaultAvatar = user.sex ==1 ? "http://s16.mogucdn.com/p2/160808/upload_4b36g29gfk6hdck0c5i74d3bgc9ha_512x512.jpg" : "http://s16.mogucdn.com/p2/160808/upload_60j556ide1igke0l0803eijiafbic_512x512.jpg";
 		return {
-			avatar: user.avatar || user.avatar_url,
+			avatar: user.avatar || user.avatar_url || defaultAvatar,
 			nickName: user.nickName || user.user_nick_name,
 			userId: parseInt(user.userId || user.user_id)
 		}

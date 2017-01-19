@@ -87,8 +87,8 @@ export default class Application extends BaseComponent {
 			                    <span className="weui-form-preview__value">{item.passengers}</span>
 			                </div>
 			                <div className="weui-form-preview__item">
-			                    <label className="weui-form-preview__label">时间</label>
-			                    <span className="weui-form-preview__value">{item.departDateString}</span>
+			                    <label className="weui-form-preview__label">申请时间</label>
+			                    <span className="weui-form-preview__value">{item.applyDateString}</span>
 			                </div>
 			                <div className="weui-form-preview__item">
 			                    <label className="weui-form-preview__label">状态</label>

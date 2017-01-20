@@ -75,7 +75,7 @@ export default class FuzzySelect extends Component {
 		return (
 			<div className="fuzzySelect">
 				<div className="weui-search-bar weui-search-bar_focusing">
-		            <form className="weui-search-bar__form">
+		            <div className="weui-search-bar__form">
 		                <div className="weui-search-bar__box">
 		                    <i className="weui-icon-search"></i>
 		                    <input type="search" className="weui-search-bar__input" placeholder="搜索" required onChange = { this.search } ref="serchInput"/>
@@ -85,7 +85,7 @@ export default class FuzzySelect extends Component {
 		                    <i className="weui-icon-search"></i>
 		                    <span>搜索</span>
 		                </label>
-		            </form>
+		            </div>
 		            <a href="javascript:" className="weui-search-bar__cancel-btn" onClick = { this.searchCancel }>取消</a>
 		        </div>
 		        <div className="weui-cells searchbar-result">

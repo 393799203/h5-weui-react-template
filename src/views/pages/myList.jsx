@@ -50,6 +50,7 @@ export default class Application extends BaseComponent {
 		let postData = {
 			id: item.applyId
 		}
+		if(!confirm("确定撤销该单据?"))return;
 		Util.startLoading("撤销中");
 		Ajax.post("/api/trip/cancel", postData).then((res) => {
 			console.log(index);

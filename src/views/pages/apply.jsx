@@ -149,6 +149,7 @@ export default class TravelApply extends BaseComponent {
 
 	submit = () => {
 		let postData = this.processData();
+		if(!this.checkData(postData)) return;
 		Util.startLoading("处理中~");
 		this.state.disabled = true;
 		this.setState(this.state);
@@ -185,6 +186,31 @@ export default class TravelApply extends BaseComponent {
 		return params
 	}
 
+	checkData = (data) => {
+		let err = "";
+		if(!data.travellers.length){
+			err = "出行人不能为空~"
+		}
+		if(!data.reason.length || data.reason.length > 300){
+			err = "出行事由不能为空,且不能超过300字~"
+		}
+		data.marches.forEach((item)=>{
+			if(!item.fromCity || !item.toCity){
+				err = "行程出发,到达不能为空~"
+				return;
+			}
+			if(!item.trafficType){
+				err = "交通方式不能为空~"
+				return;
+			}
+		})
+		if(err){
+			Util.error(err);
+			return false
+		}
+		return true
+	}
+
 	selectCity = (item, key, index, ev) => {
 		ev.preventDefault();
 		Util.fuzzySelect("/api/base/city/getTripHotelList", null, (data) => {
@@ -205,7 +231,7 @@ export default class TravelApply extends BaseComponent {
 		let { innCityList, params, disabled, showCitySelectModule, innType } = this.state;
 		return (
 			<ListView className="apply" loadable={false} refreshable={false}>
-				<div className="weui-cells__title">基本信息</div>
+				<div className="weui-cells__title"><span className="text-danger m-r-xs">*</span>基本信息</div>
 				<div className="weui-cells m-t-n">
 					<div className="weui-cell bg-white">
 						<div className="weui-cell__bd">
@@ -239,7 +265,7 @@ export default class TravelApply extends BaseComponent {
 		                </div>
 		            </div>
 		        </div>
-		        <div className="weui-cells__title">出行信息<span className="text-primary m-l-sm">(手机暂不支持差旅补单)</span></div>
+		        <div className="weui-cells__title"><span className="text-danger m-r-xs">*</span>出行信息<span className="text-primary m-l-sm">(手机暂不支持差旅补单)</span></div>
 		        <div className="weui-cells m-t-n">
 		        	<For each = "march" of = { params.marches } index = "index">
 			        	<div className={classnames("m-b-sm", {"m-b-n" : index == params.marches.length - 1})} key={index}>
@@ -253,10 +279,10 @@ export default class TravelApply extends BaseComponent {
 				            </div>
 				            <div className="weui-cell bg-white">
 			        			<div className="weui-cell__hd">
-				                    <label htmlFor="travellerto" className="weui-label">抵达</label>
+				                    <label htmlFor="travellerto" className="weui-label">到达</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input id="travellerto" className="weui-input" type="text" placeholder="请输入抵达城市" value={march.toCity} onClick = { this.selectCity.bind(this, march, 'toCity', index) }/>
+				                    <input id="travellerto" className="weui-input" type="text" placeholder="请输入到达城市" value={march.toCity} onClick = { this.selectCity.bind(this, march, 'toCity', index) }/>
 				                </div>
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">
@@ -273,7 +299,7 @@ export default class TravelApply extends BaseComponent {
 				                </div>
 				                <div className="weui-cell__bd">
 				                	<select className="weui-select" id={`traffic${index}`} name={`traffic${index}`} value={ march.trafficType } onChange={ (e) => { march.trafficType = e.target.value; this.setState(this.state) }}>
-				                		<option key="" value = "">请选择交通工具</option>
+				                		<option key="" value = "">请选择交通方式</option>
 				                		<option key = "2" value = "2">汽车</option>
 								    	<option key = "0" value = "0">火车</option>
 								    	<option key = "1" value = "1">飞机</option>
@@ -289,7 +315,7 @@ export default class TravelApply extends BaseComponent {
 		            	</If>
                 	</a>
 		        </div>
-		        <div className="weui-cells__title">住宿信息</div>
+		        <div className="weui-cells__title"><span className="text-danger m-r-xs">*</span>住宿信息</div>
 		        <div className="weui-cells weui-cells_radio bg-white" >
 		            <label className="weui-cell weui-check__label" htmlFor="self">
 		                <div className="weui-cell__bd">
@@ -302,7 +328,7 @@ export default class TravelApply extends BaseComponent {
 		            </label>
 		            <label className="weui-cell weui-check__label" htmlFor="company">
 		                <div className="weui-cell__bd">
-		                    <p>公司预订</p>
+		                    <p>公司账户预订</p>
 		                </div>
 		                <div className="weui-cell__ft">
 		                    <input type="radio" className="weui-check" name="bookInn" id="company" onChange={ this.bookInn.bind(this, "company") } checked={ innType == "company" ? "checked":"" }/>

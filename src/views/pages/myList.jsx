@@ -64,6 +64,35 @@ export default class Application extends BaseComponent {
 		})
 	}
 
+	book = (applyWorkId) => {
+		Ajax.get("/api/trip/getCtripTicket",{applyWorkId: applyWorkId}).then((res)=>{
+			let token = res.data.map;
+			let str = `
+				<form style={{"display":"none"}} action="https://ct.ctrip.com/m/SingleSignOn/H5SignInfo" id="H5SignInfo" method="post">
+					<input type="hidden" name="Appid" value="${token.Appid}"/> 
+		            <input type="hidden" name="AccessUserId" value="${token.AppKey}"/>
+		            <input type="hidden" name="AppSecurity" value="${token.AppSecurity}"/> 
+		            <input type="hidden" name="Token" value="${token.Ticket}"/> 
+		            <input type="hidden" name="EmployeeID" value="${token.EmployeeID}"/>  
+		            <input type="hidden" name="InitPage" value="Home" />  
+		            <input type="hidden" name="Callback" value="https://ct.ctrip.com/m" />  
+		            <input type="submit" value="机票预订" id="button"/> 
+	        	</form>
+			`
+			let node = document.createElement("div"); 
+			if(!document.getElementById('H5SignInfo')){
+				document.getElementById('appWrapper').appendChild(node).innerHTML = str;
+			}else{
+				document.getElementById('appWrapper').removeChild(document.getElementById('H5SignInfo')).innerHTML = str;
+			}
+			setTimeout(()=>{
+				document.getElementById('button').click();
+			},500)
+		})
+		
+
+	}
+
 	render() {
 		let params = this.state.params;
 		let ajaxUrl = this.state.ajaxUrl;
@@ -104,10 +133,10 @@ export default class Application extends BaseComponent {
 			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" onClick={this.cancel.bind(this, item, index)}>撤销</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(100)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/gotoCtrip`, query: { "applyWorkId": item.applyWorkId}}}>机票预订</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" onClick={ this.book.bind(this, item.applyWorkId) }>机票预订</Link>
 			            </If>
 			            <If condition={item.viewerOperateItems.indexOf(101)!=-1}>
-			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary pushWindow" to={{pathname: `/gotoCtrip`, query: { "applyWorkId": item.applyWorkId}}}>酒店预定</Link>
+			                <Link className="weui-form-preview__btn weui-form-preview__btn_primary" onClick={ this.book.bind(this, item.applyWorkId) }>酒店预定</Link>
 			            </If>
 			            </div>
 			        </div>

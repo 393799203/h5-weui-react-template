@@ -104,7 +104,7 @@ export default class TravelApply extends BaseComponent {
 	}
 
 	simpleUser = (user) => {
-		let defaultAvatar = user.sex ==1 ? "http://s16.mogucdn.com/p2/160808/upload_4b36g29gfk6hdck0c5i74d3bgc9ha_512x512.jpg" : "http://s16.mogucdn.com/p2/160808/upload_60j556ide1igke0l0803eijiafbic_512x512.jpg";
+		let defaultAvatar = user.sex ==1 ? "https://s16.mogucdn.com/p2/160808/upload_4b36g29gfk6hdck0c5i74d3bgc9ha_512x512.jpg" : "https://s16.mogucdn.com/p2/160808/upload_60j556ide1igke0l0803eijiafbic_512x512.jpg";
 		return {
 			avatar: user.avatar || user.avatar_url || defaultAvatar,
 			nickName: user.nickName || user.user_nick_name,
@@ -214,13 +214,13 @@ export default class TravelApply extends BaseComponent {
 					err = err ? err : "入住城市不能为空~"
 				}
 				if(item.beginTime < moment().format('YYYY-MM-DD')){
-					err = err ? err : "入住时间不能早于当前时间~"
+					err = err ? err : "入住日期不能早于当前时间~"
 				}
 				if(item.endTime < moment().format('YYYY-MM-DD')){
-					err = err ? err : "退房时间不能早于当前时间~"
+					err = err ? err : "退房日期不能早于当前时间~"
 				}
 				if( item.beginTime > item.endTime){
-					err = err ? err : "退房时间不能早于入住时间~"
+					err = err ? err : "退房日期不能早于入住日期~"
 				}
 			})
 		}
@@ -254,10 +254,10 @@ export default class TravelApply extends BaseComponent {
 				<div className="weui-cells__title"><span className="text-danger m-r-xs">*</span>基本信息</div>
 				<div className="weui-cells m-t-n">
 					<div className="weui-cell bg-white">
-						<div className="weui-cell__bd">
-		                    <p>申请人</p>
+						<div className="weui-cell__hd">
+		                    <label className="weui-label">申请人</label>
 		                </div>
-		                <div className="weui-cell__ft text-dark">{`${params.nickName} - ${params.deptName}`}</div>
+		                <div className="weui-cell__bd text-dark m-l-xs">{`${params.nickName} - ${params.deptName}`}</div>
 		            </div>
 		            <div className="weui-cell bg-white p-v-xs">
 		                <div className="weui-cell__hd">

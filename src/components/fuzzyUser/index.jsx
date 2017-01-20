@@ -117,22 +117,25 @@ export default class FuzzyUser extends Component {
 		let { disableSerach, list, batchSelectedList } = this.state;
 		return (
 			<div className="fuzzySelect">
+				<If condition={!disableSerach} >
 				<div className="weui-search-bar weui-search-bar_focusing">
-		            <form className="weui-search-bar__form">
+		            <div className="weui-search-bar__form">
 		                <div className="weui-search-bar__box">
 		                    <i className="weui-icon-search"></i>
-		                    <input type="search" className="weui-search-bar__input" placeholder="搜索" required onChange = { this.search } ref="serchInput" disabled={ disableSerach ? "disabled":""}/>
+		                    <input type="search" className="weui-search-bar__input" placeholder="搜索" required onChange = { this.search } ref="serchInput"/>
 		                    <a href="javascript:" className="weui-icon-clear" onClick = { this.searchClear }></a>
 		                </div>
-		                <label className="weui-search-bar__label">
-		                    <i className="weui-icon-search"></i>
-		                    <span>搜索</span>
-		                </label>
-		            </form>
+		            </div>
 		            <a href="javascript:" className="weui-search-bar__cancel-btn" onClick = { this.searchCancel }>取消</a>
 		        </div>
+		        </If>
 		        <div className="weui-cells searchbar-result">
-		            <div className="weui-cells__title">查询
+		            <div className="weui-cells__title clearfix">
+		            	<If condition={disableSerach}>
+		            		<a href="javascript:" className="pull-left text-primary" onClick = { this.searchCancel }>取消</a>
+		            	<Else/>
+		            		<span>查询</span>
+		            	</If>
 		            	<If condition={disableSerach && list.length != batchSelectedList.length}>
 		            		<a className="pull-right text-primary" href="javascript:;" onClick={this.selectAll}>全选</a>
 		            	</If>

@@ -60,7 +60,7 @@ export default class ListView extends Component {
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
-            scrollbars: true
+            scrollbars: false
         };
         let listViewWrap = this.getScrollWrap();
         this.iScrollInstance = new iScroll(listViewWrap, options );

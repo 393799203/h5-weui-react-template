@@ -27,6 +27,9 @@ export default class DetailAudit extends BaseComponent {
 	 	Util.startLoading();
 		Ajax.get("/api/trip/detail", {id: this.props.params.id}).then((res)=>{
 			this.state.detailInfo = res.data;
+			this.state.detailInfo.applyItems.forEach((item) => {
+				item.checked = true;
+			})
 			if(this.props.route.path.indexOf('audit') != -1){
 				this.state.showAudit = true;
 			}

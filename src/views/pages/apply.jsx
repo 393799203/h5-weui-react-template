@@ -205,7 +205,7 @@ export default class TravelApply extends BaseComponent {
 				err = err ? err : "出行时间不能早于当前时间~"
 			}
 		})
-		if(data.inns.length){
+		if(data.inns && data.inns.length){
 			data.inns.forEach((item) => {
 				if(!item.innTravellers.length){
 					err = err ? err : "住宿人不能为空~"

@@ -189,18 +189,18 @@ export default class TravelApply extends BaseComponent {
 	checkData = (data) => {
 		let err = "";
 		if(!data.travellers.length){
-			err = "出行人不能为空~"
+			err = err ? err : "出行人不能为空~"
 		}
 		if(!data.reason.length || data.reason.length > 300){
-			err = "出行事由不能为空,且不能超过300字~"
+			err = err ? err : "出行事由不能为空,且不能超过300字~"
 		}
 		data.marches.forEach((item)=>{
 			if(!item.fromCity || !item.toCity){
-				err = "行程出发,到达不能为空~"
+				err = err ? err : "行程出发,到达不能为空~"
 				return;
 			}
 			if(!item.trafficType){
-				err = "交通方式不能为空~"
+				err = err ? err : "交通方式不能为空~"
 				return;
 			}
 		})

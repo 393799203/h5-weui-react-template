@@ -191,19 +191,39 @@ export default class TravelApply extends BaseComponent {
 		if(!data.travellers.length){
 			err = err ? err : "出行人不能为空~"
 		}
-		if(!data.reason.length || data.reason.length > 300){
-			err = err ? err : "出行事由不能为空,且不能超过300字~"
+		if(!data.reason.length){
+			err = err ? err : "出行事由不能为空~"
 		}
 		data.marches.forEach((item)=>{
 			if(!item.fromCity || !item.toCity){
 				err = err ? err : "行程出发,到达不能为空~"
-				return;
 			}
 			if(!item.trafficType){
 				err = err ? err : "交通方式不能为空~"
-				return;
+			}
+			if(item.departDate < moment().format('YYYYMMDD')){
+				err = err ? err : "出行时间不能早于当前时间~"
 			}
 		})
+		if(data.inns.length){
+			data.inns.forEach((item) => {
+				if(!item.innTravellers.length){
+					err = err ? err : "住宿人不能为空~"
+				}
+				if(!item.innCity){
+					err = err ? err : "入住城市不能为空~"
+				}
+				if(item.beginTime < moment().format('YYYY-MM-DD')){
+					err = err ? err : "入住时间不能早于当前时间~"
+				}
+				if(item.endTime < moment().format('YYYY-MM-DD')){
+					err = err ? err : "退房时间不能早于当前时间~"
+				}
+				if( item.beginTime > item.endTime){
+					err = err ? err : "退房时间不能早于入住时间~"
+				}
+			})
+		}
 		if(err){
 			Util.error(err);
 			return false
@@ -261,7 +281,7 @@ export default class TravelApply extends BaseComponent {
 		                    <label htmlFor="traveller" className="weui-label">出行事由</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <textarea className="weui-textarea" placeholder="请输入出行事由" value={params.reason} onChange={(e) => { this.resizeTextarea(e); params.reason = e.target.value; this.setState(this.state)}}></textarea>
+		                    <textarea className="weui-textarea" placeholder="请输入出行事由,限制300字" value={params.reason} onChange={(e) => { this.resizeTextarea(e); params.reason = e.target.value; this.setState(this.state)}} maxLength="300"></textarea>
 		                </div>
 		            </div>
 		        </div>

@@ -281,7 +281,7 @@ export default class TravelApply extends BaseComponent {
 		                    <label htmlFor="traveller" className="weui-label">出行事由</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <textarea className="weui-textarea" placeholder="请输入出行事由,限制300字" row="1" value={params.reason} onChange={(e) => { this.resizeTextarea(e); params.reason = e.target.value; this.setState(this.state)}} maxLength="300"></textarea>
+		                    <textarea className="weui-textarea" placeholder="请输入出行事由,限制300字" value={params.reason} onChange={(e) => { this.resizeTextarea(e); params.reason = e.target.value; this.setState(this.state)}} maxLength="300"></textarea>
 		                </div>
 		            </div>
 		        </div>

@@ -276,7 +276,7 @@ export default class TravelApply extends BaseComponent {
 		                	</For>
 		                </div>
 		            </div>
-		            <div className="weui-cell bg-white">
+		            <div className="weui-cell bg-white baseline">
 		            	<div className="weui-cell__hd">
 		                    <label htmlFor="traveller" className="weui-label">出行事由</label>
 		                </div>

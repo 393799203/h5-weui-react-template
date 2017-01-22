@@ -281,7 +281,7 @@ export default class TravelApply extends BaseComponent {
 		                    <label htmlFor="traveller" className="weui-label">出行事由</label>
 		                </div>
 		                <div className="weui-cell__bd">
-		                    <textarea className="weui-textarea" placeholder="请输入出行事由,限制300字" value={params.reason} onChange={(e) => { this.resizeTextarea(e); params.reason = e.target.value; this.setState(this.state)}} maxLength="300"></textarea>
+		                    <textarea className="weui-textarea" placeholder="请输入出行事由,限制300字" row="1" value={params.reason} onChange={(e) => { this.resizeTextarea(e); params.reason = e.target.value; this.setState(this.state)}} maxLength="300"></textarea>
 		                </div>
 		            </div>
 		        </div>
@@ -294,7 +294,7 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="travellerfrom" className="weui-label">出发</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input id="travellerfrom" className="weui-input" type="text" placeholder="请输入出发城市" value={march.fromCity} onClick = { this.selectCity.bind(this, march, 'fromCity', index) }/>
+				                    <input id="travellerfrom" className="weui-input" type="text" placeholder="请选择出发城市" value={march.fromCity} onClick = { this.selectCity.bind(this, march, 'fromCity', index) }/>
 				                </div>
 				            </div>
 				            <div className="weui-cell bg-white">
@@ -302,7 +302,7 @@ export default class TravelApply extends BaseComponent {
 				                    <label htmlFor="travellerto" className="weui-label">到达</label>
 				                </div>
 				                <div className="weui-cell__bd">
-				                    <input id="travellerto" className="weui-input" type="text" placeholder="请输入到达城市" value={march.toCity} onClick = { this.selectCity.bind(this, march, 'toCity', index) }/>
+				                    <input id="travellerto" className="weui-input" type="text" placeholder="请选择到达城市" value={march.toCity} onClick = { this.selectCity.bind(this, march, 'toCity', index) }/>
 				                </div>
 				            </div>
 				            <div className="weui-cell weui-cell_select weui-cell_select-after bg-white">

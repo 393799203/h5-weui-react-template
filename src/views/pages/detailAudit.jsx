@@ -219,7 +219,7 @@ export default class DetailAudit extends BaseComponent {
 			        	<div className="weui-cells weui-cells_form">
 				            <div className="weui-cell">
 				                <div className="weui-cell__bd">
-				                    <textarea className="weui-textarea" placeholder="请输入文本" rows="3" ref="auditTextarea"></textarea>
+				                    <textarea className="weui-textarea" placeholder="请输入审批意见,限制100字" rows="3" ref="auditTextarea" maxLength="100"></textarea>
 				                </div>
 				            </div>
 				        </div>

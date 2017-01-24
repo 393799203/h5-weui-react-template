@@ -34,14 +34,9 @@
 			├── component		组件		(可复用模块 或 方便实用的模块)
 			├── data			数据		(公共数据层，事件、通知、公共字符串等)
 			├── lib				公共库		(公共的工具或者样式等等)
-			├── sass			应用样式		(应用除了主题外单独的样式库)
+			├── style			应用样式		(应用除了主题外单独的样式库)
 			├── server			服务		(服务层，包含数据处理，状态机等各种公共服务)
 			├── static			静态资源	(其他静态资源)
 			├── views			各种页面的 views
 			└── app.jsx			项目入口jsx
 
-#### 5.开发规范
-
-	开发时，css尽量使用全局变量 @import 'sass/var';
-	src目录已加入动态加载目录中，文件引入最好使用绝对路径
-	如 import ServerDemo from 'server/serverDemo';

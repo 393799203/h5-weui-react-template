@@ -40,8 +40,4 @@
 			├── views			各种页面的 views
 			└── app.jsx			项目入口jsx
 
-#### 5.开发规范
 
-	开发时，css尽量使用全局变量 @import 'sass/var';
-	src目录已加入动态加载目录中，文件引入最好使用绝对路径
-	如 import ServerDemo from 'server/serverDemo';

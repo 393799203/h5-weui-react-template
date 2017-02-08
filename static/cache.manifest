@@ -1,0 +1,12 @@
+CACHE MANIFEST
+#v0.13	
+
+CACHE:
+/app.css
+/static/moment.min.js
+/static/hdp.min.js
+/vendor.js
+/app.js
+
+NETWORK:
+*

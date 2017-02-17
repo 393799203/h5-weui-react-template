@@ -5,6 +5,7 @@
 			a.启动服务：npm start
 			b.打包项目：npm run build
 			c.自定义服务：npm run [taskName]
+			d.metabse发布文件地址拼接：npm run metabse
 
 #### 3.关于框架
 

@@ -7,9 +7,10 @@
   "private": true,
   "scripts": {
     "start": "node scripts/server.js",
-    "build": "node scripts/task.js clean && node scripts/build.js && node scripts/task.js",
+    "build": "node scripts/task.js clean && node scripts/build.js && node scripts/task.js && node scripts/metabase",
     "svg": "node scripts/task svg",
-    "clean": "node scripts/task clean"
+    "clean": "node scripts/task clean",
+    "metabase": "node scripts/metabase"
   },
   "devDependencies": {
     "app-module-path": "^1.0.6",
